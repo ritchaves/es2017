@@ -17,3 +17,5 @@ To run tests execute: mvn clean install
 80888 Francisco Mira francisco.mira96@gmail.com franciscomira
 
 81586 Diogo Freitas diogo.maria.freitas@gmail.com dfreitas06
+
+73046 André Antunes andre.r.antunes@ist.utl.pt Antunes10
