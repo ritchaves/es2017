@@ -15,3 +15,5 @@ To run tests execute: mvn clean install
 75834 Hugo do Vale hugo_yoco@hotmail.com zipie
 
 80888 Francisco Mira francisco.mira96@gmail.com franciscomira
+
+81586 Diogo Freitas diogo.maria.freitas@gmail.com dfreitas06
