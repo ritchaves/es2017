@@ -54,6 +54,16 @@ public class Hotel {
 	int getNumberOfRooms() {
 		return this.rooms.size();
 	}
+	
+	boolean roomExists(String number) {
+		boolean b = false;
+		for (Room r : rooms) {
+		    if (r.getNumber() == number){
+		    	return true;
+		    }
+		}
+		return false;
+	}
 
 	public static String reserveHotel(Room.Type type, LocalDate arrival, LocalDate departure) {
 		for (Hotel hotel : Hotel.hotels) {

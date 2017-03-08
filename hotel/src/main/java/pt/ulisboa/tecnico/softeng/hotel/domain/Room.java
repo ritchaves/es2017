@@ -23,8 +23,17 @@ public class Room {
 
 	public Room(Hotel hotel, String number, Type type) {
 		this.hotel = hotel;
+		try {
+			Integer.parseInt(number);
+		} catch (NumberFormatException e) {
+			throw new HotelException();
+		}
 		this.number = number;
 		this.type = type;
+		
+		if (hotel.roomExists(number)) {
+			throw new HotelException();
+		}
 
 		this.hotel.addRoom(this);
 	}
