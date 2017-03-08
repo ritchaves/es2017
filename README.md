@@ -3,11 +3,11 @@
 To run tests execute: mvn clean install
 
 
-| Número | Nome | Email | GitHub | Módulo |
-| --------- | ------- | ------  | -------- | -------- |
-| 79710    | David Cardoso      | davidanil@tecnico.ulisboa.pt  | davidanil              | bank     |
-| 78753    | Alcino Albuquerque | condealbuquerque@gmail.com    | alcinocondealbuquerque | bank     |
-| 69836    | Rita Ferreira      | rita.c.ferreira@live.com      | ritchaves              | bank     |
+| Número | Nome | Email | GitHub | Módulo | Função
+| --------- | ------- | ------  | -------- | -------- | ------- |
+| 79710    | David Cardoso      | davidanil@tecnico.ulisboa.pt  | davidanil              | bank     | Client, Account, getAccount
+| 78753    | Alcino Albuquerque | condealbuquerque@gmail.com    | alcinocondealbuquerque | bank     | Withdraw, Deposit, Broker
+| 69836    | Rita Ferreira      | rita.c.ferreira@live.com      | ritchaves              | bank     | Bank, Operation 
 | 73046    | André Antunes      | andre.r.antunes@ist.utl.pt    | Antunes10              | activity |
 | 75834    | Hugo do Vale       | hugo_yoco@hotmail.com         | zipie                  | activity |
 | 70012    | Filipe Cruzinha    |  filipe.cruzinha@gmail.com    | Cruzinha               | activity |
