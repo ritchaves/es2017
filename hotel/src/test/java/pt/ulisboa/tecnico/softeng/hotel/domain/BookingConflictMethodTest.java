@@ -17,10 +17,12 @@ public class BookingConflictMethodTest {
 		LocalDate departure = new LocalDate(2016, 12, 24);
 		this.booking = new Booking(hotel, arrival, departure);
 	}
+	
+	
 
 	@Test
 	public void noConflictBefore() {
-		LocalDate arrival = new LocalDate(2016, 12, 16);
+		LocalDate arrival = new LocalDate(2016, 12, 24);
 		LocalDate departure = new LocalDate(2016, 12, 19);
 
 		Assert.assertFalse(this.booking.conflict(arrival, departure));
