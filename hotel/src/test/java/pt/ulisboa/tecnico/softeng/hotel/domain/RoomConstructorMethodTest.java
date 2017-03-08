@@ -24,7 +24,17 @@ public class RoomConstructorMethodTest {
 		Assert.assertEquals(Type.DOUBLE, room.getType());
 		Assert.assertEquals(1, this.hotel.getNumberOfRooms());
 	}
+	
+	@Test
+	public void failure() {
+		Room room = new Room(this.hotel, "PT", Type.DOUBLE);
 
+		Assert.assertEquals(this.hotel, room.getHotel());
+		Assert.assertEquals("PT", room.getNumber());
+		Assert.assertEquals(Type.DOUBLE, room.getType());
+		Assert.assertEquals(1, this.hotel.getNumberOfRooms());
+	}
+	
 	@After
 	public void tearDown() {
 		Hotel.hotels.clear();
