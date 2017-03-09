@@ -2,6 +2,8 @@ package pt.ulisboa.tecnico.softeng.hotel.domain;
 
 import org.joda.time.LocalDate;
 
+import pt.ulisboa.tecnico.softeng.hotel.exception.HotelException;
+
 public class Booking {
 	private static int counter = 0;
 
@@ -13,6 +15,9 @@ public class Booking {
 		this.reference = hotel.getCode() + Integer.toString(++Booking.counter);
 		this.arrival = arrival;
 		this.departure = departure;
+		if (impossibility(arrival, departure)){
+			throw new HotelException();
+		}
 	}
 
 	public String getReference() {
@@ -28,18 +33,25 @@ public class Booking {
 	}
 
 	boolean conflict(LocalDate arrival, LocalDate departure) {
-		if (arrival.isAfter(this.arrival) && arrival.isBefore(this.departure)) {
+		if (arrival.isAfter(this.arrival) && arrival.isBefore(this.departure)) { /*Conflict Situation 1*/
 			return true;
 		}
 
-		if (departure.isAfter(this.arrival) && departure.isBefore(this.departure)) {
+		if (departure.isAfter(this.arrival) && departure.isBefore(this.departure)) { /*Conflict Situation 2*/
 			return true;
 		}
 
-		if (arrival.isBefore(this.arrival) && departure.isAfter(this.departure)) {
+		if (arrival.isBefore(this.arrival) && departure.isAfter(this.departure)) { /*Conflict Situation 3*/
 			return true;
 		}
 
+		return false;
+	}
+	
+	boolean impossibility(LocalDate arrival, LocalDate departure) {
+		if (departure.isBefore(arrival)){
+			return true;
+		}
 		return false;
 	}
 
