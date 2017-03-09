@@ -56,7 +56,6 @@ public class Hotel {
 	}
 	
 	boolean roomExists(String number) {
-		boolean b = false;
 		for (Room r : rooms) {
 		    if (r.getNumber() == number){
 		    	return true;
