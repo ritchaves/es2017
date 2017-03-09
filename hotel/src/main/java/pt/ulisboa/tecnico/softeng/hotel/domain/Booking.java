@@ -13,11 +13,11 @@ public class Booking {
 
 	Booking(Hotel hotel, LocalDate arrival, LocalDate departure) {
 		this.reference = hotel.getCode() + Integer.toString(++Booking.counter);
-		if (conflict(arrival, departure)){
-			throw new HotelException();
-		}
 		this.arrival = arrival;
 		this.departure = departure;
+		if (impossibility(arrival, departure)){
+			throw new HotelException();
+		}
 	}
 
 	public String getReference() {
@@ -33,18 +33,25 @@ public class Booking {
 	}
 
 	boolean conflict(LocalDate arrival, LocalDate departure) {
-		if (arrival.isAfter(this.arrival) && arrival.isBefore(this.departure)) {
+		if (arrival.isAfter(this.arrival) && arrival.isBefore(this.departure)) { /*Conflict Situation 1*/
 			return true;
 		}
 
-		if (departure.isAfter(this.arrival) && departure.isBefore(this.departure)) {
+		if (departure.isAfter(this.arrival) && departure.isBefore(this.departure)) { /*Conflict Situation 2*/
 			return true;
 		}
 
-		if (arrival.isBefore(this.arrival) && departure.isAfter(this.departure)) {
+		if (arrival.isBefore(this.arrival) && departure.isAfter(this.departure)) { /*Conflict Situation 3*/
 			return true;
 		}
 
+		return false;
+	}
+	
+	boolean impossibility(LocalDate arrival, LocalDate departure) {
+		if (departure.isBefore(arrival)){
+			return true;
+		}
 		return false;
 	}
 

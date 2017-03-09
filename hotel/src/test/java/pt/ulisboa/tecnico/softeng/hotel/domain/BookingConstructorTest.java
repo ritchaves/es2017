@@ -5,6 +5,8 @@ import org.junit.After;
 import org.junit.Assert;
 import org.junit.Test;
 
+import pt.ulisboa.tecnico.softeng.hotel.exception.HotelException;
+
 public class BookingConstructorTest {
 
 	@Test
@@ -20,6 +22,22 @@ public class BookingConstructorTest {
 		Assert.assertTrue(booking.getReference().length() > Hotel.CODE_SIZE);
 		Assert.assertEquals(arrival, booking.getArrival());
 		Assert.assertEquals(departure, booking.getDeparture());
+	}
+	
+	@Test (expected = HotelException.class)
+	public void departureBeforeArrival() {
+		Hotel hotel = new Hotel("XPTO123", "Londres");
+		
+		LocalDate arrival = new LocalDate(2016, 12, 18);
+		LocalDate departure = new LocalDate(2016, 12, 16);
+		
+		Booking booking = new Booking(hotel, arrival, departure);
+
+		Assert.assertTrue(booking.getReference().startsWith(hotel.getCode()));
+		Assert.assertTrue(booking.getReference().length() > Hotel.CODE_SIZE);
+		Assert.assertEquals(arrival, booking.getArrival());
+		Assert.assertEquals(departure, booking.getDeparture());
+		Assert.assertTrue(booking.impossibility(arrival, departure));
 	}
 
 	@After
