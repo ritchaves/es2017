@@ -10,12 +10,10 @@ public class Client {
 
 	public Client(Bank bank, String name){
 		this.ID = Integer.toString(++Client.counter);
-		System.out.println(name);
 		if(name==null || name.trim().isEmpty()){
 			throw new BankException("Erro BankException - Client");
 		}
 		else{
-			System.out.println("got here");
 			this.name = name;
 		}
 
