@@ -8,14 +8,15 @@ public class Client {
 	private final String name;
 	private final String ID;
 
-	public Client(Bank bank, String name) {
+	public Client(Bank bank, String name){
 		this.ID = Integer.toString(++Client.counter);
-		
-		if(name=="" || name==null){
-			throw new BankException();
+		System.out.println(name);
+		if(name==null || name.trim().isEmpty()){
+			throw new BankException("Erro BankException - Client");
 		}
 		else{
-		this.name = name;
+			System.out.println("got here");
+			this.name = name;
 		}
 
 		bank.addClient(this);

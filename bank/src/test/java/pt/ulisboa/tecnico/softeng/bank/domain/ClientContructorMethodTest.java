@@ -23,22 +23,27 @@ public class ClientContructorMethodTest {
 
 	@Test
 	public void success() {
-		Client client = new Client(this.bank, "António");
+		this.client = new Client(this.bank, "António");
 
-		Assert.assertNotEquals("", client.getName()); //not empty
-		Assert.assertEquals("António", client.getName());//is equal to what we expect
-		Assert.assertTrue(client.getID().length() >= 1);//sizeID positive
+		Assert.assertNotEquals("", this.client.getName()); //not empty
+		Assert.assertEquals("António", this.client.getName());//is equal to what we expect
+		Assert.assertTrue(this.client.getID().length() >= 1);//sizeID positive
 		Assert.assertTrue(this.bank.hasClient(client));//is in bank
 	}
 	
 	@Test(expected = BankException.class)
 	public void empty(){
-		Client client2 = new Client(this.bank, "");
+		this.client = new Client(this.bank, "");
+	}
+	
+	@Test(expected = BankException.class)
+	public void empty2(){
+		this.client = new Client(this.bank, "     ");
 	}
 	
 	@Test(expected = BankException.class)
 	public void nulled(){
-		Client client3 = new Client(this.bank, null);
+		this.client = new Client(this.bank, null);
 	}
 
 	@After
