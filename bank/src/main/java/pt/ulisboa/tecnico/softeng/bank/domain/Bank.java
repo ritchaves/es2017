@@ -18,9 +18,19 @@ public class Bank {
 	private final Set<Client> clients = new HashSet<>();
 	private final List<Operation> log = new ArrayList<>();
 
-	public Bank(String name, String code) {
+	public Bank(String name, String code) throws BankException {
+		
+		if(name == null || name == "") {
+			throw new BankException();
+		}
+		
+		if(code == null || code == "") {
+			throw new BankException();
+		}
+		
 		checkCode(code);
-
+		codeExists(code);
+		
 		this.name = name;
 		this.code = code;
 
@@ -29,7 +39,15 @@ public class Bank {
 
 	private void checkCode(String code) {
 		if (code.length() != Bank.CODE_SIZE) {
-			throw new BankException();
+		    throw new BankException();
+		}
+	}
+	
+	private void codeExists(String newCode) {
+		for (Bank b: banks) {
+			if (b.code.equals(newCode)) {
+				throw new BankException();
+			}
 		}
 	}
 
