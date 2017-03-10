@@ -18,14 +18,14 @@ public class Bank {
 	private final Set<Client> clients = new HashSet<>();
 	private final List<Operation> log = new ArrayList<>();
 
-	public Bank(String name, String code) throws BankException {
+	public Bank(String name, String code) {
 		
-		if(name == null || name == "") {
-			throw new BankException();
+		if(name == null || name.trim().isEmpty()) {
+			throw new BankException("Erro BankException - Bank");
 		}
 		
-		if(code == null || code == "") {
-			throw new BankException();
+		if(code == null || code.trim().isEmpty()) {
+			throw new BankException("Erro BankException - Bank");
 		}
 		
 		checkCode(code);
@@ -84,12 +84,13 @@ public class Bank {
 	}
 
 	public Account getAccount(String IBAN) {
+		if (IBAN==null || IBAN.trim().isEmpty()) throw new BankException("Erro BankException - Bank");
 		for (Account account : this.accounts) {
 			if (account.getIBAN().equals(IBAN)) {
 				return account;
 			}
 		}
-		throw new BankException();
+		throw new BankException("Erro BankException - Bank");
 	}
 
 	public Operation getOperation(String reference) {
