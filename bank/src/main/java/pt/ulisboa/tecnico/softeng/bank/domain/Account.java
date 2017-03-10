@@ -12,9 +12,13 @@ public class Account {
 
 	public Account(Bank bank, Client client) {
 		this.bank = bank;
+		if(this.bank == null) throw new BankException("Erro BankException - Account");
 		this.IBAN = bank.getCode() + Integer.toString(++Account.counter);
 		this.client = client;
 		this.balance = 0;
+		if (this.client == null || !this.bank.hasClient(this.client)){
+			throw new BankException("Erro BankException - Account");
+		}
 
 		bank.addAccount(this);
 	}
