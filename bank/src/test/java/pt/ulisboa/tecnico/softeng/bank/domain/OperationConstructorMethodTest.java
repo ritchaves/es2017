@@ -1,5 +1,7 @@
 package pt.ulisboa.tecnico.softeng.bank.domain;
 
+import pt.ulisboa.tecnico.softeng.bank.exception.BankException;
+
 import org.junit.After;
 import org.junit.Assert;
 import org.junit.Before;
@@ -33,6 +35,21 @@ public class OperationConstructorMethodTest {
 		Assert.assertEquals(1000, operation.getValue());
 		Assert.assertTrue(operation.getTime() != null);
 		Assert.assertEquals(operation, this.bank.getOperation(operation.getReference()));
+	}
+	
+	@Test(expected = BankException.class)
+	public void typeNull() {
+		new Operation(null, this.account, 10);
+	}
+	
+	@Test(expected = BankException.class)
+	public void accountNull(){
+		new Operation(Type.DEPOSIT, null, 10);
+	}
+	
+	@Test(expected = BankException.class)
+	public void negativeValue(){
+		new Operation(Type.DEPOSIT, this.account, -10);
 	}
 
 	@After
