@@ -24,38 +24,37 @@ public class BankConstructorTest {
 		Assert.assertEquals(1, Bank.banks.size());
 		Assert.assertEquals(0, bank.getNumberOfAccounts());
 		Assert.assertEquals(0, bank.getNumberOfClients());
-	
 	}	
 	
 	@Test(expected = BankException.class)	
-	public void nullname() {
-		Bank bank2 = new Bank(null, "BK02");
+	public void nullName() {
+		new Bank(null, "BK02");
 	}
 
 	@Test(expected = BankException.class)	
-	public void nullcode() {
-		Bank bank2 = new Bank("R", null);
+	public void nullCode() {
+		new Bank("R", null);
 	}
 	
 	@Test(expected = BankException.class)	
-	public void emptystring() {
-		Bank bank2 = new Bank("", "BK03");
+	public void emptyName() {
+		new Bank("", "BK03");
 	}
 	
 	@Test(expected = BankException.class)	
-	public void emptycode() {
-		Bank bank2 = new Bank("M", "");
+	public void emptyCode() {
+		new Bank("M", "");
 	}
 	
 	@Test(expected = BankException.class)
-	public void codeverification(){
-		Bank bank4 = new Bank("M", "BK011");
+	public void codeVerification(){
+		new Bank("M", "BK011");
 	}
 	
 	@Test(expected = BankException.class)
-	public void codeexists(){
-		Bank bank5 = new Bank("M", "BK03");
-		Bank bank6 = new Bank("O", "BK03");
+	public void codeExists(){
+		new Bank("M", "BK03");
+		new Bank("O", "BK03");
 	}
 	
 	@After
