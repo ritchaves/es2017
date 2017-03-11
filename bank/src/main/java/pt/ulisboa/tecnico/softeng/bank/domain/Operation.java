@@ -20,7 +20,7 @@ class Operation {
 	Operation(Type type, Account account, int value) {
 		
 		if (type == null || account == null) {
-			throw new BankException("Erro BankException - Bank");
+			throw new BankException("Erro BankException - Operation");
 		}
 		
 		checkValue(value);
@@ -36,7 +36,7 @@ class Operation {
 	
 	private void checkValue(int value) {
 		if (value <= 0) {
-			throw new BankException("Erro BankException - Bank");
+			throw new BankException("Erro BankException - Operation");
 		}
 	}
 	
