@@ -15,11 +15,11 @@ public class HotelHasVacancyMethodTest {
 	@Before
 	public void setUp() {
 		this.hotel = new Hotel("XPTO123", "Paris");
-		new Room(this.hotel, "01", Type.DOUBLE);
-	}
+		}
 
 	@Test
 	public void hasVacancy() {
+		new Room(this.hotel, "01", Type.DOUBLE);
 		LocalDate arrival = new LocalDate(2016, 12, 19);
 		LocalDate departure = new LocalDate(2016, 12, 21);
 
@@ -29,6 +29,7 @@ public class HotelHasVacancyMethodTest {
 	}
 	@Test (expected = HotelException.class)
 	public void FailureSingle(){
+		new Room(this.hotel, "01", Type.DOUBLE);
 		LocalDate arrival = new LocalDate(2016,12,19);
 		LocalDate departure = new LocalDate(2016,12,21);
 		
@@ -37,8 +38,9 @@ public class HotelHasVacancyMethodTest {
 		Assert.assertEquals("01", room.getNumber());
 	}
 
-	@Test
+	@Test 
 	public void SameDate() {
+		new Room(this.hotel, "01", Type.DOUBLE);
 		LocalDate arrival = new LocalDate(2016, 12, 19);
 		LocalDate departure = new LocalDate(2016, 12, 19);
 		
@@ -46,7 +48,15 @@ public class HotelHasVacancyMethodTest {
 		
 		Assert.assertEquals("01", room.getNumber());
 	}
-	
+	@Test (expected = HotelException.class)
+	public void NoRooms(){
+		LocalDate arrival = new LocalDate(2016,12,19);
+		LocalDate departure = new LocalDate(2016,12,21);
+		
+		Room room = this.hotel.hasVacancy(Type.DOUBLE, arrival, departure);
+		
+		Assert.assertEquals(null, room.getNumber());
+	}
 	
 	@After
 	public void tearDown() {
