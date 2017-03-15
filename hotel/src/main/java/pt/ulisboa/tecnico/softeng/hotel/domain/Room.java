@@ -30,7 +30,9 @@ public class Room {
 		}
 		this.number = number;
 		this.type = type;
-		
+		if (this.hotel == null || this.number == null || this.type == null ){
+			throw new HotelException();
+		}
 		if (hotel.roomExists(number)) {
 			throw new HotelException();
 		}

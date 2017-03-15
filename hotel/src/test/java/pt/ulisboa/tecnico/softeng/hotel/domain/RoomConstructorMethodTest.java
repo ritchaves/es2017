@@ -27,7 +27,7 @@ public class RoomConstructorMethodTest {
 	}
 	
 	@Test (expected = HotelException.class)
-	public void failure1() {
+	public void notNumeric() {
 		Room room = new Room(this.hotel, "PT", Type.DOUBLE);
 
 		Assert.assertEquals(this.hotel, room.getHotel());
@@ -37,7 +37,27 @@ public class RoomConstructorMethodTest {
 	}
 	
 	@Test (expected = HotelException.class)
-	public void failure2() {
+	public void nullNumber() {
+		Room room = new Room(this.hotel, null, Type.DOUBLE);
+
+		Assert.assertEquals(this.hotel, room.getHotel());
+		Assert.assertEquals("PT", room.getNumber());
+		Assert.assertEquals(Type.DOUBLE, room.getType());
+		Assert.assertEquals(1, this.hotel.getNumberOfRooms());
+	}
+	
+	@Test (expected = HotelException.class)
+	public void emptyNumber() {
+		Room room = new Room(this.hotel, "      ", Type.DOUBLE);
+
+		Assert.assertEquals(this.hotel, room.getHotel());
+		Assert.assertEquals("PT", room.getNumber());
+		Assert.assertEquals(Type.DOUBLE, room.getType());
+		Assert.assertEquals(1, this.hotel.getNumberOfRooms());
+	}
+	
+	@Test (expected = HotelException.class)
+	public void roomAlreadyExists() {
 		new Room(this.hotel, "01", Type.DOUBLE);
 		Room room = new Room(this.hotel, "01", Type.DOUBLE);
 		
