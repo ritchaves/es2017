@@ -68,7 +68,7 @@ public class HotelConstructorTest {
 	public void ifNameNull() {
 		Hotel hotel = new Hotel("XPTO123", null);
 
-		Assert.assertEquals("Londres", hotel.getName());
+		Assert.assertEquals(null, hotel.getName());
 		Assert.assertTrue(hotel.getCode().length() == Hotel.CODE_SIZE);
 		Assert.assertEquals(0, hotel.getNumberOfRooms());
 		Assert.assertEquals(1, Hotel.hotels.size());
@@ -78,7 +78,7 @@ public class HotelConstructorTest {
 	public void ifNameEmpty() {
 		Hotel hotel = new Hotel("XPTO123", "");
 
-		Assert.assertEquals("Londres", hotel.getName());
+		Assert.assertEquals("", hotel.getName());
 		Assert.assertTrue(hotel.getCode().length() == Hotel.CODE_SIZE);
 		Assert.assertEquals(0, hotel.getNumberOfRooms());
 		Assert.assertEquals(1, Hotel.hotels.size());
@@ -88,7 +88,7 @@ public class HotelConstructorTest {
 	public void ifNameSpaces() {
 		Hotel hotel = new Hotel("XPTO123", "       ");
 
-		Assert.assertEquals("Londres", hotel.getName());
+		Assert.assertEquals("       ", hotel.getName());
 		Assert.assertTrue(hotel.getCode().length() == Hotel.CODE_SIZE);
 		Assert.assertEquals(0, hotel.getNumberOfRooms());
 		Assert.assertEquals(1, Hotel.hotels.size());
