@@ -1,5 +1,7 @@
 package pt.ulisboa.tecnico.softeng.activity.domain;
 
+import  pt.ulisboa.tecnico.softeng.activity.domain.exception.ActivityException;
+
 import java.util.HashSet;
 import java.util.Set;
 
@@ -12,10 +14,23 @@ public class ActivityOffer {
 	private final Set<Booking> bookings = new HashSet<>();
 
 	public ActivityOffer(Activity activity, LocalDate begin, LocalDate end) {
+		
+		if (begin.isAfter(end)){
+			throw new ActivityException("The end date cannot come before begin date");
+		}
+		
+		if (begin.isEqual(end)){
+			throw new ActivityException("The end date cannot come before begin date");
+		}
+		
+		
 		this.begin = begin;
 		this.end = end;
 		this.capacity = activity.getCapacity();
-
+		
+		
+		
+		
 		activity.addOffer(this);
 	}
 
