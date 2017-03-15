@@ -15,6 +15,9 @@ public class Booking {
 		this.reference = hotel.getCode() + Integer.toString(++Booking.counter);
 		this.arrival = arrival;
 		this.departure = departure;
+		if (this.arrival == null || this.departure == null){
+			throw new HotelException();
+		}
 		if (impossibility(arrival, departure)){
 			throw new HotelException();
 		}

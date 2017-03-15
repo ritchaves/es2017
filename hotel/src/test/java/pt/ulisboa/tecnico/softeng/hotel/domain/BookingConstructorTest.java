@@ -40,6 +40,37 @@ public class BookingConstructorTest {
 		Assert.assertTrue(booking.impossibility(arrival, departure));
 	}
 
+	@Test (expected = HotelException.class)
+	public void ifArrivalNull() {
+		Hotel hotel = new Hotel("XPTO123", "Londres");
+		
+		LocalDate arrival = null;
+		LocalDate departure = new LocalDate(2016, 12, 2 );
+		
+		Booking booking = new Booking(hotel, arrival, departure);
+		Assert.assertTrue(booking.getReference().startsWith(hotel.getCode()));
+		Assert.assertTrue(booking.getReference().length() > Hotel.CODE_SIZE);
+		Assert.assertEquals(arrival, booking.getArrival());
+		Assert.assertEquals(departure, booking.getDeparture());
+		Assert.assertTrue(booking.impossibility(arrival, departure));
+	}
+	
+	@Test (expected = HotelException.class)
+	public void ifDepartureNull() {
+		Hotel hotel = new Hotel("XPTO123", "Londres");
+		
+		LocalDate arrival = new LocalDate(2016, 12, 18);
+		LocalDate departure = null;
+		
+		Booking booking = new Booking(hotel, arrival, departure);
+		Assert.assertTrue(booking.getReference().startsWith(hotel.getCode()));
+		Assert.assertTrue(booking.getReference().length() > Hotel.CODE_SIZE);
+		Assert.assertEquals(arrival, booking.getArrival());
+		Assert.assertEquals(departure, booking.getDeparture());
+		Assert.assertTrue(booking.impossibility(arrival, departure));
+		
+	}
+	
 	@After
 	public void tearDown() {
 		Hotel.hotels.clear();

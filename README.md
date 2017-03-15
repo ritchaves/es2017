@@ -11,8 +11,8 @@ To run tests execute: mvn clean install
 | 73046    | André Antunes      | andre.r.antunes@ist.utl.pt    | Antunes10              | activity |
 | 75834    | Hugo do Vale       | hugo_yoco@hotmail.com         | zipie                  | activity |
 | 70012    | Filipe Cruzinha    |  filipe.cruzinha@gmail.com    | Cruzinha               | activity |
-| 81718    | Nuno Tomás         | soarestomas@yahoo.com.br      | nunocartier            | hotel    | Hotel Code, Booking Conflict
-| 81586    | Diogo Freitas      | diogo.maria.freitas@gmail.com | dfreitas06             | hotel    | Room Number, Booking - Departure can't be prior to Arrival
-| 80888    | Francisco Mira     | francisco.mira96@gmail.com    | franciscomira          | hotel    | Hotel - hasVacancy
+| 81718    | Nuno Tomás         | soarestomas@yahoo.com.br      | nunocartier            | hotel    | Hotel Code, Booking, Booking Constructor, Booking Conflict
+| 81586    | Diogo Freitas      | diogo.maria.freitas@gmail.com | dfreitas06             | hotel    | Room , Room Constructor, Room Reserve
+| 80888    | Francisco Mira     | francisco.mira96@gmail.com    | franciscomira          | hotel    | Hotel Code, Hotel hasVacancy, Hotel Constructor
 
 
