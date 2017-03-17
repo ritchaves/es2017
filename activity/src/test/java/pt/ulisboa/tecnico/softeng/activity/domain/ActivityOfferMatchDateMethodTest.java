@@ -1,5 +1,4 @@
 package pt.ulisboa.tecnico.softeng.activity.domain;
-import  pt.ulisboa.tecnico.softeng.activity.domain.exception.ActivityException;
 
 
 import org.joda.time.LocalDate;

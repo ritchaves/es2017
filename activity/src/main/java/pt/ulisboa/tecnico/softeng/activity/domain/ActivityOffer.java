@@ -14,23 +14,15 @@ public class ActivityOffer {
 	private final Set<Booking> bookings = new HashSet<>();
 
 	public ActivityOffer(Activity activity, LocalDate begin, LocalDate end) {
-		
-		if (begin.isAfter(end)){
-			throw new ActivityException("The end date cannot come before begin date");
-		}
-		
-		if (begin.isEqual(end)){
-			throw new ActivityException("The end date cannot come before begin date");
-		}
-		
-		
+						
 		this.begin = begin;
 		this.end = end;
 		this.capacity = activity.getCapacity();
 		
-		
-		
-		
+		if (begin.isAfter(end)){
+			throw new ActivityException("The end date cannot come before begin date");
+		}
+				
 		activity.addOffer(this);
 	}
 
@@ -45,6 +37,8 @@ public class ActivityOffer {
 	int getNumberOfBookings() {
 		return this.bookings.size();
 	}
+	
+	 
 
 	void addBooking(Booking booking) {
 		this.bookings.add(booking);
