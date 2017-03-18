@@ -1,4 +1,5 @@
 package pt.ulisboa.tecnico.softeng.activity.domain;
+import  pt.ulisboa.tecnico.softeng.activity.domain.exception.ActivityException;
 
 import org.junit.After;
 import org.junit.Assert;
@@ -26,6 +27,28 @@ public class ActivityConstructorMethodTest {
 		Assert.assertEquals(0, activity.getNumberOfOffers());
 		Assert.assertEquals(1, this.provider.getNumberOfActivities());
 	}
+
+	@Test(expected= ActivityException.class)
+
+	public void invalidcapacity() {
+			
+		ActivityProvider provider = new ActivityProvider("XtremX", "ExtremeAdventure");
+
+		Activity activity = new Activity(provider, "Bush Walking", 18, 80, 0);
+
+		Assert.assertTrue(activity.getCode().startsWith(this.provider.getCode()));
+
+		Assert.assertTrue(activity.getCode().length() > ActivityProvider.CODE_SIZE);
+		
+Assert.assertEquals(18, activity.getMinAge());
+
+		Assert.assertEquals(80, activity.getMaxAge());
+
+		Assert.assertEquals(0, activity.getCapacity());
+			
+	
+	}
+	
 
 	@After
 	public void tearDown() {

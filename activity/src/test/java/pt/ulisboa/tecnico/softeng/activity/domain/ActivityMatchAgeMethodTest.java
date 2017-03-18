@@ -1,4 +1,5 @@
 package pt.ulisboa.tecnico.softeng.activity.domain;
+import  pt.ulisboa.tecnico.softeng.activity.domain.exception.ActivityException;
 
 import java.time.format.DateTimeFormatter;
 
@@ -21,6 +22,35 @@ public class ActivityMatchAgeMethodTest {
 	@Test
 	public void successIn() {
 		Assert.assertTrue(this.activity.matchAge(50));
+	}
+
+	@Test(expected= ActivityException.class)
+	
+	public void invalidage() {
+		
+		ActivityProvider provider = new ActivityProvider("XtremX", "ExtremeAdventure");
+		
+		Activity activity = new Activity(provider, "Bush Walking", 18, 100, 3);
+		
+		Assert.assertTrue(this.activity.matchAge(17));
+		
+		Assert.assertTrue(this.activity.matchAge(101));
+	}
+
+	@Test(expected= ActivityException.class)
+
+	public void incompatibleage() {
+		
+		ActivityProvider provider = new ActivityProvider("XtremX", "ExtremeAdventure");
+
+		Activity activity = new Activity(provider, "Bush Walking", 60, 40, 3);
+
+		Assert.assertTrue(activity.getCode().startsWith(this.provider.getCode()));
+
+		Assert.assertTrue(activity.getCode().length() > ActivityProvider.CODE_SIZE);
+		Assert.assertEquals(60, activity.getMinAge());
+		
+		Assert.assertEquals(40, activity.getMaxAge());
 	}
 
 	@After
