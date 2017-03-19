@@ -6,6 +6,7 @@ import java.util.Set;
 import org.joda.time.LocalDate;
 
 import pt.ulisboa.tecnico.softeng.activity.domain.exception.ActivityException;
+import pt.ulisboa.tecnico.softeng.hotel.exception.HotelException;
 
 public class ActivityProvider {
 	public static Set<ActivityProvider> providers = new HashSet<>();
@@ -18,15 +19,21 @@ public class ActivityProvider {
 
 	public ActivityProvider(String code, String name) {
 		checkCode(code);
+		checkName(name);
 
 		this.code = code;
 		this.name = name;
-
 		ActivityProvider.providers.add(this);
 	}
 
 	private void checkCode(String code) {
-		if (code.length() != ActivityProvider.CODE_SIZE) {
+		if (code == null || code.trim().length() != ActivityProvider.CODE_SIZE) {
+			throw new ActivityException();
+		}
+	}
+	
+	private void checkName(String name) {
+		if (name == null || name.trim().length() == 0) {
 			throw new ActivityException();
 		}
 	}
