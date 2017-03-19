@@ -13,11 +13,6 @@ public class ActivityMatchAgeMethodTest {
 	}
 
 	@Test (expected = ActivityException.class)
-	public void capacityTest() {
-		ActivityProvider provider = new ActivityProvider("XtremX", "ExtremeAdventure");
-		new Activity(provider, "Bush Walking", 18, 60, -1);
-	}
-	@Test (expected = ActivityException.class)
 	public void ageMinTest() {
 		ActivityProvider provider = new ActivityProvider("XtremX", "ExtremeAdventure");
 		new Activity(provider, "Bush Walking", 13, 60, 2);

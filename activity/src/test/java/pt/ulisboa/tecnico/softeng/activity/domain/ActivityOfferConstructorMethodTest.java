@@ -17,7 +17,7 @@ public class ActivityOfferConstructorMethodTest {
 		this.activity = new Activity(provider, "Bush Walking", 18, 80, 25);
 	}
 
-	@Test (expected = ActivityException.class)
+	@Test
 	public void success() {
 		LocalDate begin = new LocalDate(2016, 12, 19);
 		LocalDate end = new LocalDate(2016, 12, 21);
