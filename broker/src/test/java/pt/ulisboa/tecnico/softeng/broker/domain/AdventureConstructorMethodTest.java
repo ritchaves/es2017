@@ -6,6 +6,10 @@ import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
+import pt.ulisboa.tecnico.softeng.activity.domain.exception.ActivityException;
+import pt.ulisboa.tecnico.softeng.bank.exception.BankException;
+import pt.ulisboa.tecnico.softeng.broker.exception.BrokerException;
+
 public class AdventureConstructorMethodTest {
 	private Broker broker;
 
@@ -33,7 +37,32 @@ public class AdventureConstructorMethodTest {
 		Assert.assertNull(adventure.getActivityBooking());
 		Assert.assertNull(adventure.getRoomBooking());
 	}
+	
+	@Test(expected = BrokerException.class)
+	public void invalidDate() {
+		LocalDate begin = new LocalDate(2016, 12, 21);
+		LocalDate end = new LocalDate(2016, 12, 19);
+		
+		new Adventure(this.broker, begin, end, 20, "BK011234567", 300);
+	
+	}
+	
+	@Test(expected = BrokerException.class)
+	public void invalidAge() {
+		LocalDate begin = new LocalDate(2016, 12, 19);
+		LocalDate end = new LocalDate(2016, 12, 21);
 
+		new Adventure(this.broker, begin, end, 1, "BK011234567", 300);
+	}
+	
+	@Test(expected = BrokerException.class)
+	public void invalidValue() {
+		LocalDate begin = new LocalDate(2016, 12, 19);
+		LocalDate end = new LocalDate(2016, 12, 21);
+
+		new Adventure(this.broker, begin, end, 20, "BK011234567", 0);
+		
+	}
 	@After
 	public void tearDown() {
 		Broker.brokers.clear();

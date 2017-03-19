@@ -4,6 +4,7 @@ import org.joda.time.LocalDate;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import pt.ulisboa.tecnico.softeng.broker.exception.BrokerException;
 import pt.ulisboa.tecnico.softeng.broker.interfaces.ActivityInterface;
 import pt.ulisboa.tecnico.softeng.broker.interfaces.BankInterface;
 import pt.ulisboa.tecnico.softeng.broker.interfaces.HotelInterface;
@@ -33,8 +34,25 @@ public class Adventure {
 		this.age = age;
 		this.IBAN = IBAN;
 		this.amount = amount;
-
+		
+		if (end.isBefore(begin)) {
+			throw new BrokerException("The end date cannot come before begin date");
+		}
+		
+		if (age <= 18) {
+			throw new BrokerException("The minimun age cannot be below 18");
+		}
+		else if (age >= 100) {
+			throw new BrokerException("The maximum age cannot exceed 100");
+		}
+		
+		if (amount <= 0) {
+			throw new BrokerException();
+		}
+		
+		
 		broker.addAdventure(this);
+		
 	}
 
 	public String getID() {
