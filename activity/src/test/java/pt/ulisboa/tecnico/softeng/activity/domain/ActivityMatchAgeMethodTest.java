@@ -1,17 +1,12 @@
 package pt.ulisboa.tecnico.softeng.activity.domain;
+
 import  pt.ulisboa.tecnico.softeng.activity.domain.exception.ActivityException;
-
-
-import java.time.format.DateTimeFormatter;
-
 import org.junit.After;
-import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
 public class ActivityMatchAgeMethodTest {
-	private final DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy");
-
+	
 	@Before
 	public void setUp() {
 		
@@ -25,14 +20,13 @@ public class ActivityMatchAgeMethodTest {
 	@Test (expected = ActivityException.class)
 	public void ageMinTest() {
 		ActivityProvider provider = new ActivityProvider("XtremX", "ExtremeAdventure");
-		new Activity(provider, "Bush Walking", 13, 60, -1);
+		new Activity(provider, "Bush Walking", 13, 60, 2);
 	}
 	@Test (expected = ActivityException.class)
 	public void ageMaxTest() {
 		ActivityProvider provider = new ActivityProvider("XtremX", "ExtremeAdventure");
-		new Activity(provider, "Bush Walking", 19, 101, -1);
+		new Activity(provider, "Bush Walking", 19, 101, 3);
 	}
-	
 	
 	@After
 	public void tearDown() {
