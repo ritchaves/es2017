@@ -44,6 +44,56 @@ public class ActivityProviderConstructorMethodTest {
 		Assert.assertEquals(1, ActivityProvider.providers.size());
 	}
 
+	@Test (expected = ActivityException.class)
+	public void ifNameNull() {
+		ActivityProvider provider = new ActivityProvider("XtremX", null);
+
+		Assert.assertEquals(null, provider.getName());
+		Assert.assertTrue(provider.getCode().length() == ActivityProvider.CODE_SIZE);
+		Assert.assertEquals(0, provider.getNumberOfActivities());
+		Assert.assertEquals(1, ActivityProvider.providers.size());
+	}
+	
+	@Test (expected = ActivityException.class)
+	public void ifNameEmpty() {
+		ActivityProvider provider = new ActivityProvider("XtremX", "");
+
+		Assert.assertEquals("", provider.getName());
+		Assert.assertTrue(provider.getCode().length() == ActivityProvider.CODE_SIZE);
+		Assert.assertEquals(0, provider.getNumberOfActivities());
+		Assert.assertEquals(1, ActivityProvider.providers.size());
+	}
+	
+	@Test (expected = ActivityException.class)
+	public void ifNameSpace() {
+		ActivityProvider provider = new ActivityProvider("XtremX", "       ");
+
+		Assert.assertEquals("       ", provider.getName());
+		Assert.assertTrue(provider.getCode().length() == ActivityProvider.CODE_SIZE);
+		Assert.assertEquals(0, provider.getNumberOfActivities());
+		Assert.assertEquals(1, ActivityProvider.providers.size());
+	}
+	
+	@Test (expected = ActivityException.class)
+	public void ifCodenull() {
+		ActivityProvider provider = new ActivityProvider(null , "Adventure++");
+
+		Assert.assertEquals("Adventure++", provider.getName());
+		Assert.assertTrue(provider.getCode().length() == ActivityProvider.CODE_SIZE);
+		Assert.assertEquals(0, provider.getNumberOfActivities());
+		Assert.assertEquals(1, ActivityProvider.providers.size());
+	}
+	
+	@Test (expected = ActivityException.class)
+	public void ifCodeSpace() {
+		ActivityProvider provider = new ActivityProvider("       ", "Adventure++");
+
+		Assert.assertEquals("Adventure++", provider.getName());
+		Assert.assertTrue(provider.getCode().length() == ActivityProvider.CODE_SIZE);
+		Assert.assertEquals(0, provider.getNumberOfActivities());
+		Assert.assertEquals(1, ActivityProvider.providers.size());
+	}
+	
 	@After
 	public void tearDown() {
 		ActivityProvider.providers.clear();
