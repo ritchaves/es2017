@@ -6,7 +6,7 @@ import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
-import pt.ulisboa.tecnico.softeng.hotel.exception.HotelException;
+//import pt.ulisboa.tecnico.softeng.hotel.exception.HotelException;
 
 public class BookingConflictMethodTest {
 	Booking booking;
