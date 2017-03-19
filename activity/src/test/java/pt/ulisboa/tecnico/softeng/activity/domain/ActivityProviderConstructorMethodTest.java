@@ -26,7 +26,7 @@ public class ActivityProviderConstructorMethodTest {
 	
 	@Test (expected = ActivityException.class)
 	public void moreCaractersCode() {
-		ActivityProvider provider = new ActivityProvider("XtremX", "Adventure++");
+		ActivityProvider provider = new ActivityProvider("XtremXXX", "Adventure++");
 
 		Assert.assertEquals("Adventure++", provider.getName());
 		Assert.assertTrue(provider.getCode().length() == ActivityProvider.CODE_SIZE);
@@ -36,7 +36,7 @@ public class ActivityProviderConstructorMethodTest {
 	
 	@Test (expected = ActivityException.class)
 	public void lessCaractersCode() {
-		ActivityProvider provider = new ActivityProvider("XtremX", "Adventure++");
+		ActivityProvider provider = new ActivityProvider("X", "Adventure++");
 
 		Assert.assertEquals("Adventure++", provider.getName());
 		Assert.assertTrue(provider.getCode().length() == ActivityProvider.CODE_SIZE);
