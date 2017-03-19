@@ -45,7 +45,7 @@ public class ActivityMatchAgeMethodTest {
 
 		Activity activity = new Activity(provider, "Bush Walking", 60, 40, 3);
 
-		Assert.assertTrue(activity.getCode().startsWith(this.provider.getCode()));
+		Assert.assertTrue(activity.getCode().startsWith(provider.getCode()));
 
 		Assert.assertTrue(activity.getCode().length() > ActivityProvider.CODE_SIZE);
 		Assert.assertEquals(60, activity.getMinAge());
