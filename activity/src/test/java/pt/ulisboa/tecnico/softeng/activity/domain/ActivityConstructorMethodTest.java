@@ -40,7 +40,7 @@ public class ActivityConstructorMethodTest {
 
 		Assert.assertTrue(activity.getCode().length() > ActivityProvider.CODE_SIZE);
 		
-Assert.assertEquals(18, activity.getMinAge());
+		Assert.assertEquals(18, activity.getMinAge());
 
 		Assert.assertEquals(80, activity.getMaxAge());
 
