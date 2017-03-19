@@ -24,7 +24,7 @@ public class BookingConstructorTest {
 		Assert.assertEquals(departure, booking.getDeparture());
 	}
 	
-	@Test (expected = HotelException.class)
+	@Test 
 	public void departureBeforeArrival() {
 		Hotel hotel = new Hotel("XPTO123", "Londres");
 		
@@ -32,7 +32,8 @@ public class BookingConstructorTest {
 		LocalDate departure = new LocalDate(2016, 12, 16);
 		
 		Booking booking = new Booking(hotel, arrival, departure);
-
+		Assert.assertTrue(booking.impossibility(arrival, departure));
+		
 		Assert.assertTrue(booking.getReference().startsWith(hotel.getCode()));
 		Assert.assertTrue(booking.getReference().length() > Hotel.CODE_SIZE);
 		Assert.assertEquals(arrival, booking.getArrival());

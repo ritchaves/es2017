@@ -18,10 +18,10 @@ public class Activity {
 	private final Set<ActivityOffer> offers = new HashSet<>();
 
 	public Activity(ActivityProvider provider, String name, int minAge, int maxAge, int capacity) {
-		if (minAge <= 18) {
+		if (minAge < 18) {
 			throw new ActivityException("A idade minima nao pode ser inferior a 18");
 		}
-		if (maxAge >= 100) {
+		if (maxAge > 100) {
 			throw new ActivityException("A idade maxima nao pode exceder os 100");
 		}
 		if (capacity < 0) {

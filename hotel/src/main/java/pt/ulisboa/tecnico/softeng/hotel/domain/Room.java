@@ -4,13 +4,13 @@ import java.util.HashSet;
 import java.util.Set;
 
 import org.joda.time.LocalDate;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+//import org.slf4j.Logger;
+//import org.slf4j.LoggerFactory;
 
 import pt.ulisboa.tecnico.softeng.hotel.exception.HotelException;
 
 public class Room {
-	private static Logger logger = LoggerFactory.getLogger(Room.class);
+	//private static Logger logger = LoggerFactory.getLogger(Room.class);
 
 	public static enum Type {
 		SINGLE, DOUBLE
@@ -67,6 +67,9 @@ public class Room {
 	}
 
 	public Booking reserve(Type type, LocalDate arrival, LocalDate departure) {
+		if (type != this.type){
+			throw new HotelException();
+		}
 		if (!isFree(type, arrival, departure)) {
 			throw new HotelException();
 		}

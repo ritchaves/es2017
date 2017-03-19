@@ -39,7 +39,7 @@ public class BookingConflictMethodTest {
 		Assert.assertFalse(this.booking.conflict(arrival, departure));
 	}
 	
-	@Test (expected = HotelException.class)
+	@Test 
 	public void conflict1() {
 		LocalDate arrival = new LocalDate(2016, 12, 22);
 		LocalDate departure = new LocalDate(2016, 12, 26);
@@ -47,7 +47,7 @@ public class BookingConflictMethodTest {
 		Assert.assertTrue(this.booking.conflict(arrival, departure));
 	}
 	
-	@Test (expected = HotelException.class)
+	@Test 
 	public void conflict2() {
 		LocalDate arrival = new LocalDate(2016, 12, 16);
 		LocalDate departure = new LocalDate(2016, 12, 22);
@@ -55,7 +55,7 @@ public class BookingConflictMethodTest {
 		Assert.assertTrue(this.booking.conflict(arrival, departure));
 	}
 	
-	@Test (expected = HotelException.class)
+	@Test 
 	public void conflict3() {
 		LocalDate arrival = new LocalDate(2016, 12, 16);
 		LocalDate departure = new LocalDate(2016, 12, 26);

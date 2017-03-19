@@ -18,9 +18,6 @@ public class Booking {
 		if (this.arrival == null || this.departure == null){
 			throw new HotelException();
 		}
-		if (impossibility(arrival, departure)){
-			throw new HotelException();
-		}
 	}
 
 	public String getReference() {
