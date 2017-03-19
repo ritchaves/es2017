@@ -14,7 +14,7 @@ public class ActivityConstructorMethodTest {
 		this.provider = new ActivityProvider("XtremX", "ExtremeAdventure");
 	}
 
-	@Test
+	@Test(expected= ActivityException.class)
 	public void success() {
 		Activity activity = new Activity(this.provider, "Bush Walking", 18, 80, 25);
 
