@@ -6,7 +6,6 @@ import java.util.Set;
 import org.joda.time.LocalDate;
 
 import pt.ulisboa.tecnico.softeng.activity.domain.exception.ActivityException;
-import pt.ulisboa.tecnico.softeng.hotel.exception.HotelException;
 
 public class ActivityProvider {
 	public static Set<ActivityProvider> providers = new HashSet<>();
