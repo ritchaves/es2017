@@ -14,3 +14,4 @@ To check test coverage execute: mvn clean cobertura:cobertura
 |70012       |Filipe Cruzinha          |filipe.cruzinha@gmail.com    |Cruzinha              |   7   |
 |75834       |Hugo do Vale             |hugo_yoco@hotmail.com        |zipie                 |   8   |
 |78753       |Alcino Albuquerque       |condealbuquerque@gmail.com   |alcinocondealbuquerque|   9   |
+4
