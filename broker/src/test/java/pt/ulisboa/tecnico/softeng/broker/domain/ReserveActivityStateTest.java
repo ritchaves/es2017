@@ -1,5 +1,7 @@
 package pt.ulisboa.tecnico.softeng.broker.domain;
 
+import java.awt.print.Printable;
+
 import org.joda.time.LocalDate;
 import org.junit.Assert;
 import org.junit.Before;
@@ -17,6 +19,9 @@ import pt.ulisboa.tecnico.softeng.broker.exception.RemoteAccessException;
 import pt.ulisboa.tecnico.softeng.broker.interfaces.ActivityInterface;
 import pt.ulisboa.tecnico.softeng.broker.interfaces.BankInterface;
 import pt.ulisboa.tecnico.softeng.broker.interfaces.HotelInterface;
+import pt.ulisboa.tecnico.softeng.hotel.dataobjects.RoomBookingData;
+import pt.ulisboa.tecnico.softeng.hotel.domain.Room;
+import pt.ulisboa.tecnico.softeng.hotel.exception.HotelException;
 
 @RunWith(JMockit.class)
 public class ReserveActivityStateTest {
@@ -43,27 +48,15 @@ public class ReserveActivityStateTest {
 
 	@Test
 	public void success() {
+		//System.out.println(adventure.getState());
+		Assert.assertNotEquals(Adventure.State.RESERVE_ACTIVITY, this.adventure.getState());
 		this.adventure.process();
 		Assert.assertEquals(Adventure.State.RESERVE_ACTIVITY, this.adventure.getState());
+		Assert.assertEquals(this.begin, this.adventure.getBegin());
+		Assert.assertEquals(this.end, this.adventure.getEnd());
+		Assert.assertEquals(21, this.adventure.getAge());
+		Assert.assertEquals("BR01", this.adventure.getBroker().getCode());
+		Assert.assertEquals(300, this.adventure.getAmount());
+		//Assert.assertNotNull(this.adventure.getActivityConfirmation());
 	}
-/*
-	@Test
-	public void cancelledPaymentSecondRemoteAccessException(@Mocked final BankInterface bankInterface) {
-		this.adventure.setPaymentConfirmation(PAYMENT_CONFIRMATION);
-		this.adventure.setPaymentCancellation(PAYMENT_CANCELLATION);
-
-		new Expectations() {
-			{
-				BankInterface.getOperationData(PAYMENT_CONFIRMATION);
-				this.result = new BankOperationData();
-
-				BankInterface.getOperationData(PAYMENT_CANCELLATION);
-				this.result = new RemoteAccessException();
-			}
-		};
-
-		this.adventure.process();
-
-		Assert.assertEquals(Adventure.State.CANCELLED, this.adventure.getState());
-	}*/
 }
