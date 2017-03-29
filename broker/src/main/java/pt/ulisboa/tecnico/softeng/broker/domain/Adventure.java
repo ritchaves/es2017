@@ -155,14 +155,15 @@ public class Adventure {
 	}
 
 	public State getState() {
-		switch (this.oldState) {
+		switch (this.getOldState()) {
 		case PROCESS_PAYMENT:
 			return this.state.getState();
 		case RESERVE_ACTIVITY:
+			return this.state.getState();
 		case BOOK_ROOM:
 		case UNDO:
 		case CONFIRMED:
-			return this.oldState;
+			return this.getOldState();
 		case CANCELLED:
 			return this.state.getState();
 		default:
@@ -172,13 +173,13 @@ public class Adventure {
 	}
 
 	public void setState(State state) {
-		this.oldState = state;
+		this.setOldState(state);
 		switch (state) {
 		case PROCESS_PAYMENT:
 			this.state = new ProcessPaymentState();
 			break;
 		case RESERVE_ACTIVITY:
-			this.state = null;
+			this.state = new ReserveActivityState();
 			break;
 		case BOOK_ROOM:
 			this.state = null;
@@ -200,31 +201,14 @@ public class Adventure {
 	}
 
 	public void process() {
-		logger.debug("process ID:{}, state:{} ", this.ID, this.oldState.name());
+		logger.debug("process ID:{}, state:{} ", this.ID, this.getOldState().name());
 
-		switch (this.oldState) {
+		switch (this.getOldState()) {
 		case PROCESS_PAYMENT:
 			this.state.process(this);
 			break;
 		case RESERVE_ACTIVITY:
-			try {
-				this.activityConfirmation = ActivityInterface.reserveActivity(this.begin, this.end, this.age);
-			} catch (ActivityException ae) {
-				setState(State.UNDO);
-			} catch (RemoteAccessException rae) {
-				// increment number of errors
-				// if (number of errors == 5) {
-				// adventure.setState(State.UNDO);
-				// }
-				// return;
-			}
-
-			if (this.begin.equals(this.end)) {
-				setState(State.CONFIRMED);
-			} else {
-				setState(State.BOOK_ROOM);
-			}
-
+			this.state.process(this);
 			break;
 		case BOOK_ROOM:
 			try {
@@ -344,6 +328,14 @@ public class Adventure {
 
 	public boolean cancelPayment() {
 		return getPaymentConfirmation() != null && getPaymentCancellation() == null;
+	}
+
+	public State getOldState() {
+		return oldState;
+	}
+
+	public void setOldState(State oldState) {
+		this.oldState = oldState;
 	}
 
 }
