@@ -19,7 +19,7 @@ public class ProcessPaymentState extends AdventureState {
 
 	@Override
 	public void process(Adventure adventure) {
-		logger.debug("process ID:{}, state:{} ", adventure.getID(), adventure.oldState.name());
+		logger.debug("process ID:{}, state:{} ", adventure.getID(), adventure.getOldState().name());
 		
 
 		try {
