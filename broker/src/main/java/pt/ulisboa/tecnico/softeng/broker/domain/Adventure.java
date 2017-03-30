@@ -161,6 +161,7 @@ public class Adventure {
 		case RESERVE_ACTIVITY:
 			return this.state.getState();
 		case BOOK_ROOM:
+			return this.state.getState();
 		case UNDO:
 		case CONFIRMED:
 			return this.getOldState();
@@ -182,7 +183,7 @@ public class Adventure {
 			this.state = new ReserveActivityState();
 			break;
 		case BOOK_ROOM:
-			this.state = null;
+			this.state = new BookRoomState();
 			break;
 		case UNDO:
 			this.state = null;
