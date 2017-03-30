@@ -99,7 +99,10 @@ public class Hotel {
 	}
 
 	public static RoomBookingData getRoomBookingData(String reference) {
-		// TODO implement
+		RoomBookingData booking = new RoomBookingData();
+		if (booking.getReference() == reference){
+			return booking;
+		}
 		throw new HotelException();
 	}
 
