@@ -13,7 +13,6 @@ public class ReserveActivityState extends AdventureState {
 	private LocalDate begin;
 	private LocalDate end;
 	private String activityConfirmation;
-	//private int age;
 	
 	@Override
 	public State getState() {
@@ -23,19 +22,20 @@ public class ReserveActivityState extends AdventureState {
 	@Override
 	public void process(Adventure adventure) {
 		logger.debug("process");		
-		//int error=0;
 		
+		this.getNumOfRemoteErrors();
 		try {
 			adventure.setActivityConfirmation(ActivityInterface.reserveActivity(adventure.getBegin(), adventure.getEnd(), adventure.getAge()));
 		} catch (ActivityException ae) {
 			setState(State.UNDO);
 		} catch (RemoteAccessException rae) {
-			// increment number of errors
-			// if (errors == 5) {
-			// adventure.setState(State.UNDO);
-			// }
-			// return;
-		}	
+			this.incNumOfRemoteErrors();
+			if(this.numOfRemoteErrors >=5){
+				adventure.setState(State.CANCELLED);
+				return;
+			}
+		}
+			
 		//actividade de 1 dia nao precisa de quarto
 		if (this.begin.equals(this.end)) {
 			setState(State.CONFIRMED);
