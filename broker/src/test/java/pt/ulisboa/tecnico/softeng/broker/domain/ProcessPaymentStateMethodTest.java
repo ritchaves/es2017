@@ -37,7 +37,12 @@ public class ProcessPaymentStateMethodTest {
 	}
 
 	@Test
-	public void readyToReserve() {
+	public void readyToReserve(@Mocked final BankInterface bankInterface) {
+		this.adventure.getIBAN();
+		this.adventure.getAmount();
+		
+		BankInterface.processPayment(IBAN , AMOUNT);
+		
 		this.adventure.process();
 
 		Assert.assertEquals(Adventure.State.RESERVE_ACTIVITY, this.adventure.getState());
@@ -57,7 +62,7 @@ public class ProcessPaymentStateMethodTest {
 
 		this.adventure.process();
 
-		Assert.assertEquals(Adventure.State.RESERVE_ACTIVITY, this.adventure.getState());
+		Assert.assertEquals(Adventure.State.CANCELLED, this.adventure.getState());
 	}
 
 	@Test
@@ -94,6 +99,8 @@ public class ProcessPaymentStateMethodTest {
 		};
 
 		this.adventure.process();
+		this.adventure.process();
+		this.adventure.process();
 
 		Assert.assertEquals(Adventure.State.CANCELLED, this.adventure.getState());
 	}
@@ -113,6 +120,7 @@ public class ProcessPaymentStateMethodTest {
 			}
 		};
 
+		this.adventure.process();
 		this.adventure.process();
 
 		Assert.assertEquals(Adventure.State.PROCESS_PAYMENT, this.adventure.getState());
@@ -137,8 +145,11 @@ public class ProcessPaymentStateMethodTest {
 		};
 
 		this.adventure.process();
+		this.adventure.process();
+		this.adventure.process();
+		this.adventure.process();
 
-		Assert.assertEquals(Adventure.State.PROCESS_PAYMENT, this.adventure.getState());
+		Assert.assertEquals(Adventure.State.CANCELLED, this.adventure.getState());
 	}
 }
 

@@ -20,16 +20,18 @@ public class ProcessPaymentState extends AdventureState {
 	public void process(Adventure adventure) {
 		logger.debug("process ID:{}, state:{} ", adventure.getID(), adventure.getOldState().name());
 		
-
+		this.getNumOfRemoteErrors();
 		try {
 			adventure.setPaymentConfirmation(BankInterface.processPayment(adventure.getIBAN(), adventure.getAmount()));
 		} catch (BankException be) {
 			adventure.setState(State.CANCELLED);
+			return;
 		} catch (RemoteAccessException rae) {
-				// increment number of errors
-				// if (number of errors == 3) {
-				// setState(State.CANCELLED);
-				// }
+			this.incNumOfRemoteErrors();
+			if (this.numOfRemoteErrors >= 3) {
+				adventure.setState(State.CANCELLED);
+				return;
+			}
 			return;
 		}
 
