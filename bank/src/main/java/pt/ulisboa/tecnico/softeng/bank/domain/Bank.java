@@ -104,7 +104,16 @@ public class Bank {
 	}
 
 	public static String cancelPayment(String reference) {
-		// TODO implement
+		for (Bank bank : Bank.banks) {
+			if(bank.getOperation(reference) != null) {
+				Operation canceledOperation = bank.getOperation(reference);
+				Account creditAcc = canceledOperation.getAccount();
+				return creditAcc.deposit(canceledOperation.getValue());
+			}
+		}
+		
+		
+		
 		throw new BankException();
 	}
 

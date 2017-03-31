@@ -1,3 +1,4 @@
+
 package pt.ulisboa.tecnico.softeng.broker.domain;
 
 import org.joda.time.LocalDate;
@@ -140,3 +141,4 @@ public class ProcessPaymentStateMethodTest {
 		Assert.assertEquals(Adventure.State.PROCESS_PAYMENT, this.adventure.getState());
 	}
 }
+
