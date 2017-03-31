@@ -99,9 +99,24 @@ public class Hotel {
 	}
 
 	public static RoomBookingData getRoomBookingData(String reference) {
-		RoomBookingData booking = new RoomBookingData();
-		if (booking.getReference() == reference){
-			return booking;
+		RoomBookingData bookingData = new RoomBookingData();
+		
+		for(Hotel hotel : hotels){
+			for(Room room : hotel.rooms){
+				for(Booking booking :room.getBookings()){
+					if (reference.equals(booking.getReference())){
+						bookingData.setReference(reference);
+						bookingData.setHotelName(hotel.name);
+						bookingData.setHotelCode(hotel.code);
+						bookingData.setRoomNumber(room.getNumber());
+						bookingData.setRoomType(room.getType().toString());
+						bookingData.setArrival(booking.getArrival());
+						bookingData.setDeparture(booking.getDeparture());
+						return bookingData;
+					}
+				}
+			}
+			
 		}
 		throw new HotelException();
 	}

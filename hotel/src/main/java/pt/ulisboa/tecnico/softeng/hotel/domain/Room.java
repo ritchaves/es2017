@@ -44,6 +44,10 @@ public class Room {
 	String getNumber() {
 		return this.number;
 	}
+	
+	public Set<Booking> getBookings(){
+		return this.bookings;
+	}
 
 	Type getType() {
 		return this.type;
