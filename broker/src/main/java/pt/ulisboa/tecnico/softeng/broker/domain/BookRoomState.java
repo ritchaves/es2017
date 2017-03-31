@@ -1,6 +1,5 @@
  package pt.ulisboa.tecnico.softeng.broker.domain;
 
-import java.time.LocalDate;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import pt.ulisboa.tecnico.softeng.broker.domain.Adventure.State;
@@ -22,24 +21,29 @@ public class BookRoomState extends AdventureState {
 	public void process(Adventure adventure) {
 		logger.debug("process ID:{}, state:{} ", adventure.getID(), adventure.getOldState().name());
 		
+		this.getNumOfRemoteErrors();
+
 		try {
 			adventure.setRoomConfirmation(HotelInterface.reserveRoom(Room.Type.SINGLE, adventure.getBegin(), adventure.getEnd()));
 		} catch (HotelException rae) {
-			setState(State.UNDO);
+			adventure.setState(State.UNDO);
+			return;
 		} catch (RemoteAccessException rae) {
-			// increment number of errors
-			// if (number of errors == 10) {
-			// adventure.setState(State.UNDO);
-			// }
-			// return;
+			this.incNumOfRemoteErrors();
+			if (this.numOfRemoteErrors == 10) {
+				adventure.setState(State.UNDO);
+				return;
+			}
+			return;
 		}
+		
 		adventure.setState(State.CONFIRMED);
 
 	}
 
-	private void setState(State undo) {
-		// TODO Auto-generated method stub
-	}
+//	private void setState(State undo) {
+//		// TODO Auto-generated method stub
+//	}
 
 	public String getRoomConfirmation() {
 		return roomConfirmation;
