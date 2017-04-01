@@ -18,18 +18,20 @@ import pt.ulisboa.tecnico.softeng.broker.interfaces.ActivityInterface;
 public class ReserveActivityStateTest {
 	private final LocalDate begin = new LocalDate(2017, 12, 19);
 	private final LocalDate end = new LocalDate(2017, 12, 21);
-	private final LocalDate end2 = new LocalDate(2017, 12, 19);
 	private static final String IBAN = "BK01987654321";
-	private final int age = 30;
+	private final int age = 21;
 	private Adventure adventure;
+	private Adventure adventure2;
 	
 	@Injectable
 	private Broker broker;
 	
 	@Before
 	public void setUp() {
-		this.adventure = new Adventure(this.broker, this.begin, this.end, 21, IBAN,300);
+		this.adventure = new Adventure(this.broker, this.begin, this.end, this.age, IBAN,300);
+		this.adventure2 = new Adventure(this.broker, this.begin, this.begin, this.age, IBAN, 300);
 		this.adventure.setState(State.RESERVE_ACTIVITY);
+		this.adventure2.setState(State.RESERVE_ACTIVITY);
 	}
 
 	@Test
@@ -52,16 +54,16 @@ public class ReserveActivityStateTest {
 	
 	@Test
 	public void confirmSameDayActivity(@Mocked final ActivityInterface activityInterface) {
-		Adventure adventure2 = new Adventure(this.broker, this.begin, this.end2, 20, "BK01987654321", this.age);
-		adventure2.getAge();
-		adventure2.getBegin();
-		adventure2.getEnd();
-		
-		ActivityInterface.reserveActivity(begin, end2, age);
-		
-		adventure2.process();
+		this.adventure2.getBegin();
+		this.adventure2.getEnd();
+		this.adventure2.getAge();
 
-		Assert.assertEquals(Adventure.State.CONFIRMED, adventure2.getState());
+		
+		ActivityInterface.reserveActivity(begin, begin, age);
+		
+		this.adventure2.process();
+
+		Assert.assertEquals(Adventure.State.CONFIRMED, this.adventure2.getState());
 	}
 	
 	@Test
