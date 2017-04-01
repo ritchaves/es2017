@@ -18,7 +18,7 @@ public class RoomConstructorMethodTest {
 		this.hotel = new Hotel("XPTO123", "Lisboa");
 	}
 
-/*	@Test
+	@Test
 	public void success() {
 		Room room = new Room(this.hotel, "01", Type.DOUBLE);
 
@@ -73,5 +73,5 @@ public class RoomConstructorMethodTest {
 	public void tearDown() {
 		Hotel.hotels.clear();
 	}
-*/
+
 }
