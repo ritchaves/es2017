@@ -88,21 +88,41 @@ public class ActivityProvider {
 			ActivityReservationData reservationData = new ActivityReservationData();
 			for (ActivityProvider provider : providers){
 				for(Activity activity : provider.activities){
+<<<<<<< HEAD
 					for(ActivityOffer offer : activity.offers){
 						for(Booking booking : offer.getBookings()){
+=======
+					for(ActivityOffer activityoffer : activity.getOffers()){
+						for(Booking booking : activityoffer.bookings){
+>>>>>>> ada543e11b181fc4e72a3136c87281f58fc0e313
 							if(reference.equals(booking.getReference())){
 								reservationData.setReference(reference);
 								reservationData.setName(provider.name);
 								reservationData.setCode(provider.code);
+<<<<<<< HEAD
 								reservationData.setBegin(offer.getBegin());
 								reservationData.setEnd(offer.getEnd());
+=======
+								reservationData.setBegin(activityoffer.getBegin());
+								reservationData.setEnd(activityoffer.getEnd());
+>>>>>>> ada543e11b181fc4e72a3136c87281f58fc0e313
 								return reservationData;
 							}	
 						}
 					}
+<<<<<<< HEAD
 				}		
 			}
 		throw new ActivityException();
 	}
 }
 
+=======
+				}
+					
+			}
+		throw new ActivityException();
+	}
+
+}
+>>>>>>> ada543e11b181fc4e72a3136c87281f58fc0e313
