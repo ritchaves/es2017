@@ -28,9 +28,9 @@ public class ReserveActivityState extends AdventureState {
 			return;
 		} catch (RemoteAccessException rae) {
 			this.incNumOfRemoteErrors();
-				if(this.numOfRemoteErrors >=5){
-					System.out.println("Erro");
+				if(this.numOfRemoteErrors == 5){
 					adventure.setState(State.UNDO);
+					System.out.println("Erro");
 					return;
 				}
 			return;
@@ -39,6 +39,7 @@ public class ReserveActivityState extends AdventureState {
 		//actividade de 1 dia nao precisa de quarto
 		if (adventure.getBegin().equals(adventure.getEnd())) {
 			adventure.setState(State.CONFIRMED);
+			return;
 		}
 		
 		adventure.setState(State.BOOK_ROOM);

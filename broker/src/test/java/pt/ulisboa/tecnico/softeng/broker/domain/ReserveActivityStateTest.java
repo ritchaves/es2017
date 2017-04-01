@@ -20,6 +20,7 @@ public class ReserveActivityStateTest {
 	private final LocalDate end = new LocalDate(2017, 12, 21);
 	private static final String IBAN = "BK01987654321";
 	private final int age = 21;
+	private final int AMOUNT = 300;
 	private Adventure adventure;
 	private Adventure adventure2;
 	
@@ -28,8 +29,8 @@ public class ReserveActivityStateTest {
 	
 	@Before
 	public void setUp() {
-		this.adventure = new Adventure(this.broker, this.begin, this.end, this.age, IBAN,300);
-		this.adventure2 = new Adventure(this.broker, this.begin, this.begin, this.age, IBAN, 300);
+		this.adventure = new Adventure(this.broker, this.begin, this.end, this.age, IBAN, this.AMOUNT);
+		this.adventure2 = new Adventure(this.broker, this.begin, this.begin, this.age, IBAN, this.AMOUNT);
 		this.adventure.setState(State.RESERVE_ACTIVITY);
 		this.adventure2.setState(State.RESERVE_ACTIVITY);
 	}
@@ -124,7 +125,7 @@ public class ReserveActivityStateTest {
 		};
 		
 		this.adventure.process();
-		Assert.assertEquals(Adventure.State.BOOK_ROOM, this.adventure.getState());
+		Assert.assertEquals(Adventure.State.RESERVE_ACTIVITY, this.adventure.getState());
 	}
 	
 	@Test
@@ -150,6 +151,6 @@ public class ReserveActivityStateTest {
 			}
 		};
 		for (int i = 0; i < 6; i++)this.adventure.process();
-		Assert.assertEquals(Adventure.State.UNDO, this.adventure.getState());
+		Assert.assertEquals(Adventure.State.CANCELLED, this.adventure.getState());
 	}
 }
