@@ -1,5 +1,6 @@
  package pt.ulisboa.tecnico.softeng.broker.domain;
 
+import java.time.LocalDate;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import pt.ulisboa.tecnico.softeng.activity.exception.ActivityException;
@@ -9,6 +10,8 @@ import pt.ulisboa.tecnico.softeng.broker.interfaces.ActivityInterface;
 
 public class ReserveActivityState extends AdventureState {
 	private static Logger logger = LoggerFactory.getLogger(ReserveActivityState.class);
+	private LocalDate begin;
+	private LocalDate end;
 	private String activityConfirmation;
 	
 	@Override
@@ -28,25 +31,28 @@ public class ReserveActivityState extends AdventureState {
 			return;
 		} catch (RemoteAccessException rae) {
 			this.incNumOfRemoteErrors();
-				if(this.numOfRemoteErrors >=5){
-					System.out.println("Erro");
-					adventure.setState(State.UNDO);
-					return;
-				}
+			if(this.numOfRemoteErrors >=5){
+				System.out.println("Erro");
+				adventure.setState(State.UNDO);
+				return;
+			}
 			return;
 		}
 			
 		//actividade de 1 dia nao precisa de quarto
-		if (adventure.getBegin().equals(adventure.getEnd())) {
+		if (this.begin.equals(this.end)) {
 			adventure.setState(State.CONFIRMED);
 		}
 		
 		adventure.setState(State.BOOK_ROOM);
+		
+		//adventure.setState(State.RESERVE_ACTIVITY);
 
 	}
 
 //	private void setState(State undo) {
 //		// TODO Auto-generated method stub
+//		
 //	}
 
 	public String getActivityConfirmation() {
