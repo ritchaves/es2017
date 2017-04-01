@@ -44,6 +44,10 @@ public class ActivityOffer {
 	int getNumberOfBookings() {
 		return this.bookings.size();
 	}
+	
+	public Set<Booking> getBookings(){
+		return this.bookings;
+	}
 
 	void addBooking(Booking booking) {
 		if (this.capacity == this.bookings.size()) {
