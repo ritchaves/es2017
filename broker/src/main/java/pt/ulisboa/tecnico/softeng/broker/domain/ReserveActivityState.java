@@ -21,36 +21,39 @@ public class ReserveActivityState extends AdventureState {
 
 	@Override
 	public void process(Adventure adventure) {
-		logger.debug("process");		
+		logger.debug("process ID:{}, state:{} ", adventure.getID(), adventure.getOldState().name());	
 		
 		this.getNumOfRemoteErrors();
 		try {
 			adventure.setActivityConfirmation(ActivityInterface.reserveActivity(adventure.getBegin(), adventure.getEnd(), adventure.getAge()));
 		} catch (ActivityException ae) {
-			setState(State.UNDO);
+			adventure.setState(State.UNDO);
+			return;
 		} catch (RemoteAccessException rae) {
 			this.incNumOfRemoteErrors();
 			if(this.numOfRemoteErrors >=5){
-				adventure.setState(State.CANCELLED);
+				System.out.println("Erro");
+				adventure.setState(State.UNDO);
 				return;
 			}
+			return;
 		}
 			
 		//actividade de 1 dia nao precisa de quarto
 		if (this.begin.equals(this.end)) {
-			setState(State.CONFIRMED);
-		} else {
-			setState(State.BOOK_ROOM);
+			adventure.setState(State.CONFIRMED);
 		}
-
-		adventure.setState(State.RESERVE_ACTIVITY);
-
-	}
-
-	private void setState(State undo) {
-		// TODO Auto-generated method stub
 		
+		adventure.setState(State.BOOK_ROOM);
+		
+		//adventure.setState(State.RESERVE_ACTIVITY);
+
 	}
+
+//	private void setState(State undo) {
+//		// TODO Auto-generated method stub
+//		
+//	}
 
 	public String getActivityConfirmation() {
 		return activityConfirmation;
