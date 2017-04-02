@@ -163,7 +163,7 @@ public class Adventure {
 		case BOOK_ROOM:
 			return this.state.getState();
 		case UNDO:
-			return this.getOldState();
+			return this.state.getState();
 		case CONFIRMED:
 			return this.getOldState();
 		case CANCELLED:
