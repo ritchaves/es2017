@@ -99,12 +99,14 @@ public class Hotel {
 	}
 
 	public static RoomBookingData getRoomBookingData(String reference) {
-		RoomBookingData bookingData = new RoomBookingData();
-		
+		if(reference == null || reference.trim().equals("")){
+			throw new HotelException();
+		}
 		for(Hotel hotel : hotels){
 			for(Room room : hotel.rooms){
 				for(Booking booking :room.getBookings()){
 					if (reference.equals(booking.getReference())){
+						RoomBookingData bookingData = new RoomBookingData();
 						bookingData.setReference(reference);
 						bookingData.setHotelName(hotel.name);
 						bookingData.setHotelCode(hotel.code);
