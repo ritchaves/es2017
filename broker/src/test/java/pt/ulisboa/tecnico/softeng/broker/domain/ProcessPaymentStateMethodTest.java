@@ -60,10 +60,11 @@ public class ProcessPaymentStateMethodTest {
 		this.adventure.getIBAN();
 		this.adventure.getAmount();
 
-		new Expectations() {
+		new StrictExpectations() {
 			{
-				BankInterface.processPayment(IBAN , AMOUNT);
+				BankInterface.processPayment(this.anyString , this.anyInt);
 				this.result = new BankException();
+				this.times = 1;
 			}
 		};
 
@@ -79,8 +80,9 @@ public class ProcessPaymentStateMethodTest {
 
 		new Expectations() {
 			{
-				BankInterface.processPayment(IBAN , AMOUNT);
+				BankInterface.processPayment(this.anyString , this.anyInt);
 				this.result = new RemoteAccessException();
+				this.times = 1;				
 			}
 		};
 
@@ -96,12 +98,10 @@ public class ProcessPaymentStateMethodTest {
 
 		new Expectations() {
 			{	
-					BankInterface.processPayment(IBAN , AMOUNT);
+					BankInterface.processPayment(this.anyString , this.anyInt);
 					this.result = new RemoteAccessException();
-					BankInterface.processPayment(IBAN , AMOUNT);
-					this.result = new RemoteAccessException();
-					BankInterface.processPayment(IBAN , AMOUNT);
-					this.result = new RemoteAccessException();	
+					this.times = 3;
+
 			}
 		};
 
@@ -120,10 +120,9 @@ public class ProcessPaymentStateMethodTest {
 
 		new Expectations() {
 			{	
-					BankInterface.processPayment(IBAN , AMOUNT);
+					BankInterface.processPayment(this.anyString , this.anyInt);
 					this.result = new RemoteAccessException();
-					BankInterface.processPayment(IBAN , AMOUNT);
-					this.result = new RemoteAccessException();	
+					this.times = 2;	
 			}
 		};
 
@@ -140,14 +139,9 @@ public class ProcessPaymentStateMethodTest {
 
 		new Expectations() {
 			{	
-					BankInterface.processPayment(IBAN , AMOUNT);
+					BankInterface.processPayment(this.anyString , this.anyInt);
 					this.result = new RemoteAccessException();
-					BankInterface.processPayment(IBAN , AMOUNT);
-					this.result = new RemoteAccessException();	
-					BankInterface.processPayment(IBAN , AMOUNT);
-					this.result = new RemoteAccessException();
-					BankInterface.processPayment(IBAN , AMOUNT);
-					this.result = new RemoteAccessException();
+					this.times = 4;
 			}
 		};
 
