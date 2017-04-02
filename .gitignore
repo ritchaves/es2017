@@ -5,5 +5,9 @@ target
 jmeter.log
 infer-out
 .DS_Store
+<<<<<<< HEAD
 .metadata
 .recommenders
+=======
+
+>>>>>>> reference/master

@@ -21,7 +21,7 @@ public class UndoState extends AdventureState {
 
 	@Override
 	public void process(Adventure adventure) {
-		logger.debug("process ID:{}, state:{} ", adventure.getID(), adventure.getOldState().name());
+		logger.debug("process ID:{}, state:{} ", adventure.getID(), adventure.getState().name());
 		
 		if (adventure.cancelPayment()) {
 			try {

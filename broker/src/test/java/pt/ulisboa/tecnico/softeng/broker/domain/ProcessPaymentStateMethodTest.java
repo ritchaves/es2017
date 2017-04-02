@@ -7,22 +7,20 @@ import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
-import mockit.Expectations;
 import mockit.Injectable;
 import mockit.Mocked;
+import mockit.StrictExpectations;
 import mockit.integration.junit4.JMockit;
-import pt.ulisboa.tecnico.softeng.bank.dataobjects.BankOperationData;
 import pt.ulisboa.tecnico.softeng.bank.exception.BankException;
 import pt.ulisboa.tecnico.softeng.broker.domain.Adventure.State;
 import pt.ulisboa.tecnico.softeng.broker.exception.RemoteAccessException;
-import pt.ulisboa.tecnico.softeng.broker.interfaces.ActivityInterface;
 import pt.ulisboa.tecnico.softeng.broker.interfaces.BankInterface;
-import pt.ulisboa.tecnico.softeng.broker.interfaces.HotelInterface;
+
 	
 @RunWith(JMockit.class)
 public class ProcessPaymentStateMethodTest {
+	private static final String PAYMENT_CONFIRMATION = "PaymentConfirmation";
 	private static final String IBAN = "BK01987654321";
-	private static final int AMOUNT = 300;
 	private final LocalDate begin = new LocalDate(2016, 12, 19);
 	private final LocalDate end = new LocalDate(2016, 12, 21);
 	private Adventure adventure;
@@ -39,7 +37,14 @@ public class ProcessPaymentStateMethodTest {
 	@Test
 	public void readyToReserve(@Mocked final BankInterface bankInterface) {
 		
-		BankInterface.processPayment(IBAN , AMOUNT);
+
+		new StrictExpectations() {
+			{
+				BankInterface.processPayment(this.anyString , this.anyInt);
+				this.result = PAYMENT_CONFIRMATION;
+				this.times = 1;
+			}
+		};
 		
 		this.adventure.process();
 
@@ -51,10 +56,11 @@ public class ProcessPaymentStateMethodTest {
 		this.adventure.getIBAN();
 		this.adventure.getAmount();
 
-		new Expectations() {
+		new StrictExpectations() {
 			{
-				BankInterface.processPayment(IBAN , AMOUNT);
+				BankInterface.processPayment(this.anyString , this.anyInt);
 				this.result = new BankException();
+				this.times = 1;
 			}
 		};
 
@@ -68,10 +74,11 @@ public class ProcessPaymentStateMethodTest {
 		this.adventure.getIBAN();
 		this.adventure.getAmount();
 
-		new Expectations() {
+		new StrictExpectations() {
 			{
-				BankInterface.processPayment(IBAN , AMOUNT);
+				BankInterface.processPayment(this.anyString , this.anyInt);
 				this.result = new RemoteAccessException();
+				this.times = 1;				
 			}
 		};
 
@@ -85,14 +92,12 @@ public class ProcessPaymentStateMethodTest {
 		this.adventure.getIBAN();
 		this.adventure.getAmount();
 
-		new Expectations() {
+		new StrictExpectations() {
 			{	
-					BankInterface.processPayment(IBAN , AMOUNT);
+					BankInterface.processPayment(this.anyString , this.anyInt);
 					this.result = new RemoteAccessException();
-					BankInterface.processPayment(IBAN , AMOUNT);
-					this.result = new RemoteAccessException();
-					BankInterface.processPayment(IBAN , AMOUNT);
-					this.result = new RemoteAccessException();	
+					this.times = 3;
+
 			}
 		};
 
@@ -109,12 +114,11 @@ public class ProcessPaymentStateMethodTest {
 		this.adventure.getIBAN();
 		this.adventure.getAmount();
 
-		new Expectations() {
+		new StrictExpectations() {
 			{	
-					BankInterface.processPayment(IBAN , AMOUNT);
+					BankInterface.processPayment(this.anyString , this.anyInt);
 					this.result = new RemoteAccessException();
-					BankInterface.processPayment(IBAN , AMOUNT);
-					this.result = new RemoteAccessException();	
+					this.times = 2;	
 			}
 		};
 
@@ -129,16 +133,11 @@ public class ProcessPaymentStateMethodTest {
 		this.adventure.getIBAN();
 		this.adventure.getAmount();
 
-		new Expectations() {
+		new StrictExpectations() {
 			{	
-					BankInterface.processPayment(IBAN , AMOUNT);
+					BankInterface.processPayment(this.anyString , this.anyInt);
 					this.result = new RemoteAccessException();
-					BankInterface.processPayment(IBAN , AMOUNT);
-					this.result = new RemoteAccessException();	
-					BankInterface.processPayment(IBAN , AMOUNT);
-					this.result = new RemoteAccessException();
-					BankInterface.processPayment(IBAN , AMOUNT);
-					this.result = new RemoteAccessException();
+					this.times = 4;
 			}
 		};
 
