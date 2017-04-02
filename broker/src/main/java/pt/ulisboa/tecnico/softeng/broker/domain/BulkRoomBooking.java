@@ -12,11 +12,13 @@ import pt.ulisboa.tecnico.softeng.hotel.exception.HotelException;
 import pt.ulisboa.tecnico.softeng.broker.domain.AdventureState;
 
 public class BulkRoomBooking {
+	private static final int MAX_REMOTE_ERRORS = 10;
+	private static final int MAX_HOTEL_EXCEPTIONS = 3;
 	private final Set<String> references = new HashSet<>();
 	private final int number;
 	private final LocalDate arrival;
 	private final LocalDate departure;
-	private final boolean cancelled = false;
+	private boolean cancelled = false;
 
 	public BulkRoomBooking(int number, LocalDate arrival, LocalDate departure) {
 		this.number = number;
