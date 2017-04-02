@@ -9,6 +9,7 @@ import org.junit.runner.RunWith;
 import mockit.Expectations;
 import mockit.Injectable;
 import mockit.Mocked;
+import mockit.StrictExpectations;
 import mockit.integration.junit4.JMockit;
 import pt.ulisboa.tecnico.softeng.bank.dataobjects.BankOperationData;
 import pt.ulisboa.tecnico.softeng.bank.exception.BankException;
@@ -43,43 +44,62 @@ public class UndoStateTest {
 
 	@Test
 	public void cancelledPayment(@Mocked final BankInterface bankInterface) {
-		this.adventure.setPaymentConfirmation(PAYMENT_CONFIRMATION);
-		this.adventure.setPaymentCancellation(PAYMENT_CANCELLATION);
-
-		BankInterface.cancelPayment(PAYMENT_CANCELLATION);
-		this.adventure.process();
-
-		Assert.assertEquals(Adventure.State.CANCELLED, this.adventure.getState());
-	}
-
-	@Test
-	public void cancelledActivity(@Mocked final BankInterface bankInterface,
-			@Mocked final ActivityInterface activityInterface) {
-		this.adventure.setPaymentConfirmation(PAYMENT_CONFIRMATION);
-		this.adventure.setPaymentCancellation(PAYMENT_CANCELLATION);
-		this.adventure.setActivityConfirmation(ACTIVITY_CONFIRMATION);
-		this.adventure.setActivityCancellation(ACTIVITY_CANCELLATION);
-
-		BankInterface.cancelPayment(PAYMENT_CANCELLATION);
-		ActivityInterface.getActivityReservationData(ACTIVITY_CANCELLATION);
-		this.adventure.process();
-
-		Assert.assertEquals(Adventure.State.CANCELLED, this.adventure.getState());
-	}
-
-	@Test
-	public void cancelledRoom(@Mocked final BankInterface bankInterface,
-			@Mocked final ActivityInterface activityInterface, @Mocked final HotelInterface hotelInterface) {
-		this.adventure.setPaymentConfirmation(PAYMENT_CONFIRMATION);
-		this.adventure.setPaymentCancellation(PAYMENT_CANCELLATION);
 		this.adventure.setActivityConfirmation(ACTIVITY_CONFIRMATION);
 		this.adventure.setActivityCancellation(ACTIVITY_CANCELLATION);
 		this.adventure.setRoomConfirmation(ROOM_CONFIRMATION);
 		this.adventure.setRoomCancellation(ROOM_CANCELLATION);
+		this.adventure.setPaymentConfirmation(PAYMENT_CONFIRMATION);
+		
+		new StrictExpectations() {
+			{
+				BankInterface.cancelPayment(this.anyString);
+				this.result = PAYMENT_CANCELLATION;
+				this.times = 1;
+			}
+		};
+		
+		this.adventure.process();
 
-		BankInterface.cancelPayment(PAYMENT_CANCELLATION);
-		ActivityInterface.getActivityReservationData(ACTIVITY_CANCELLATION);
-		HotelInterface.getRoomBookingData(ROOM_CANCELLATION);
+		Assert.assertEquals(Adventure.State.CANCELLED, this.adventure.getState());
+	}
+
+	@Test
+	public void cancelledActivity(@Mocked final ActivityInterface activityInterface) {
+		this.adventure.setRoomConfirmation(ROOM_CONFIRMATION);
+		this.adventure.setRoomCancellation(ROOM_CANCELLATION);
+		this.adventure.setPaymentConfirmation(PAYMENT_CONFIRMATION);
+		this.adventure.setPaymentConfirmation(PAYMENT_CANCELLATION);
+		this.adventure.setActivityConfirmation(ACTIVITY_CONFIRMATION);
+		
+		new StrictExpectations() {
+			{
+				ActivityInterface.cancelReservation(this.anyString);
+				this.result = ACTIVITY_CANCELLATION;
+				this.times = 1;
+			}
+		};
+		
+		this.adventure.process();
+
+		Assert.assertEquals(Adventure.State.CANCELLED, this.adventure.getState());
+	}
+	
+	@Test
+	public void cancelledRoom(@Mocked final HotelInterface hotelInterface) {
+		this.adventure.setPaymentConfirmation(PAYMENT_CONFIRMATION);
+		this.adventure.setPaymentConfirmation(PAYMENT_CANCELLATION);
+		this.adventure.setActivityConfirmation(ACTIVITY_CONFIRMATION);
+		this.adventure.setActivityCancellation(ACTIVITY_CANCELLATION);
+		this.adventure.setRoomConfirmation(ROOM_CONFIRMATION);
+
+		new StrictExpectations() {
+			{
+				HotelInterface.cancelBooking(this.anyString);
+				this.result = ROOM_CANCELLATION;
+				this.times = 1;
+			}
+		};
+		
 		this.adventure.process();
 
 		Assert.assertEquals(Adventure.State.CANCELLED, this.adventure.getState());
