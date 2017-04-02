@@ -38,7 +38,7 @@ public class UndoStateTest {
 	@Before
 	public void setUp() {
 		this.adventure = new Adventure(this.broker, this.begin, this.end, 20, IBAN, 300);
-		this.adventure.setState(State.CANCELLED);
+		this.adventure.setState(State.UNDO);
 	}
 
 	@Test
@@ -49,6 +49,40 @@ public class UndoStateTest {
 		BankInterface.cancelPayment(PAYMENT_CANCELLATION);
 		this.adventure.process();
 
-		Assert.assertEquals(Adventure.State.UNDO, this.adventure.getState());
+		Assert.assertEquals(Adventure.State.CANCELLED, this.adventure.getState());
 	}
+
+	@Test
+	public void cancelledActivity(@Mocked final BankInterface bankInterface,
+			@Mocked final ActivityInterface activityInterface) {
+		this.adventure.setPaymentConfirmation(PAYMENT_CONFIRMATION);
+		this.adventure.setPaymentCancellation(PAYMENT_CANCELLATION);
+		this.adventure.setActivityConfirmation(ACTIVITY_CONFIRMATION);
+		this.adventure.setActivityCancellation(ACTIVITY_CANCELLATION);
+
+		BankInterface.cancelPayment(PAYMENT_CANCELLATION);
+		ActivityInterface.getActivityReservationData(ACTIVITY_CANCELLATION);
+		this.adventure.process();
+
+		Assert.assertEquals(Adventure.State.CANCELLED, this.adventure.getState());
+	}
+
+	@Test
+	public void cancelledRoom(@Mocked final BankInterface bankInterface,
+			@Mocked final ActivityInterface activityInterface, @Mocked final HotelInterface hotelInterface) {
+		this.adventure.setPaymentConfirmation(PAYMENT_CONFIRMATION);
+		this.adventure.setPaymentCancellation(PAYMENT_CANCELLATION);
+		this.adventure.setActivityConfirmation(ACTIVITY_CONFIRMATION);
+		this.adventure.setActivityCancellation(ACTIVITY_CANCELLATION);
+		this.adventure.setRoomConfirmation(ROOM_CONFIRMATION);
+		this.adventure.setRoomCancellation(ROOM_CANCELLATION);
+
+		BankInterface.cancelPayment(PAYMENT_CANCELLATION);
+		ActivityInterface.getActivityReservationData(ACTIVITY_CANCELLATION);
+		HotelInterface.getRoomBookingData(ROOM_CANCELLATION);
+		this.adventure.process();
+
+		Assert.assertEquals(Adventure.State.CANCELLED, this.adventure.getState());
+	}
+
 }
