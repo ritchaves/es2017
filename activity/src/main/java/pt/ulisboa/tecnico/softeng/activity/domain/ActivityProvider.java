@@ -91,7 +91,7 @@ public class ActivityProvider {
 		ActivityReservationData reservationData = new ActivityReservationData();
 		for (ActivityProvider provider : providers){
 			for(Activity activity : provider.activities){
-				for(ActivityOffer actoffer : activity.offers){
+				for(ActivityOffer actoffer : activity.getActOffers()){
 					for(Booking booking : actoffer.getBookings()){
 						if(reference.equals(booking.getReference())){
 							reservationData.setReference(reference);
