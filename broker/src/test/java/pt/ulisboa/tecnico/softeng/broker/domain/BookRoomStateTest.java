@@ -6,6 +6,7 @@ import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
+import mockit.StrictExpectations;
 import mockit.Expectations;
 import mockit.Injectable;
 import mockit.Mocked;
@@ -53,7 +54,7 @@ public class BookRoomStateTest {
 		this.adventure.getEnd();
 		this.adventure.getBegin();
 		
-		new Expectations() {
+		new StrictExpectations() {
 			{
 				HotelInterface.reserveRoom(Room.Type.SINGLE, begin, end);
 				this.result = new HotelException();
@@ -69,7 +70,7 @@ public class BookRoomStateTest {
 		this.adventure.getBegin();
 		this.adventure.getEnd();
 		
-		new Expectations() {
+		new StrictExpectations() {
 			{
 				HotelInterface.reserveRoom(Room.Type.SINGLE, begin, end);
 				this.result = new RemoteAccessException();
@@ -104,7 +105,7 @@ public class BookRoomStateTest {
 		this.adventure.getBegin();
 		this.adventure.getEnd();
 		
-		new Expectations() {
+		new StrictExpectations() {
 			{
 				HotelInterface.reserveRoom(Room.Type.SINGLE, begin, end);
 				this.result = new RemoteAccessException();

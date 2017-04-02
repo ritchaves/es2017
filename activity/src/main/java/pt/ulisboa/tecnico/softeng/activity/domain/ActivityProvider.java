@@ -85,8 +85,24 @@ public class ActivityProvider {
 	}
 
 	public static ActivityReservationData getActivityReservationData(String reference) {
-		// TODO implement
-		throw new ActivityException();
-	}
+		ActivityReservationData reservationData = new ActivityReservationData();
+		for (ActivityProvider provider : providers){
+			for(Activity activity : provider.activities){
+				for(ActivityOffer offer : activity.offers){
+					for(Booking booking : offer.getBookings()){
+						if(reference.equals(booking.getReference())){
+							reservationData.setReference(reference);
+							reservationData.setName(provider.name);
+							reservationData.setCode(provider.code);
+							reservationData.setBegin(offer.getBegin());
+							reservationData.setEnd(offer.getEnd());
+							return reservationData;
+						}	
+					}
+				}
+			}		
+		}
+	throw new ActivityException();
+	}	
 
 }

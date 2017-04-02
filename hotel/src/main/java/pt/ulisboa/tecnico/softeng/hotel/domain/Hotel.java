@@ -6,6 +6,7 @@ import java.util.Set;
 import org.joda.time.LocalDate;
 
 import pt.ulisboa.tecnico.softeng.hotel.dataobjects.RoomBookingData;
+import pt.ulisboa.tecnico.softeng.hotel.domain.Room.Type;
 import pt.ulisboa.tecnico.softeng.hotel.exception.HotelException;
 
 public class Hotel {
@@ -124,11 +125,29 @@ public class Hotel {
 	}
 
 	public static Set<String> bulkBooking(int number, LocalDate arrival, LocalDate departure) {
-		// TODO: verify consistency of arguments, return the
-		// references for 'number' new bookings, it does not matter if they are
-		// single of double. If there aren't enough rooms available it throws a
-		// hotel exception
-		throw new HotelException();
+		int numOfFreeRooms = 0;
+		int numOfSingles = 0;
+		Set<String> setRef = new HashSet<String>();
+		for(Hotel hotel : hotels){
+			for(Room room : hotel.rooms){
+				if(room.isFree(room.getType(), arrival, departure)) {
+					numOfFreeRooms++;
+					if(room.getType().equals(Type.SINGLE))
+						numOfSingles++;
+				}	
+			}
+			if(numOfFreeRooms < number)
+				throw new HotelException();	
+		}
+		for(int i = 0; i < numOfSingles; i++){
+			setRef.add(reserveRoom(Type.SINGLE, arrival, departure));
+			
+		}
+		for(int i=numOfSingles; i< number; i++){
+			setRef.add(reserveRoom(Type.DOUBLE, arrival, departure));
+		}
+		return setRef;
+		
 	}
 
 }
