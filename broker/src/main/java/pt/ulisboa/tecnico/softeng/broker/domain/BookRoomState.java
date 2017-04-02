@@ -19,7 +19,7 @@ public class BookRoomState extends AdventureState {
 
 	@Override
 	public void process(Adventure adventure) {
-		logger.debug("process ID:{}, state:{} ", adventure.getID(), adventure.getOldState().name());
+		logger.debug("process ID:{}, state:{} ", adventure.getID(), adventure.getState().name());
 		
 		this.getNumOfRemoteErrors();
 
