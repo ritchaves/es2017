@@ -250,7 +250,6 @@ public class Adventure {
 			// TODO: prints the complete Adventure file, the info in operation,
 			// reservation and booking
 
-			break;
 		case CANCELLED:
 			this.state.process(this);
 			break;

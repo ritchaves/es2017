@@ -17,6 +17,7 @@ import pt.ulisboa.tecnico.softeng.hotel.exception.HotelException;
 
 public class ConfirmedState extends AdventureState {
 	private static Logger logger = LoggerFactory.getLogger(CancelledState.class);
+	
 	@Override
 	public State getState() {
 		return State.CONFIRMED;
@@ -24,24 +25,30 @@ public class ConfirmedState extends AdventureState {
 
 	@Override
 	public void process(Adventure adventure) {
+		logger.debug("process");
 		BankOperationData operation;
 		try {
 			operation = BankInterface.getOperationData(adventure.getPaymentConfirmation());
 		} catch (BankException be) {
-			// increment number of errors
-			// if (number of errors == 5) {
-			// adventure.setState(State.UNDO);
-			// }
-			// return;
+			this.incNumOfRemoteErrors();
+			if (this.numOfRemoteErrors == 5) {
+				adventure.setState(State.UNDO);
+			
+			}
+			return;
+			
 		} catch (RemoteAccessException rae) {
-			// increment number of errors
-			// if (number of errors == 20) {
-			// adventure.setState(State.UNDO);
-			// }
-			// return;
+			this.incNumOfRemoteErrors();
+			if (this.numOfRemoteErrors == 20) {
+				adventure.setState(State.UNDO);
+			
+			}
+		
+			return;
+			
 		}
-		// reset number of errors
-
+		this.numOfRemoteErrors = 0;
+		
 		ActivityReservationData reservation;
 		try {
 			reservation = ActivityInterface.getActivityReservationData(adventure.getActivityConfirmation());
@@ -49,14 +56,15 @@ public class ConfirmedState extends AdventureState {
 			adventure.setState(State.UNDO);
 			return;
 		} catch (RemoteAccessException rae) {
-			// increment number of errors
-			// if (number of errors == 20) {
-			// adventure.setState(State.UNDO);
-			// }
-			// return;
+			this.incNumOfRemoteErrors();
+			if(this.numOfRemoteErrors == 20){
+				adventure.setState(State.UNDO);
+			}
+			return;
+			
 		}
-		// reset number of errors
-
+		this.numOfRemoteErrors = 0;
+		
 		if (adventure.getRoomConfirmation() != null) {
 			RoomBookingData booking;
 			try {
@@ -65,13 +73,14 @@ public class ConfirmedState extends AdventureState {
 				adventure.setState(State.UNDO);
 				return;
 			} catch (RemoteAccessException rae) {
-				// increment number of errors
-				// if (number of errors == 20) {
-				// adventure.setState(State.UNDO);
-				// }
-				// return;
+				this.incNumOfRemoteErrors();
+				if (this.numOfRemoteErrors == 20) {
+					adventure.setState(State.UNDO);
+					
+				}
+				return;
 			}
-			// reset number of errors
+			this.numOfRemoteErrors = 0;
 		}
 
 
