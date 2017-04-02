@@ -7,7 +7,6 @@ import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
-import mockit.Expectations;
 import mockit.Injectable;
 import mockit.Mocked;
 import mockit.StrictExpectations;
@@ -75,7 +74,7 @@ public class ProcessPaymentStateMethodTest {
 		this.adventure.getIBAN();
 		this.adventure.getAmount();
 
-		new Expectations() {
+		new StrictExpectations() {
 			{
 				BankInterface.processPayment(this.anyString , this.anyInt);
 				this.result = new RemoteAccessException();
@@ -93,7 +92,7 @@ public class ProcessPaymentStateMethodTest {
 		this.adventure.getIBAN();
 		this.adventure.getAmount();
 
-		new Expectations() {
+		new StrictExpectations() {
 			{	
 					BankInterface.processPayment(this.anyString , this.anyInt);
 					this.result = new RemoteAccessException();
@@ -115,7 +114,7 @@ public class ProcessPaymentStateMethodTest {
 		this.adventure.getIBAN();
 		this.adventure.getAmount();
 
-		new Expectations() {
+		new StrictExpectations() {
 			{	
 					BankInterface.processPayment(this.anyString , this.anyInt);
 					this.result = new RemoteAccessException();
@@ -134,7 +133,7 @@ public class ProcessPaymentStateMethodTest {
 		this.adventure.getIBAN();
 		this.adventure.getAmount();
 
-		new Expectations() {
+		new StrictExpectations() {
 			{	
 					BankInterface.processPayment(this.anyString , this.anyInt);
 					this.result = new RemoteAccessException();
