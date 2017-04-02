@@ -38,8 +38,6 @@ public class ProcessPaymentStateMethodTest {
 
 	@Test
 	public void readyToReserve(@Mocked final BankInterface bankInterface) {
-		this.adventure.getIBAN();
-		this.adventure.getAmount();
 		
 		BankInterface.processPayment(IBAN , AMOUNT);
 		
