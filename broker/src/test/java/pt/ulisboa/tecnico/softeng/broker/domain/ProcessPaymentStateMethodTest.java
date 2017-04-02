@@ -12,19 +12,16 @@ import mockit.Injectable;
 import mockit.Mocked;
 import mockit.StrictExpectations;
 import mockit.integration.junit4.JMockit;
-import pt.ulisboa.tecnico.softeng.bank.dataobjects.BankOperationData;
 import pt.ulisboa.tecnico.softeng.bank.exception.BankException;
 import pt.ulisboa.tecnico.softeng.broker.domain.Adventure.State;
 import pt.ulisboa.tecnico.softeng.broker.exception.RemoteAccessException;
-import pt.ulisboa.tecnico.softeng.broker.interfaces.ActivityInterface;
 import pt.ulisboa.tecnico.softeng.broker.interfaces.BankInterface;
-import pt.ulisboa.tecnico.softeng.broker.interfaces.HotelInterface;
+
 	
 @RunWith(JMockit.class)
 public class ProcessPaymentStateMethodTest {
 	private static final String PAYMENT_CONFIRMATION = "PaymentConfirmation";
 	private static final String IBAN = "BK01987654321";
-	private static final int AMOUNT = 300;
 	private final LocalDate begin = new LocalDate(2016, 12, 19);
 	private final LocalDate end = new LocalDate(2016, 12, 21);
 	private Adventure adventure;
