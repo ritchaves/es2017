@@ -174,7 +174,7 @@ public class Adventure {
 			this.state = new UndoState();
 			break;
 		case CONFIRMED:
-			this.state = null;
+			this.state = new ConfirmedState();
 			break;
 		case CANCELLED:
 			this.state = new CancelledState();
@@ -187,10 +187,10 @@ public class Adventure {
 	}
 
 	public void process() {
-		logger.debug("process ID:{}, state:{} ", this.ID, this.state);
+		logger.debug("process ID:{}, state:{} ", this.ID, this.getState());
 
 		try{
-			this.state.getState();
+			this.state.process(this);
 		}
 		catch(Exception e){
 			throw new BrokerException();

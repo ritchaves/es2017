@@ -7,6 +7,7 @@ import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
+import mockit.Expectations;
 import mockit.Injectable;
 import mockit.Mocked;
 import mockit.StrictExpectations;
@@ -126,27 +127,6 @@ public class ProcessPaymentStateMethodTest {
 		this.adventure.process();
 
 		Assert.assertEquals(Adventure.State.PROCESS_PAYMENT, this.adventure.getState());
-	}
-	
-	@Test
-	public void processPaymentNumberErrorsAbove3Exception(@Mocked final BankInterface bankInterface) {
-		this.adventure.getIBAN();
-		this.adventure.getAmount();
-
-		new StrictExpectations() {
-			{	
-					BankInterface.processPayment(this.anyString , this.anyInt);
-					this.result = new RemoteAccessException();
-					this.times = 4;
-			}
-		};
-
-		this.adventure.process();
-		this.adventure.process();
-		this.adventure.process();
-		this.adventure.process();
-
-		Assert.assertEquals(Adventure.State.CANCELLED, this.adventure.getState());
 	}
 }
 
