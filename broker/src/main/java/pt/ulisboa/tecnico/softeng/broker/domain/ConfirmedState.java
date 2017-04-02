@@ -45,7 +45,6 @@ public class ConfirmedState extends AdventureState {
 			}
 		
 			return;
-			
 		}
 		this.numOfRemoteErrors = 0;
 		
