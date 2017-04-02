@@ -111,9 +111,6 @@ public class Bank {
 				return creditAcc.deposit(canceledOperation.getValue());
 			}
 		}
-		
-		
-		
 		throw new BankException();
 	}
 
