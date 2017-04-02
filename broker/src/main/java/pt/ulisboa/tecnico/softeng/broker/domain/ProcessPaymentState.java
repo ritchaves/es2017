@@ -22,7 +22,7 @@ public class ProcessPaymentState extends AdventureState {
 			return;
 		} catch (RemoteAccessException rae) {
 			this.incNumOfRemoteErrors();
-			if (this.numOfRemoteErrors >= 3) {
+			if (this.numOfRemoteErrors == 3) {
 				adventure.setState(State.CANCELLED);
 				return;
 			}

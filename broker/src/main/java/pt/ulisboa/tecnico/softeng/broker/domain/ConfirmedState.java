@@ -47,7 +47,7 @@ public class ConfirmedState extends AdventureState {
 			return;
 			
 		}
-		this.numOfRemoteErrors = 0;
+		this.resetNumOfRemoteErrors();
 		
 		ActivityReservationData reservation;
 		try {
@@ -63,7 +63,7 @@ public class ConfirmedState extends AdventureState {
 			return;
 			
 		}
-		this.numOfRemoteErrors = 0;
+		this.resetNumOfRemoteErrors();
 		
 		if (adventure.getRoomConfirmation() != null) {
 			RoomBookingData booking;
@@ -80,7 +80,7 @@ public class ConfirmedState extends AdventureState {
 				}
 				return;
 			}
-			this.numOfRemoteErrors = 0;
+			this.resetNumOfRemoteErrors();
 		}
 
 
