@@ -115,7 +115,19 @@ public class Bank {
 	}
 
 	public static BankOperationData getOperationData(String reference) {
-		// TODO implement
+
+		BankOperationData bod = new BankOperationData();
+		for (Bank bank : Bank.banks){
+			if(bank.getOperation(reference)!=null){
+				bod.setIban(bank.getOperation(reference).getAccount().getIBAN());
+				bod.setReference(reference);
+				bod.setValue(bank.getOperation(reference).getValue());
+				bod.setTime(bank.getOperation(reference).getTime());
+				bod.setType(bank.getOperation(reference).getType().toString());
+				return bod;
+
+			}
+		}
 		throw new BankException();
 	}
 
