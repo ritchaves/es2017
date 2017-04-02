@@ -9,6 +9,7 @@ import org.junit.runner.RunWith;
 import mockit.Expectations;
 import mockit.Injectable;
 import mockit.Mocked;
+import mockit.StrictExpectations;
 import mockit.integration.junit4.JMockit;
 import pt.ulisboa.tecnico.softeng.bank.dataobjects.BankOperationData;
 import pt.ulisboa.tecnico.softeng.bank.exception.BankException;
@@ -45,7 +46,7 @@ public class ConfirmedStateProcessMethodTest {
 		this.adventure.setPaymentConfirmation(PAYMENT_CONFIRMATION);
 		this.adventure.setPaymentCancellation(PAYMENT_CANCELLATION);
 
-		new Expectations() {
+		new StrictExpectations() {
 			{
 				BankInterface.getOperationData(PAYMENT_CONFIRMATION);
 			}
@@ -64,7 +65,7 @@ public class ConfirmedStateProcessMethodTest {
 		this.adventure.setActivityConfirmation(ACTIVITY_CONFIRMATION);
 		this.adventure.setActivityCancellation(ACTIVITY_CANCELLATION);
 
-		new Expectations() {
+		new StrictExpectations() {
 			{
 				BankInterface.getOperationData(PAYMENT_CONFIRMATION);
 
@@ -86,7 +87,7 @@ public class ConfirmedStateProcessMethodTest {
 		this.adventure.setRoomConfirmation(ROOM_CONFIRMATION);
 		this.adventure.setRoomCancellation(ROOM_CANCELLATION);
 
-		new Expectations() {
+		new StrictExpectations() {
 			{
 				BankInterface.getOperationData(PAYMENT_CONFIRMATION);
 
