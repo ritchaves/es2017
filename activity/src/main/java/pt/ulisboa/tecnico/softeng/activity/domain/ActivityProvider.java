@@ -9,6 +9,9 @@ import org.joda.time.LocalDate;
 
 import pt.ulisboa.tecnico.softeng.activity.dataobjects.ActivityReservationData;
 import pt.ulisboa.tecnico.softeng.activity.exception.ActivityException;
+import pt.ulisboa.tecnico.softeng.activity.domain.Activity;
+import pt.ulisboa.tecnico.softeng.activity.domain.ActivityOffer;
+import pt.ulisboa.tecnico.softeng.activity.domain.Booking;
 
 public class ActivityProvider {
 	public static Set<ActivityProvider> providers = new HashSet<>();
@@ -88,14 +91,14 @@ public class ActivityProvider {
 		ActivityReservationData reservationData = new ActivityReservationData();
 		for (ActivityProvider provider : providers){
 			for(Activity activity : provider.activities){
-				for(ActivityOffer offer : activity.offers){
-					for(Booking booking : offer.getBookings()){
+				for(ActivityOffer actoffer : activity.offers){
+					for(Booking booking : actoffer.getBookings()){
 						if(reference.equals(booking.getReference())){
 							reservationData.setReference(reference);
 							reservationData.setName(provider.name);
 							reservationData.setCode(provider.code);
-							reservationData.setBegin(offer.getBegin());
-							reservationData.setEnd(offer.getEnd());
+							reservationData.setBegin(actoffer.getBegin());
+							reservationData.setEnd(actoffer.getEnd());
 							return reservationData;
 						}	
 					}
