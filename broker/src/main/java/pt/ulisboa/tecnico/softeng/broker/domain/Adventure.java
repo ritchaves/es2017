@@ -4,15 +4,10 @@ import org.joda.time.LocalDate;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import pt.ulisboa.tecnico.softeng.activity.dataobjects.ActivityReservationData;
-import pt.ulisboa.tecnico.softeng.activity.exception.ActivityException;
 import pt.ulisboa.tecnico.softeng.bank.dataobjects.BankOperationData;
 import pt.ulisboa.tecnico.softeng.bank.exception.BankException;
 import pt.ulisboa.tecnico.softeng.broker.exception.BrokerException;
-import pt.ulisboa.tecnico.softeng.broker.exception.RemoteAccessException;
 import pt.ulisboa.tecnico.softeng.broker.interfaces.ActivityInterface;
-import pt.ulisboa.tecnico.softeng.broker.interfaces.BankInterface;
-import pt.ulisboa.tecnico.softeng.broker.interfaces.HotelInterface;
 import pt.ulisboa.tecnico.softeng.hotel.dataobjects.RoomBookingData;
 import pt.ulisboa.tecnico.softeng.hotel.domain.Room;
 import pt.ulisboa.tecnico.softeng.hotel.exception.HotelException;
@@ -40,7 +35,7 @@ public class Adventure {
 	private String activityConfirmation;
 	private String activityCancellation;
 
-	private State oldState; // to be removed once all states are refactored as
+	//private State oldState; // to be removed once all states are refactored as
 							// subclasses of AdventureState
 	private AdventureState state;
 
@@ -155,27 +150,16 @@ public class Adventure {
 	}
 
 	public State getState() {
-		switch (this.getOldState()) {
-		case PROCESS_PAYMENT:
+		try{
 			return this.state.getState();
-		case RESERVE_ACTIVITY:
-			return this.state.getState();
-		case BOOK_ROOM:
-			return this.state.getState();
-		case UNDO:
-			return this.state.getState();
-		case CONFIRMED:
-			return this.getOldState();
-		case CANCELLED:
-			return this.state.getState();
-		default:
+		}
+		catch(Exception e){
 			new BrokerException();
 			return null;
 		}
 	}
 
 	public void setState(State state) {
-		this.setOldState(state);
 		switch (state) {
 		case PROCESS_PAYMENT:
 			this.state = new ProcessPaymentState();
@@ -203,31 +187,12 @@ public class Adventure {
 	}
 
 	public void process() {
-		logger.debug("process ID:{}, state:{} ", this.ID, this.getOldState().name());
+		logger.debug("process ID:{}, state:{} ", this.ID, this.state);
 
-		switch (this.getOldState()) {
-		case PROCESS_PAYMENT:
-			this.state.process(this);
-			break;
-		case RESERVE_ACTIVITY:
-			this.state.process(this);
-			break;
-		case BOOK_ROOM:
-			this.state.process(this);
-			break;
-		case UNDO:
-			this.state.process(this);
-			break;
-		case CONFIRMED:
-			this.state.process(this);
-			break;
-			// TODO: prints the complete Adventure file, the info in operation,
-			// reservation and booking
-
-		case CANCELLED:
-			this.state.process(this);
-			break;
-		default:
+		try{
+			this.state.getState();
+		}
+		catch(Exception e){
 			throw new BrokerException();
 		}
 	}
@@ -242,14 +207,6 @@ public class Adventure {
 
 	public boolean cancelPayment() {
 		return getPaymentConfirmation() != null && getPaymentCancellation() == null;
-	}
-
-	public State getOldState() {
-		return oldState;
-	}
-
-	public void setOldState(State oldState) {
-		this.oldState = oldState;
 	}
 
 }
