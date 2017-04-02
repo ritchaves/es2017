@@ -5,3 +5,5 @@ target
 jmeter.log
 infer-out
 .DS_Store
+.metadata
+.recommenders
