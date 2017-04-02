@@ -5,9 +5,11 @@ import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+
 import mockit.Expectations;
 import mockit.Injectable;
 import mockit.Mocked;
+import mockit.StrictExpectations;
 import mockit.integration.junit4.JMockit;
 import pt.ulisboa.tecnico.softeng.activity.exception.ActivityException;
 import pt.ulisboa.tecnico.softeng.broker.domain.Adventure.State;
@@ -73,7 +75,7 @@ public class ReserveActivityStateTest {
 		this.adventure.getBegin();
 		this.adventure.getAge();
 		
-		new Expectations() {
+		new StrictExpectations() {
 			{
 				ActivityInterface.reserveActivity(begin, end, age);
 				this.result = new ActivityException();
@@ -90,7 +92,7 @@ public class ReserveActivityStateTest {
 		this.adventure.getEnd();
 		this.adventure.getAge();
 		
-		new Expectations() {
+		new StrictExpectations() {
 			{
 				ActivityInterface.reserveActivity(begin, end, age);
 				this.result = new RemoteAccessException();
@@ -117,7 +119,7 @@ public class ReserveActivityStateTest {
 		this.adventure.getEnd();
 		this.adventure.getAge();
 		
-		new Expectations() {
+		new StrictExpectations() {
 			{
 				ActivityInterface.reserveActivity(begin, end, age);
 				this.result = new RemoteAccessException();
