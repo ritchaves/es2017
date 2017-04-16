@@ -3,6 +3,13 @@ package pt.ulisboa.tecnico.softeng.bank.domain;
 class Bank {
 }
 
+class Operation{
+	String reference;
+	OperationType Type;
+	int value;
+	DataTime Time;
+}
+
 relation DomainRootHasBankApplication {
 	.pt.ist.fenixframework.DomainRoot playsRole root {
 		multiplicity 1..1;
@@ -10,4 +17,14 @@ relation DomainRootHasBankApplication {
 	Bank playsRole bank {
 		multiplicity 0..*;
 	}
+}
+
+relation BankHasOperation{
+	Bank playsRole bank{
+		multiplicity 1..1;	
+	}
+	Operation playsRole operation{
+		multiplicity 0..*;
+	}
+
 }
