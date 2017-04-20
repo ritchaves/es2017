@@ -5,9 +5,8 @@ class Bank {
 
 class Operation{
 	String reference;
-	OperationType Type;
 	int value;
-	DataTime Time;
+	DateTime Time;
 }
 
 relation DomainRootHasBankApplication {

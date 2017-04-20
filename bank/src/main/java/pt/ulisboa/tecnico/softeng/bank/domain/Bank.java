@@ -78,10 +78,10 @@ public class Bank extends Bank_Base {
 		this.clients.add(client);
 	}
 
-	void addOperation(Operation operation) {
+/*	public void addOperation(Operation operation) {
 		FenixFramework.getDomainRoot().addOperation(operation);
 	}
-
+*/
 	public Account getAccount(String IBAN) {
 		if (IBAN == null || IBAN.trim().equals("")) {
 			throw new BankException();
@@ -95,7 +95,7 @@ public class Bank extends Bank_Base {
 
 		return null;
 	}
-
+/*
 	public Operation getOperation(String reference) {
 		for (Operation operation : FenixFramework.getDomainRoot().getOperationSet()) {
 			if (operation.getReference().equals(reference)) {
@@ -104,7 +104,7 @@ public class Bank extends Bank_Base {
 		}
 		return null;
 	}
-
+*/
 	public static Bank getBankByCode(String code) {
 		for (Bank bank : FenixFramework.getDomainRoot().getBankSet()) {
 			if (bank.getCode().equals(code)) {
@@ -113,7 +113,7 @@ public class Bank extends Bank_Base {
 		}
 		return null;
 	}
-
+/*
 	public static Operation getOperationByReference(String reference) {
 		for (Bank bank : FenixFramework.getDomainRoot().getBankSet()) {
 			Operation operation = bank.getOperation(reference);
@@ -123,7 +123,7 @@ public class Bank extends Bank_Base {
 		}
 		return null;
 	}
-
+*/
 	public static String processPayment(String IBAN, int amount) {
 		for (Bank bank : FenixFramework.getDomainRoot().getBankSet()) {
 			if (bank.getAccount(IBAN) != null) {
@@ -132,7 +132,7 @@ public class Bank extends Bank_Base {
 		}
 		throw new BankException();
 	}
-
+/*
 	public static String cancelPayment(String paymentConfirmation) {
 		Operation operation = getOperationByReference(paymentConfirmation);
 		if (operation != null) {
@@ -148,5 +148,5 @@ public class Bank extends Bank_Base {
 		}
 		throw new BankException();
 	}
-
+*/
 }
