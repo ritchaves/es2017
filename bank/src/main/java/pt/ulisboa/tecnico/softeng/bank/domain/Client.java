@@ -2,7 +2,7 @@ package pt.ulisboa.tecnico.softeng.bank.domain;
 
 import pt.ulisboa.tecnico.softeng.bank.exception.BankException;
 
-public class Client extends Client_Base{
+public class Client {
 	private static int counter = 0;
 
 	private final String name;
@@ -13,7 +13,7 @@ public class Client extends Client_Base{
 
 		this.ID = Integer.toString(++Client.counter);
 		this.name = name;
-		
+
 		bank.addClient(this);
 	}
 

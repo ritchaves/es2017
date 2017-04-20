@@ -12,7 +12,7 @@ import org.junit.Test;
 import pt.ulisboa.tecnico.softeng.activity.dataobjects.ActivityReservationData;
 import pt.ulisboa.tecnico.softeng.activity.exception.ActivityException;
 
-public class ActivityProviderActivityReservationDataMethodTest extends RollbackTestAbstractClass {
+public class ActivityProviderActivityReservationDataMethodTest {
 	private static final String NAME = "ExtremeAdventure";
 	private static final String CODE = "XtremX";
 	private final LocalDate begin = new LocalDate(2016, 12, 19);

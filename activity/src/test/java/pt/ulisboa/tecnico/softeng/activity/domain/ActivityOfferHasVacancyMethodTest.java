@@ -6,7 +6,7 @@ import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
-public class ActivityOfferHasVacancyMethodTest extends RollbackTestAbstractClass {
+public class ActivityOfferHasVacancyMethodTest {
 	private ActivityProvider provider;
 	private ActivityOffer offer;
 

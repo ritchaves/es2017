@@ -5,7 +5,7 @@ import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
-public class ActivityMatchAgeMethodTest extends RollbackTestAbstractClass{
+public class ActivityMatchAgeMethodTest {
 	private static final int MIN_AGE = 25;
 	private static final int MAX_AGE = 80;
 	private static final int CAPACITY = 30;

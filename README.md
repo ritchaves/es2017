@@ -11,6 +11,6 @@ To run tests execute: mvn clean install
 |81586       |Diogo Freitas            |diogo.maria.freitas@gmail.com|dfreitas06              |Hotel/Broker |
 |78753       |Alcino Albuquerque       |condealbuquerque@gmail.com   |alcinocondealbuquerque  |Hotel/Broker |
 |75834       |Hugo do Vale             |hugo_yoco@hotmail.com        |zipie                   |Hotel/Broker |
-|73046       |André Antunes            |andre.r.antunes@ist.utl.pt   |Antunes10               |Bank         |
-| -          | -                       |-                            | -                      |-            |
+|-           |-                        |-                            |-                       |-            |
+|-           |-                        |-                            |-                       |-            |
  

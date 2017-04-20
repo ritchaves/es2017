@@ -8,7 +8,7 @@ import org.junit.Test;
 
 import pt.ulisboa.tecnico.softeng.activity.exception.ActivityException;
 
-public class ActivityOfferConstructorMethodTest extends RollbackTestAbstractClass {
+public class ActivityOfferConstructorMethodTest {
 	private static final int CAPACITY = 25;
 	private static final int MAX_AGE = 50;
 	private static final int MIN_AGE = 25;
