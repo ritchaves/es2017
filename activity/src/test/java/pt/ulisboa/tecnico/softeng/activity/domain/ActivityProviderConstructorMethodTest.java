@@ -8,7 +8,7 @@ import org.junit.Test;
 
 import pt.ulisboa.tecnico.softeng.activity.exception.ActivityException;
 
-public class ActivityProviderConstructorMethodTest {
+public class ActivityProviderConstructorMethodTest extends RollbackTestAbstractClass {
 	private static final String PROVIDER_CODE = "XtremX";
 	private static final String PROVIDER_NAME = "Adventure++";
 

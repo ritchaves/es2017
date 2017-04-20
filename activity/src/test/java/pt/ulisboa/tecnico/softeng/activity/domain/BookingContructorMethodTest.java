@@ -10,7 +10,7 @@ import org.junit.Test;
 
 import pt.ulisboa.tecnico.softeng.activity.exception.ActivityException;
 
-public class BookingContructorMethodTest {
+public class BookingContructorMethodTest extends RollbackTestAbstractClass {
 	private ActivityProvider provider;
 	private ActivityOffer offer;
 

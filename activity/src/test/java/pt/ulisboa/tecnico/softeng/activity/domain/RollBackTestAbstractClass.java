@@ -23,8 +23,6 @@ public abstract class RollBackTestAbstractClass {
 
 	@After
 	public void tearDown() {
-		ActivityProvider.providers.clear();
-
 		try {
 			FenixFramework.getTransactionManager().rollback();
 		} catch (IllegalStateException | SecurityException | SystemException e) {

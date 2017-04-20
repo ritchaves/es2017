@@ -8,7 +8,7 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
-public class ActivityOfferGetBookingMethodTest {
+public class ActivityOfferGetBookingMethodTest extends RollbackTestAbstractClass {
 	private ActivityProvider provider;
 	private ActivityOffer offer;
 
