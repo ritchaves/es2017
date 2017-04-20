@@ -7,4 +7,4 @@ infer-out
 .DS_Store
 fenix-framework.properties
 .metadata
-*.properties
+.src/main/resources
