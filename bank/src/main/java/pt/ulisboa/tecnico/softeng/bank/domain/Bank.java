@@ -25,7 +25,6 @@ public class Bank extends Bank_Base {
 		setCode(code);
 		
 		FenixFramework.getDomainRoot().addBank(this);
-		
 	}
 
 	public void delete() {
@@ -78,8 +77,8 @@ public class Bank extends Bank_Base {
 		this.clients.add(client);
 	}
 
-	void addOperation(Operation operation) {
-		FenixFramework.getDomainRoot().addOperation(operation);
+	public void addOperation(Operation operation) {
+		addOperation(operation);
 	}
 
 	public Account getAccount(String IBAN) {
@@ -97,7 +96,7 @@ public class Bank extends Bank_Base {
 	}
 
 	public Operation getOperation(String reference) {
-		for (Operation operation : FenixFramework.getDomainRoot().getOperationSet()) {
+		for (Operation operation : getOperationSet()) {
 			if (operation.getReference().equals(reference)) {
 				return operation;
 			}
