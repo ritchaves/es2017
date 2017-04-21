@@ -1,26 +1,33 @@
 package pt.ulisboa.tecnico.softeng.activity.domain;
 
-import java.util.HashSet;
-import java.util.Set;
+//import java.util.HashSet;
+//import java.util.Set;
 
 import org.joda.time.LocalDate;
 
 import pt.ulisboa.tecnico.softeng.activity.exception.ActivityException;
 
-public class ActivityOffer {
-	private final LocalDate begin;
-	private final LocalDate end;
-	private final int capacity;
-	private final Set<Booking> bookings = new HashSet<>();
+public class ActivityOffer extends ActivityOffer_Base {
+//	private final LocalDate begin;
+//	private final LocalDate end;
+//	private final int capacity;
+//	private final Set<Booking> bookings = new HashSet<>();
 
 	public ActivityOffer(Activity activity, LocalDate begin, LocalDate end) {
 		checkArguments(activity, begin, end);
-
-		this.begin = begin;
-		this.end = end;
-		this.capacity = activity.getCapacity();
-
-		activity.addOffer(this);
+		
+		setBegin(begin);
+		setEnd(end);
+		setCapacity(activity.getCapacity());
+		
+		activity.addActivityOffer(this);
+		
+		setActivity(activity);
+	}
+	
+	public void delete() {
+		setActivity(null);
+		deleteDomainObject();
 	}
 
 	private void checkArguments(Activity activity, LocalDate begin, LocalDate end) {
@@ -33,17 +40,9 @@ public class ActivityOffer {
 		}
 	}
 
-	public LocalDate getBegin() {
-		return this.begin;
-	}
-
-	public LocalDate getEnd() {
-		return this.end;
-	}
-
 	int getNumberOfBookings() {
 		int count = 0;
-		for (Booking booking : this.bookings) {
+		for (Booking booking : getBookingSet()) {
 			if (!booking.isCancelled()) {
 				count++;
 			}
@@ -51,12 +50,12 @@ public class ActivityOffer {
 		return count;
 	}
 
-	void addBooking(Booking booking) {
-		if (this.capacity == getNumberOfBookings()) {
+	public void addBooking(Booking booking) {
+		if (this.getCapacity() == getNumberOfBookings()) {
 			throw new ActivityException();
 		}
-
-		this.bookings.add(booking);
+		addBooking(booking);
+	//	this.bookings.add(booking);
 
 	}
 
@@ -73,11 +72,11 @@ public class ActivityOffer {
 	}
 
 	boolean hasVacancy() {
-		return this.capacity > getNumberOfBookings();
+		return this.getCapacity() > getNumberOfBookings();
 	}
 
 	public Booking getBooking(String reference) {
-		for (Booking booking : this.bookings) {
+		for (Booking booking : getBookingSet()) {
 			if (booking.getReference().equals(reference)
 					|| (booking.isCancelled() && booking.getCancellation().equals(reference))) {
 				return booking;

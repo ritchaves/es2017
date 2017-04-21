@@ -4,29 +4,33 @@ import org.joda.time.LocalDate;
 
 import pt.ulisboa.tecnico.softeng.activity.exception.ActivityException;
 
-public class Booking {
+public class Booking extends Booking_Base {
 	private static int counter = 0;
-
-	private final String reference;
+	
+	//private final String reference;
 	private String cancel;
 	private LocalDate cancellationDate;
 
+
 	public Booking(ActivityProvider provider, ActivityOffer offer) {
 		checkArguments(provider, offer);
-
-		this.reference = provider.getCode() + Integer.toString(++Booking.counter);
+		
+		setReference(provider.getCode() + Integer.toString(++Booking.counter));
 
 		offer.addBooking(this);
+		
+		setActivityOffer(offer);
 	}
-
-	private void checkArguments(ActivityProvider provider, ActivityOffer offer) {
+	
+	public void delete() {
+		setActivityOffer(null);
+		deleteDomainObject();
+	}
+	
+ 	private void checkArguments(ActivityProvider provider, ActivityOffer offer) {
 		if (provider == null || offer == null) {
 			throw new ActivityException();
 		}
-	}
-
-	public String getReference() {
-		return this.reference;
 	}
 
 	public String getCancellation() {
@@ -38,7 +42,7 @@ public class Booking {
 	}
 
 	public String cancel() {
-		this.cancel = "CANCEL" + this.reference;
+		this.cancel = "CANCEL" + getReference();
 		this.cancellationDate = new LocalDate();
 		return this.cancel;
 	}
