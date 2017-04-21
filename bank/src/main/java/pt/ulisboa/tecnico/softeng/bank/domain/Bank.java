@@ -2,7 +2,6 @@ package pt.ulisboa.tecnico.softeng.bank.domain;
 
 import java.util.ArrayList;
 import java.util.HashSet;
-import java.util.List;
 import java.util.Set;
 
 import pt.ist.fenixframework.FenixFramework;
@@ -48,7 +47,7 @@ public class Bank extends Bank_Base {
 			}
 		}
 	}
-
+/*
 	String getName() {
 		return this.name;
 	}
@@ -56,7 +55,7 @@ public class Bank extends Bank_Base {
 	String getCode() {
 		return this.code;
 	}
-
+*/
 	int getNumberOfAccounts() {
 		return this.accounts.size();
 	}
