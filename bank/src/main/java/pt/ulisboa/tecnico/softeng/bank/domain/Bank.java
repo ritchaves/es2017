@@ -16,16 +16,15 @@ public class Bank extends Bank_Base {
 	private final String code;
 	private final Set<Account> accounts = new HashSet<>();
 	private final Set<Client> clients = new HashSet<>();
-	//private final List<Operation> log = new ArrayList<>();
+	private final List<Operation> log = new ArrayList<>();
 
 	public Bank(String name, String code) {
 		checkArguments(name, code);
 
 		this.name = name;
 		this.code = code;
-		
+
 		FenixFramework.getDomainRoot().addBank(this);
-		
 	}
 
 	public void delete() {
@@ -78,8 +77,8 @@ public class Bank extends Bank_Base {
 		this.clients.add(client);
 	}
 
-	void addOperation(Operation operation) {
-		FenixFramework.getDomainRoot().addOperation(operation);
+	void addLog(Operation operation) {
+		this.log.add(operation);
 	}
 
 	public Account getAccount(String IBAN) {
@@ -97,7 +96,7 @@ public class Bank extends Bank_Base {
 	}
 
 	public Operation getOperation(String reference) {
-		for (Operation operation : FenixFramework.getDomainRoot().getOperationSet()) {
+		for (Operation operation : this.log) {
 			if (operation.getReference().equals(reference)) {
 				return operation;
 			}

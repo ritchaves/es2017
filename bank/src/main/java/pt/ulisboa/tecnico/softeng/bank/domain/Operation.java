@@ -2,10 +2,9 @@ package pt.ulisboa.tecnico.softeng.bank.domain;
 
 import org.joda.time.DateTime;
 
-import pt.ist.fenixframework.FenixFramework;
 import pt.ulisboa.tecnico.softeng.bank.exception.BankException;
 
-public class Operation extends Operation_Base{
+public class Operation {
 	public static enum Type {
 		DEPOSIT, WITHDRAW
 	};
@@ -26,8 +25,8 @@ public class Operation extends Operation_Base{
 		this.account = account;
 		this.value = value;
 		this.time = DateTime.now();
-		
-		account.getBank().addOperation(this);
+
+		account.getBank().addLog(this);
 	}
 
 	private void checkArguments(Type type, Account account, int value) {
