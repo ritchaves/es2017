@@ -1,8 +1,8 @@
 package pt.ulisboa.tecnico.softeng.bank.domain;
-
+/*
 import java.util.ArrayList;
 import java.util.HashSet;
-import java.util.Set;
+import java.util.Set;*/
 
 import pt.ist.fenixframework.FenixFramework;
 import pt.ulisboa.tecnico.softeng.bank.dataobjects.BankOperationData;
@@ -67,11 +67,11 @@ public class Bank extends Bank_Base {
 	void addAccount(Account account) {
 		this.accounts.add(account);
 	}
-
+*/
 	boolean hasClient(Client client) {
-		return this.clients.contains(client);
+		return getClientSet().contains(client);
 	}
-
+/*
 	void addClient(Client client) {
 		this.clients.add(client);
 	}

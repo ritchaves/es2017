@@ -1,7 +1,5 @@
 package pt.ulisboa.tecnico.softeng.bank.domain;
 
-import org.omg.PortableServer.SERVANT_RETENTION_POLICY_ID;
-
 import pt.ulisboa.tecnico.softeng.bank.exception.BankException;
 
 public class Client extends Client_Base{
@@ -15,8 +13,10 @@ public class Client extends Client_Base{
 
 		//this.ID = Integer.toString(++Client.counter);
 		//this.name = name;
-
-		bank.addClient(this);
+		setBank(bank);
+		setID(Integer.toString(++Client.counter));
+		setName(name);
+		getBank().addClient(this);
 	}
 
 	private void checkArguments(Bank bank, String name) {

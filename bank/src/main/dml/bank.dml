@@ -37,6 +37,7 @@ relation BankHasOperation {
 	Operation playsRole operation {
 		multiplicity 0..*;
 	}
+}
 	
 relation BankHasClient {
 	Bank playsRole bank {
@@ -45,6 +46,7 @@ relation BankHasClient {
 	Client playsRole client {
 		multiplicity 0..*;
 	}
+}
 	
 relation BankHasAccount {
 	Bank playsRole bank {
@@ -53,6 +55,7 @@ relation BankHasAccount {
 	Account playsRole account {
 		multiplicity 0..*;
 	}
+}
 	
 relation ClientHasAccount {
 	Client playsRole client {
@@ -60,7 +63,5 @@ relation ClientHasAccount {
 	}
 	Account playsRole account {
 		multiplicity 0..*;
-	}
-	
-
+	}	
 }
