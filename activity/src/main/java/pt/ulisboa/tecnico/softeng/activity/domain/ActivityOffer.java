@@ -50,15 +50,6 @@ public class ActivityOffer extends ActivityOffer_Base {
 		return count;
 	}
 
-	public void addBooking(Booking booking) {
-		if (this.getCapacity() == getNumberOfBookings()) {
-			throw new ActivityException();
-		}
-		addBooking(booking);
-	//	this.bookings.add(booking);
-
-	}
-
 	boolean available(LocalDate begin, LocalDate end) {
 		return hasVacancy() && matchDate(begin, end);
 	}

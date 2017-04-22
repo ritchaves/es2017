@@ -7,7 +7,6 @@ import pt.ulisboa.tecnico.softeng.activity.exception.ActivityException;
 public class Booking extends Booking_Base {
 	private static int counter = 0;
 	
-	//private final String reference;
 	private String cancel;
 	private LocalDate cancellationDate;
 
