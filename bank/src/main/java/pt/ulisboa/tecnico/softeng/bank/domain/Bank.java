@@ -13,8 +13,8 @@ public class Bank extends Bank_Base {
 
 	//private final String name;
 	//private final String code;
-	private final Set<Account> accounts = new HashSet<>();
-	private final Set<Client> clients = new HashSet<>();
+	//private final Set<Account> accounts = new HashSet<>();
+	//private final Set<Client> clients = new HashSet<>();
 	//private final List<Operation> log = new ArrayList<>();
 
 	public Bank(String name, String code) {
@@ -55,7 +55,7 @@ public class Bank extends Bank_Base {
 	String getCode() {
 		return this.code;
 	}
-*/
+
 	int getNumberOfAccounts() {
 		return this.accounts.size();
 	}
@@ -79,16 +79,15 @@ public class Bank extends Bank_Base {
 	public void addOperation(Operation operation) {
 		addOperation(operation);
 	}
-
+*/
 	public Account getAccount(String IBAN) {
 		if (IBAN == null || IBAN.trim().equals("")) {
 			throw new BankException();
 		}
-
-		for (Account account : this.accounts) {
-			if (account.getIBAN().equals(IBAN)) {
-				return account;
-			}
+		
+		for (Bank bank:FenixFramework.getDomainRoot().getBankSet()){
+			if(!bank.getAccount(IBAN).equals(null))
+				return bank.getAccount(IBAN);
 		}
 
 		return null;
@@ -121,7 +120,7 @@ public class Bank extends Bank_Base {
 		}
 		return null;
 	}
-
+/*FIXME
 	public static String processPayment(String IBAN, int amount) {
 		for (Bank bank : FenixFramework.getDomainRoot().getBankSet()) {
 			if (bank.getAccount(IBAN) != null) {
@@ -138,7 +137,7 @@ public class Bank extends Bank_Base {
 		}
 		throw new BankException();
 	}
-
+*/
 	public static BankOperationData getOperationData(String reference) {
 		Operation operation = getOperationByReference(reference);
 		if (operation != null) {
