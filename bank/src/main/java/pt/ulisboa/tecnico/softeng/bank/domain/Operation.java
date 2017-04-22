@@ -55,7 +55,7 @@ public class Operation extends Operation_Base {
 	public DateTime getTime() {
 		return this.time;
 	}
-
+*/
 	public String revert() {
 		switch (this.type) {
 		case DEPOSIT:
@@ -67,6 +67,6 @@ public class Operation extends Operation_Base {
 
 		}
 
-	}*/
+	}
 
 }

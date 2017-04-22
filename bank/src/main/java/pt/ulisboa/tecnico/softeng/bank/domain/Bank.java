@@ -55,31 +55,31 @@ public class Bank extends Bank_Base {
 	String getCode() {
 		return this.code;
 	}
-
-	int getNumberOfAccounts() {
-		return this.accounts.size();
-	}
-
-	int getNumberOfClients() {
-		return this.clients.size();
-	}
-
-	void addAccount(Account account) {
-		this.accounts.add(account);
-	}
 */
+	public int getNumberOfAccounts() {
+		return getAccountSet().size();
+	}
+
+	public int getNumberOfClients() {
+		return getClientSet().size();
+	}
+
+	public void addAccount(Account account) {
+		getAccountSet().add(account);
+	}
+
 	boolean hasClient(Client client) {
 		return getClientSet().contains(client);
 	}
-/*
-	void addClient(Client client) {
-		this.clients.add(client);
+
+	public void addClient(Client client) {
+		getClientSet().add(client);
 	}
 
 	public void addOperation(Operation operation) {
-		addOperation(operation);
+		getOperationSet().add(operation);
 	}
-*/
+
 	public Account getAccount(String IBAN) {
 		if (IBAN == null || IBAN.trim().equals("")) {
 			throw new BankException();
@@ -120,7 +120,7 @@ public class Bank extends Bank_Base {
 		}
 		return null;
 	}
-/*FIXME
+	
 	public static String processPayment(String IBAN, int amount) {
 		for (Bank bank : FenixFramework.getDomainRoot().getBankSet()) {
 			if (bank.getAccount(IBAN) != null) {
@@ -137,7 +137,7 @@ public class Bank extends Bank_Base {
 		}
 		throw new BankException();
 	}
-*/
+
 	public static BankOperationData getOperationData(String reference) {
 		Operation operation = getOperationByReference(reference);
 		if (operation != null) {

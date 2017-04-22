@@ -48,28 +48,28 @@ public class Account extends Account_Base{
 	/*public int getBalance() {
 		return this.balance;
 	}
-
-	FIXME
+*/
+	
 	 public String deposit(int amount) {
 	 
 		if (amount <= 0) {
 			throw new BankException();
 		}
 
-		this.balance = this.balance + amount;
+		setBalance(getBalance() + amount);
 
 		Operation operation = new Operation(Operation.Type.DEPOSIT, this, amount);
 		return operation.getReference();
 	}
 
 	public String withdraw(int amount) {
-		if (amount <= 0 || amount > this.balance) {
+		if (amount <= 0 || amount > getBalance()) {
 			throw new BankException();
 		}
 
-		this.balance = this.balance - amount;
+		setBalance(getBalance() - amount);
 
 		return new Operation(Operation.Type.WITHDRAW, this, amount).getReference();
-	}*/
+	}
 
 }
