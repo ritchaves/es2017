@@ -26,9 +26,15 @@ public class Bank extends Bank_Base {
 		FenixFramework.getDomainRoot().addBank(this);
 	}
 
-	public void delete() {
+	public void delete() {		
+		for(Operation operation : getOperationSet()){
+			operation.delete();
+		}
+		for(Client client : getClientSet()){
+			client.delete();
+		}
+		
 		setRoot(null);
-
 		deleteDomainObject();
 	}
 
@@ -85,11 +91,17 @@ public class Bank extends Bank_Base {
 			throw new BankException();
 		}
 		
-		for (Bank bank:FenixFramework.getDomainRoot().getBankSet()){
+		for (Account account : this.getAccountSet()){
+			if (account.getIBAN().equals(IBAN)){
+				return account;
+			}
+		}
+		
+		/*for (Bank bank:FenixFramework.getDomainRoot().getBankSet()){
 			if(!bank.getAccount(IBAN).equals(null))
 				return bank.getAccount(IBAN);
 		}
-
+*/
 		return null;
 	}
 

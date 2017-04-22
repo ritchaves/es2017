@@ -19,13 +19,12 @@ public class Operation extends Operation_Base {
 
 	public Operation(Type type, Account account, int value) {
 		checkArguments(type, account, value);
-
-		//this.reference = account.getBank().getCode() + Integer.toString(++Operation.counter);
-		setReference(account.getBank().getCode() + Integer.toString(++Operation.counter));
-		this.type = type;
 		this.account = account;
+		this.type = type;
 		setValue(value);
 		setTime(DateTime.now());
+		//this.reference = account.getBank().getCode() + Integer.toString(++Operation.counter);
+		setReference(account.getBank().getCode() + Integer.toString(++Operation.counter));
 
 		account.getBank().addOperation(this);
 	}
@@ -35,6 +34,14 @@ public class Operation extends Operation_Base {
 			throw new BankException();
 		}
 	}
+	
+	public void delete() {
+		setBank(null);
+		
+		deleteDomainObject();
+	}
+
+	
 /*
 	public String getReference() {
 		return this.reference;

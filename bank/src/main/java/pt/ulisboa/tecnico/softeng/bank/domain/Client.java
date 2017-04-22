@@ -14,15 +14,26 @@ public class Client extends Client_Base{
 		//this.ID = Integer.toString(++Client.counter);
 		//this.name = name;
 		setBank(bank);
-		setID(Integer.toString(++Client.counter));
 		setName(name);
-		getBank().addClient(this);
+		setID(Integer.toString(++Client.counter));
+		bank.addClient(this);
 	}
 
 	private void checkArguments(Bank bank, String name) {
 		if (bank == null || name == null || name.trim().equals("")) {
 			throw new BankException();
 		}
+	}
+	
+	//TIVE DE FAZER ISTO PARA CORRER TESTES
+	
+	public void delete() {
+		
+		for(Account account : getAccountSet()){
+			account.delete();
+		}
+		setBank(null);
+		deleteDomainObject();
 	}
 
 	/*

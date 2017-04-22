@@ -19,7 +19,7 @@ public class Account extends Account_Base{
 		//this.balance = 0;
 		setIBAN(getBank().getCode() + Integer.toString(++Account.counter));
 		setBalance(0);
-		getBank().addAccount(this);
+		bank.addAccount(this);
 	}
 
 	private void checkArguments(Bank bank, Client client) {
@@ -27,11 +27,20 @@ public class Account extends Account_Base{
 			throw new BankException();
 		}
 
-		if (!getBank().hasClient(client)) {
+		if (!bank.hasClient(client)) {
 			throw new BankException();
 		}
 
 	}
+	
+	//TIVE DE FAZER ISTO PARA CORRER TESTES
+	
+	public void delete() {
+		setBank(null);
+		
+		deleteDomainObject();
+	}
+	
 /*
 	Bank getBank() {
 		return this.bank;
