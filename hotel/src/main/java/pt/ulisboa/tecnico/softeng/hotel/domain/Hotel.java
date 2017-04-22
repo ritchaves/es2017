@@ -8,11 +8,10 @@ import java.util.Set;
 import org.joda.time.LocalDate;
 
 import pt.ist.fenixframework.FenixFramework;
-import pt.ulisboa.tecnico.softeng.bank.domain.Hotel_Base;
 import pt.ulisboa.tecnico.softeng.hotel.dataobjects.RoomBookingData;
 import pt.ulisboa.tecnico.softeng.hotel.exception.HotelException;
 
-public class Hotel /*extends Hotel_Base*/ {
+public class Hotel {
 	public static Set<Hotel> hotels = new HashSet<>();
 
 	static final int CODE_SIZE = 7;
@@ -30,7 +29,7 @@ public class Hotel /*extends Hotel_Base*/ {
 		
 		/*setCode(code);
 		setName(name);
-		FenixFramework.getDomainRoot().addHotel(this);**/
+		addHotel(this);*/
 	}
 
 	private void checkArguments(String code, String name) {

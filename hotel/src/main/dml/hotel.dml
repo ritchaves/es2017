@@ -1,8 +1,22 @@
-package pt.ulisboa.tecnico.softeng.bank.domain;
+package pt.ulisboa.tecnico.softeng.hotel.domain;
 
 class Hotel {
 	String code;
 	String name;
+}
+
+class Room {
+	Hotel hotel;
+	String number;
+	Type type;
+}
+
+class Booking {
+	String reference;
+	String cancellation;
+	LocalDate cancellationDate;
+	LocalDate arrival;
+	LocalDate departure;
 }
 
 relation DomainRootHasHotelApplication {
@@ -11,5 +25,23 @@ relation DomainRootHasHotelApplication {
 	}
 	Hotel playsRole hotel {
 		multiplicity 0..*;
+	}
+}
+
+relation HotelHasRoom {
+	Hotel playsRole hotel {
+		multiplicity 1..1;
+	}
+	Room playsRole room {
+		multiplicity 1..*;
+	}
+}
+
+relation RoomHasBooking {
+	Room playsRole room {
+		multiplicity 1..1;
+	}
+	Booking playsRole booking { 
+		multiplicity 1..*;
 	}
 }
