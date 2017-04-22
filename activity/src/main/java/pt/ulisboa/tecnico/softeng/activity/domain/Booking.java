@@ -10,7 +10,6 @@ public class Booking extends Booking_Base {
 	private String cancel;
 	private LocalDate cancellationDate;
 
-
 	public Booking(ActivityProvider provider, ActivityOffer offer) {
 		checkArguments(provider, offer);
 		

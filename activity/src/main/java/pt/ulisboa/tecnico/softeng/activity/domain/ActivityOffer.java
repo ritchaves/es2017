@@ -1,17 +1,10 @@
 package pt.ulisboa.tecnico.softeng.activity.domain;
 
-//import java.util.HashSet;
-//import java.util.Set;
-
 import org.joda.time.LocalDate;
 
 import pt.ulisboa.tecnico.softeng.activity.exception.ActivityException;
 
 public class ActivityOffer extends ActivityOffer_Base {
-//	private final LocalDate begin;
-//	private final LocalDate end;
-//	private final int capacity;
-//	private final Set<Booking> bookings = new HashSet<>();
 
 	public ActivityOffer(Activity activity, LocalDate begin, LocalDate end) {
 		checkArguments(activity, begin, end);
