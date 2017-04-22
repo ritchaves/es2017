@@ -55,7 +55,11 @@ public class ActivityProvider extends ActivityProvider_Base {
 		}
 		return result;
 	}
-
+	
+	int getNumberOfActivities() {
+		return getActivitySet().size();
+	}
+	
 	private Booking getBooking(String reference) {
 		for (Activity activity : getActivitySet()) {
 			Booking booking = activity.getBooking(reference);

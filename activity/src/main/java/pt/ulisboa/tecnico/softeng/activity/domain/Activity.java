@@ -60,6 +60,10 @@ public class Activity extends Activity_Base {
 	boolean matchAge(int age) {
 		return age >= this.getMinAge() && age <= this.getMaxAge();
 	}
+	
+	int getNumberOfOffers() {
+		return getActivityOfferSet().size();
+	}
 
 	public Booking getBooking(String reference) {
 		for (ActivityOffer offer : getActivityOfferSet()) {
