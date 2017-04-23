@@ -13,7 +13,7 @@ public class Client extends Client_Base{
 
 		//this.ID = Integer.toString(++Client.counter);
 		//this.name = name;
-		//setBank(bank);
+		setBank(bank);
 		setName(name);
 		setID(Integer.toString(++Client.counter));
 		bank.addClient(this);
