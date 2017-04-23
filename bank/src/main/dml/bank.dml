@@ -1,14 +1,14 @@
 package pt.ulisboa.tecnico.softeng.bank.domain;
+enum pt.ulisboa.tecnico.softeng.bank.domain.Operation.Type as OperationType;
 
 class Bank {
 	String code;
 	String name;
 }
 
-class Operation{
-	String reference;
-	int value;
-	DateTime Time;
+class Account{
+	String IBAN;
+	int balance;
 }
 
 class Client{
@@ -16,9 +16,11 @@ class Client{
 	String ID;
 }
 
-class Account{
-	String IBAN;
-	int balance;
+class Operation{
+	String reference;
+	int value;
+	DateTime time;
+	OperationType type;
 }
 
 relation DomainRootHasBankApplication {
@@ -30,11 +32,11 @@ relation DomainRootHasBankApplication {
 	}
 }
 
-relation BankHasOperation {
+relation BankHasAccount {
 	Bank playsRole bank {
 		multiplicity 1..1;
 	}
-	Operation playsRole operation {
+	Account playsRole account {
 		multiplicity 0..*;
 	}
 }
@@ -48,15 +50,15 @@ relation BankHasClient {
 	}
 }
 	
-relation BankHasAccount {
+relation BankHasOperation {
 	Bank playsRole bank {
 		multiplicity 1..1;
 	}
-	Account playsRole account {
+	Operation playsRole operation {
 		multiplicity 0..*;
 	}
 }
-	
+
 relation ClientHasAccount {
 	Client playsRole client {
 		multiplicity 1..1;

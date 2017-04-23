@@ -27,13 +27,15 @@ public class Bank extends Bank_Base {
 	}
 
 	public void delete() {		
-		for(Operation operation : getOperationSet()){
-			operation.delete();
+		for(Account account : getAccountSet()){
+			account.delete();
 		}
 		for(Client client : getClientSet()){
 			client.delete();
 		}
-		
+		for(Operation operation : getOperationSet()){
+			operation.delete();
+		}
 		setRoot(null);
 		deleteDomainObject();
 	}

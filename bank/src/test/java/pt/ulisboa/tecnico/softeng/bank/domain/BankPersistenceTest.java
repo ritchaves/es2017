@@ -11,7 +11,7 @@ import pt.ist.fenixframework.Atomic.TxMode;
 import pt.ulisboa.tecnico.softeng.bank.domain.Operation.Type;
 import pt.ist.fenixframework.FenixFramework;
 
-public class BankPersistenceTest {
+public class BankPersistenceTest{
 	private static final String BANK_CODE = "BK01";
 	private static final String BANK_NAME = "Money";
 	private static final String CLIENT_NAME = "António";

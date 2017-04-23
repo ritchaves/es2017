@@ -17,7 +17,7 @@ public class Account extends Account_Base{
 		//this.IBAN = bank.getCode() + Integer.toString(++Account.counter);
 		setClient(client);
 		//this.balance = 0;
-		setIBAN(getBank().getCode() + Integer.toString(++Account.counter));
+		setIBAN(bank.getCode() + Integer.toString(++Account.counter));
 		setBalance(0);
 		bank.addAccount(this);
 	}

@@ -12,7 +12,7 @@ public class Operation extends Operation_Base {
 	private static int counter = 0;
 
 	//private final String reference;
-	private final Type type;
+	//private final Type type;
 	private final Account account;
 	//private final int value;
 	//private final DateTime time;
@@ -20,7 +20,7 @@ public class Operation extends Operation_Base {
 	public Operation(Type type, Account account, int value) {
 		checkArguments(type, account, value);
 		this.account = account;
-		this.type = type;
+		setType(type);
 		setValue(value);
 		setTime(DateTime.now());
 		//this.reference = account.getBank().getCode() + Integer.toString(++Operation.counter);
@@ -46,11 +46,11 @@ public class Operation extends Operation_Base {
 	public String getReference() {
 		return this.reference;
 	}
-*/
+
 	public Type getType() {
 		return this.type;
 	}
-
+*/
 	public Account getAccount() {
 		return this.account;
 	}
@@ -64,7 +64,7 @@ public class Operation extends Operation_Base {
 	}
 */
 	public String revert() {
-		switch (this.type) {
+		switch (getType()) {
 		case DEPOSIT:
 			return this.account.withdraw(getValue());
 		case WITHDRAW:
