@@ -1,5 +1,7 @@
 package pt.ulisboa.tecnico.softeng.hotel.domain;
 
+enum pt.ulisboa.tecnico.softeng.hotel.domain.Room.Type as RoomType;
+
 class Hotel {
 	String code;
 	String name;
@@ -8,7 +10,7 @@ class Hotel {
 class Room {
 	Hotel hotel;
 	String number;
-	Type type;
+	RoomType type;
 }
 
 class Booking {
@@ -33,7 +35,7 @@ relation HotelHasRoom {
 		multiplicity 1..1;
 	}
 	Room playsRole room {
-		multiplicity 1..*;
+		multiplicity 0..*;
 	}
 }
 
@@ -42,6 +44,6 @@ relation RoomHasBooking {
 		multiplicity 1..1;
 	}
 	Booking playsRole booking { 
-		multiplicity 1..*;
+		multiplicity 0..*;
 	}
 }
