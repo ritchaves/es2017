@@ -8,7 +8,6 @@ class Hotel {
 }
 
 class Room {
-	Hotel hotel;
 	String number;
 	RoomType type;
 }

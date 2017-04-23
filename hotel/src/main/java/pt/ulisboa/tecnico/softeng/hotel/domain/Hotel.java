@@ -65,7 +65,7 @@ public class Hotel extends Hotel_Base {
 		return availableRooms;
 	}
 
-	void addRoom(Room room) {
+	public void addRoom(Room room) {
 		if (hasRoom(room.getNumber())) {
 			throw new HotelException();
 		}
