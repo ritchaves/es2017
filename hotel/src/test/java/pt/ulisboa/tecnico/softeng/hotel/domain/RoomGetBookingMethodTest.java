@@ -8,6 +8,7 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
+import pt.ist.fenixframework.FenixFramework;
 import pt.ulisboa.tecnico.softeng.hotel.domain.Room.Type;
 
 public class RoomGetBookingMethodTest {
@@ -43,6 +44,6 @@ public class RoomGetBookingMethodTest {
 
 	@After
 	public void tearDown() {
-		Hotel.hotels.clear();
+		FenixFramework.getDomainRoot().getHotelSet().clear();
 	}
 }
