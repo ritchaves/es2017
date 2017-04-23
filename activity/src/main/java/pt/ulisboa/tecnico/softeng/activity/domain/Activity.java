@@ -61,8 +61,12 @@ public class Activity extends Activity_Base {
 		return age >= this.getMinAge() && age <= this.getMaxAge();
 	}
 	
-	int getNumberOfOffers() {
+	public int getNumberOfOffers() {
 		return getActivityOfferSet().size();
+	}
+	
+	public void addOffer(ActivityOffer offer) {
+		getActivityOfferSet().add(offer);
 	}
 
 	public Booking getBooking(String reference) {

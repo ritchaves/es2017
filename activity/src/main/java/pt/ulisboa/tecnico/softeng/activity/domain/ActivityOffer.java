@@ -33,7 +33,7 @@ public class ActivityOffer extends ActivityOffer_Base {
 		}
 	}
 
-	int getNumberOfBookings() {
+	public int getNumberOfBookings() {
 		int count = 0;
 		for (Booking booking : getBookingSet()) {
 			if (!booking.isCancelled()) {
@@ -46,7 +46,14 @@ public class ActivityOffer extends ActivityOffer_Base {
 	boolean available(LocalDate begin, LocalDate end) {
 		return hasVacancy() && matchDate(begin, end);
 	}
-
+	
+	public void addBooking(Booking booking) {
+		if (this.getCapacity() == getNumberOfBookings()) {
+			throw new ActivityException();
+		}
+		getBookingSet().add(booking);
+	}
+	
 	boolean matchDate(LocalDate begin, LocalDate end) {
 		if (begin == null || end == null) {
 			throw new ActivityException();
