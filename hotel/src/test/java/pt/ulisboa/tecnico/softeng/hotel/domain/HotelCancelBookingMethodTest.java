@@ -10,7 +10,7 @@ import pt.ist.fenixframework.FenixFramework;
 import pt.ulisboa.tecnico.softeng.hotel.domain.Room.Type;
 import pt.ulisboa.tecnico.softeng.hotel.exception.HotelException;
 
-public class HotelCancelBookingMethodTest {
+public class HotelCancelBookingMethodTest extends RollbackTestAbstractClass {
 	private final LocalDate arrival = new LocalDate(2016, 12, 19);
 	private final LocalDate departure = new LocalDate(2016, 12, 21);
 	private Hotel hotel;
@@ -18,7 +18,7 @@ public class HotelCancelBookingMethodTest {
 	private Booking booking;
 
 	@Before
-	public void setUp() {
+	public void populate4Test() {
 		this.hotel = new Hotel("XPTO123", "Paris");
 		this.room = new Room(this.hotel, "01", Type.DOUBLE);
 		this.booking = this.room.reserve(Type.DOUBLE, this.arrival, this.departure);

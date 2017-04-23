@@ -7,7 +7,7 @@ import org.junit.Test;
 import pt.ist.fenixframework.FenixFramework;
 import pt.ulisboa.tecnico.softeng.hotel.exception.HotelException;
 
-public class HotelConstructorTest {
+public class HotelConstructorTest extends RollbackTestAbstractClass {
 	private static final String HOTEL_NAME = "Londres";
 	private static final String HOTEL_CODE = "XPTO123";
 
