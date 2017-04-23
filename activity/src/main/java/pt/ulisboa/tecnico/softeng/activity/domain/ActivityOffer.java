@@ -20,6 +20,9 @@ public class ActivityOffer extends ActivityOffer_Base {
 	
 	public void delete() {
 		setActivity(null);
+		for (Booking booking : getBookingSet()) {
+			booking.delete();
+		}
 		deleteDomainObject();
 	}
 

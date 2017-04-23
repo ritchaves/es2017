@@ -76,7 +76,7 @@ public class ActivityPersistenceTest {
 		assertEquals(activityReservationData.getBegin(), this.begin);
 		assertEquals(activityReservationData.getEnd(), this.end);
 		activityReservationData.setCancellationDate(this.end.minusDays(2));
-		assertNotNull(activityReservationData.getCancellation());
+		assertNotNull(activityReservationData.getCancellationDate());
 
 	}
 	
