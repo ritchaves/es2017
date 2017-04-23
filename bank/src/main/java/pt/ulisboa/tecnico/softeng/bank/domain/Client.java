@@ -25,8 +25,6 @@ public class Client extends Client_Base{
 		}
 	}
 	
-	//TIVE DE FAZER ISTO PARA CORRER TESTES
-	
 	public void delete() {
 		setBank(null);
 		deleteDomainObject();

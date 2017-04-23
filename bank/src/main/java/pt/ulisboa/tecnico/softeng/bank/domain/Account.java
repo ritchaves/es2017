@@ -33,11 +33,14 @@ public class Account extends Account_Base{
 
 	}
 	
-	//TIVE DE FAZER ISTO PARA CORRER TESTES
 	
 	public void delete() {
 		setBank(null);
 		setClient(null);
+		for(Operation operation : getOperationSet()){
+			operation.delete();
+		}
+		
 		deleteDomainObject();
 	}
 	
