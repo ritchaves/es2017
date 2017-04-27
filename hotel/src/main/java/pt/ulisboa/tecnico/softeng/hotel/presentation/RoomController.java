@@ -1,3 +1,4 @@
+package pt.ulisboa.tecnico.softeng.hotel.presentation;
 /*package pt.ulisboa.tecnico.softeng.hotel.presentation;
 
 import org.slf4j.Logger;

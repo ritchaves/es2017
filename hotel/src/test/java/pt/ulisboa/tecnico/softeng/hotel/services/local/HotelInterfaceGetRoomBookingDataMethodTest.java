@@ -13,7 +13,7 @@ import pt.ulisboa.tecnico.softeng.hotel.domain.Room;
 import pt.ulisboa.tecnico.softeng.hotel.domain.Room.Type;
 import pt.ulisboa.tecnico.softeng.hotel.exception.HotelException;
 import pt.ulisboa.tecnico.softeng.hotel.services.local.HotelInterface;
-import pt.ulisboa.tecnico.softeng.hotel.services.local.dataobjects.RoomBookingData;
+import pt.ulisboa.tecnico.softeng.hotel.services.local.dataobjects.BookingData;
 
 public class HotelInterfaceGetRoomBookingDataMethodTest extends RollbackTestAbstractClass {
 	private final LocalDate arrival = new LocalDate(2016, 12, 19);
@@ -31,7 +31,7 @@ public class HotelInterfaceGetRoomBookingDataMethodTest extends RollbackTestAbst
 
 	@Test
 	public void success() {
-		RoomBookingData data = HotelInterface.getRoomBookingData(this.booking.getReference());
+		BookingData data = HotelInterface.getRoomBookingData(this.booking.getReference());
 
 		assertEquals(this.booking.getReference(), data.getReference());
 		assertNull(data.getCancellation());
@@ -47,7 +47,7 @@ public class HotelInterfaceGetRoomBookingDataMethodTest extends RollbackTestAbst
 	@Test
 	public void successCancellation() {
 		this.booking.cancel();
-		RoomBookingData data = HotelInterface.getRoomBookingData(this.booking.getCancellation());
+		BookingData data = HotelInterface.getRoomBookingData(this.booking.getCancellation());
 
 		assertEquals(this.booking.getReference(), data.getReference());
 		assertEquals(this.booking.getCancellation(), data.getCancellation());
