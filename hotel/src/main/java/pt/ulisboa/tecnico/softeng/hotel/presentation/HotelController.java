@@ -28,7 +28,7 @@ public class HotelController {
 
 	@RequestMapping(method = RequestMethod.POST)
 	public String hotelSubmit(Model model, @ModelAttribute HotelData hotelData) {
-		logger.info("brokerSubmit name:{}, code:{}", hotelData.getName(), hotelData.getCode());
+		logger.info("hotelSubmit name:{}, code:{}", hotelData.getName(), hotelData.getCode());
 
 		try {
 			HotelInterface.createHotel(hotelData);
@@ -36,16 +36,10 @@ public class HotelController {
 			model.addAttribute("error", "Error: it was not possible to create the Hotel");
 			model.addAttribute("hotel", hotelData);
 			model.addAttribute("hotels", HotelInterface.getHotels());
-			return "";
+			return "hotels";
 		}
 
 		return "redirect:/hotels";
-	}
-	
-	@RequestMapping(value = "/error")
-	public String hotelError(Model model) {
-		logger.info("hotelError");
-		throw new HotelException();
 	}
 	
 }
