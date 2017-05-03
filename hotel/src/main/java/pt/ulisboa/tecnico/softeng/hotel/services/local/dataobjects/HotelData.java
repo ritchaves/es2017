@@ -27,7 +27,8 @@ public class HotelData {
 		case ROOM:
 			for (Room room : hotel.getRoomSet()) {
 				//this.adventures.add(new RoomData(adventure));
-				//FIXME this.rooms.add(new RoomData(room));
+				RoomData roomData = new RoomData(room, pt.ulisboa.tecnico.softeng.hotel.services.local.dataobjects.RoomData.CopyDepth.ROOM);
+				this.rooms.add(roomData);
 			}
 			break;
 		/*case BOOKING:

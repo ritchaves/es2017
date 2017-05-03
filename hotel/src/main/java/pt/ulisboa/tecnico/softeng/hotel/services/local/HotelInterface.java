@@ -84,12 +84,12 @@ public class HotelInterface {
 		return availableRooms;
 	}
 
-	public static List<Hotel> getHotels() {
-		List<Hotel> hotels = new ArrayList<>();
+	public static List<HotelData> getHotels() {
+		List<HotelData> hotels = new ArrayList<>();
 		for(Hotel hotel : FenixFramework.getDomainRoot().getHotelSet()){
-			hotels.add(hotel);
+			hotels.add(new HotelData(hotel, pt.ulisboa.tecnico.softeng.hotel.services.local.dataobjects.HotelData.CopyDepth.SHALLOW));
 		}
-		return null;
+		return hotels;
 	}
 	
 	@Atomic(mode = TxMode.WRITE)

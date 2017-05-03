@@ -14,12 +14,12 @@ import pt.ulisboa.tecnico.softeng.hotel.services.local.HotelInterface;
 import pt.ulisboa.tecnico.softeng.hotel.services.local.dataobjects.HotelData;
 
 @Controller
-@RequestMapping(value = "/brokers")
+@RequestMapping(value = "/hotels")
 public class HotelController {
 	private static Logger logger = LoggerFactory.getLogger(HotelController.class);
 
 	@RequestMapping(method = RequestMethod.GET)
-	public String brokerForm(Model model) {
+	public String hotelForm(Model model) {
 		logger.info("hotelForm");
 		model.addAttribute("hotel", new HotelData());
 		model.addAttribute("hotels", HotelInterface.getHotels());
@@ -27,7 +27,7 @@ public class HotelController {
 	}
 
 	@RequestMapping(method = RequestMethod.POST)
-	public String brokerSubmit(Model model, @ModelAttribute HotelData hotelData) {
+	public String hotelSubmit(Model model, @ModelAttribute HotelData hotelData) {
 		logger.info("brokerSubmit name:{}, code:{}", hotelData.getName(), hotelData.getCode());
 
 		try {
@@ -41,4 +41,11 @@ public class HotelController {
 
 		return "redirect:/hotels";
 	}
+	
+	@RequestMapping(value = "/error")
+	public String hotelError(Model model) {
+		logger.info("hotelError");
+		throw new HotelException();
+	}
+	
 }
