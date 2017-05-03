@@ -84,6 +84,7 @@ public class HotelInterface {
 		return availableRooms;
 	}
 
+	@Atomic(mode = TxMode.READ)
 	public static List<HotelData> getHotels() {
 		List<HotelData> hotels = new ArrayList<>();
 		for(Hotel hotel : FenixFramework.getDomainRoot().getHotelSet()){
