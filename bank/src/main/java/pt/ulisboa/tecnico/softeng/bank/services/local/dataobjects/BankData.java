@@ -80,6 +80,14 @@ public class BankData {
 		this.accounts = accounts;
 	}
 	
+	public void removeAccount(AccountData accountData) {
+		this.accounts.remove(accountData);
+	}
+	
+	public int getAccountsSize() {
+		return this.accounts.size();
+	}
+	
 	public List<BankOperationData> getOperations() {
 		return this.operations;
 	}

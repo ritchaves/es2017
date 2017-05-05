@@ -8,6 +8,7 @@ import pt.ist.fenixframework.Atomic.TxMode;
 import pt.ist.fenixframework.FenixFramework;
 import pt.ulisboa.tecnico.softeng.bank.domain.*;
 import pt.ulisboa.tecnico.softeng.bank.exception.BankException;
+import pt.ulisboa.tecnico.softeng.bank.services.local.dataobjects.AccountData;
 import pt.ulisboa.tecnico.softeng.bank.services.local.dataobjects.BankData;
 import pt.ulisboa.tecnico.softeng.bank.services.local.dataobjects.BankData.CopyDepth;
 import pt.ulisboa.tecnico.softeng.bank.services.local.dataobjects.BankOperationData;
@@ -79,6 +80,24 @@ public class BankInterface {
 		}
 	}
 	
+	@Atomic(mode = TxMode.READ)
+	public static BankData getBankDataByCode_Client(String code, String clientID, CopyDepth depth) {
+		Bank bank = getBankByCode(code);
+		
+		if (bank != null) {
+			BankData bankData =  new BankData(bank, depth);
+			for (AccountData accountData : bankData.getAccounts()) {
+				if (!accountData.getClientID().equals(clientID)) {
+					bankData.removeAccount(accountData);
+				}
+			}
+			return bankData;
+		}
+		else {
+			return null;
+		}
+	}
+	
 	public static Bank getBankByCode(String code) {
 		for (Bank bank : FenixFramework.getDomainRoot().getBankSet()) {
 			if (bank.getCode().equals(code)) {
@@ -88,8 +107,22 @@ public class BankInterface {
 		return null;
 	}
 	
+	public static Client getClientByID(Bank bank, String clientID) {
+		for (Client client : bank.getClientSet()) {
+			if (client.getID().equals(clientID)) {
+				return client;
+			}
+		}
+		return  null;
+	}
+	
 	@Atomic(mode = TxMode.WRITE)
 	public static void createClient(String bankCode, ClientData clientData) {
 		new Client(getBankByCode(bankCode), clientData.getName());
+	}
+	
+	@Atomic(mode = TxMode.WRITE)
+	public static void createAccount(String bankCode, AccountData accountData) {
+		new Account(getBankByCode(bankCode), getClientByID(getBankByCode(bankCode), accountData.getClientID()));
 	}
 }

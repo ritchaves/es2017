@@ -11,6 +11,7 @@ public class AccountData {
 	};
 	
 	private String IBAN;
+	private String clientID;
 	private int balance;
 	private List<BankOperationData> operations = new ArrayList<BankOperationData>();
 	
@@ -19,6 +20,7 @@ public class AccountData {
 	public AccountData(Account account, CopyDepth depth) {
 		this.IBAN = account.getIBAN();
 		this.balance = account.getBalance();
+		this.clientID = account.getClient().getID();
 		
 		switch(depth) {
 		case OPERATION:
@@ -40,6 +42,14 @@ public class AccountData {
 	
 	public void setIBAN(String IBAN) {
 		this.IBAN = IBAN;
+	}
+	
+	public String getClientID() {
+		return this.clientID;
+	}
+	
+	public void setClientID(String clientID) {
+		this.clientID = clientID;
 	}
 	
 	public int getBalance() {
