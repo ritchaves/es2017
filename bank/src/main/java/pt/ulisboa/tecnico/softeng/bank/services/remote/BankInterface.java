@@ -1,4 +1,4 @@
-package pt.ulisboa.tecnico.softeng.bank.remote;
+package pt.ulisboa.tecnico.softeng.bank.services.remote;
 
 import pt.ulisboa.tecnico.softeng.bank.services.remote.dataobjects.BankOperationData;
 
