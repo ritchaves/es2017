@@ -12,7 +12,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import pt.ulisboa.tecnico.softeng.bank.exception.BankException;
 import pt.ulisboa.tecnico.softeng.bank.services.local.BankInterface;
 import pt.ulisboa.tecnico.softeng.bank.services.local.dataobjects.BankData;
-import pt.ulisboa.tecnico.softeng.bank.services.local.dataobjects.ClientData;
 import pt.ulisboa.tecnico.softeng.bank.services.local.dataobjects.BankData.CopyDepth;
 import pt.ulisboa.tecnico.softeng.bank.services.local.dataobjects.AccountData;
 
@@ -25,7 +24,7 @@ public class AccountController {
 	public String showAccounts(Model model, @PathVariable String bankCode) {
 		logger.info("showAccounts code:{}", bankCode);
 		
-		BankData bankData = BankInterface.getBankDataByCode(bankCode, CopyDepth.CLIENT);
+		BankData bankData = BankInterface.getBankDataByCode(bankCode, CopyDepth.ACCOUNT);
 		
 		if (bankData == null) {
 			model.addAttribute("error", "Error: it does not exist a bank with the code " + bankCode);

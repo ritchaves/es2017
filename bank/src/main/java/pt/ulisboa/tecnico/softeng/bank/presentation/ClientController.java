@@ -41,7 +41,7 @@ public class ClientController {
 	
 	@RequestMapping(method = RequestMethod.POST)
 	public String submitClient(Model model, @PathVariable String bankCode, @ModelAttribute ClientData clientData) {
-		logger.info("clientSubmit name:{}, ID:{}", clientData.getName(), clientData.getID());
+		logger.info("submitClient name:{}", clientData.getName());
 		
 		try {
 			BankInterface.createClient(bankCode, clientData);

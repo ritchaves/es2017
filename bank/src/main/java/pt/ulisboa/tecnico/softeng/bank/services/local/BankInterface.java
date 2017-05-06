@@ -58,14 +58,14 @@ public class BankInterface {
 	public static List<BankData> getBanks() {
 		List<BankData> banks = new ArrayList<BankData>();
 		for(Bank bank: FenixFramework.getDomainRoot().getBankSet()) {
-			banks.add(new BankData(bank, pt.ulisboa.tecnico.softeng.bank.services.local.dataobjects.BankData.CopyDepth.SHALLOW));
+			banks.add(new BankData(bank, CopyDepth.SHALLOW));
 		}
 		return banks;
 	}
 	
 	@Atomic(mode = TxMode.WRITE)
 	public static void createBank(BankData bankData){
-			new Bank(bankData.getCode(), bankData.getName());
+			new Bank(bankData.getName(), bankData.getCode());
 	}
 	
 	@Atomic(mode = TxMode.READ)
