@@ -52,6 +52,6 @@ public class ClientController {
 			return "clients";
 		}
 		
-		return "redirect:/banks/" + bankCode + "clients"; 
+		return "redirect:/banks/" + bankCode + "/clients"; 
 	}
 }
