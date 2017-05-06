@@ -14,7 +14,6 @@ public class HotelData {
 	private String name;
 	private String code;
 	private List<RoomData> rooms = new ArrayList<>();
-	//private List<BulkData> bulks = new ArrayList<>();
 
 	public HotelData() {
 	}
@@ -26,16 +25,10 @@ public class HotelData {
 		switch (depth) {
 		case ROOM:
 			for (Room room : hotel.getRoomSet()) {
-				//this.adventures.add(new RoomData(adventure));
-				RoomData roomData = new RoomData(room, pt.ulisboa.tecnico.softeng.hotel.services.local.dataobjects.RoomData.CopyDepth.ROOM);
+				RoomData roomData = new RoomData(room, CopyDepth.SHALLOW);
 				this.rooms.add(roomData);
 			}
 			break;
-		/*case BOOKING:
-			for (Booking bulkRoomBooking : broker.getRoomBulkBookingSet()) {
-				this.bulks.add(new BulkData(bulkRoomBooking));
-			}
-			break;*/
 		case SHALLOW:
 			break;
 		default:
@@ -60,20 +53,12 @@ public class HotelData {
 		this.code = code;
 	}
 
-	public List<RoomData> getAdventures() {
+	public List<RoomData> getRooms() {
 		return this.rooms;
 	}
 
-	public void setAdventures(List<RoomData> adventures) {
-		this.rooms = adventures;
+	public void setRooms(List<RoomData> rooms) {
+		this.rooms = rooms;
 	}
-
-/*	public List<BulkData> getBulks() {
-		return this.bulks;
-	}
-
-	public void setBulks(List<BulkData> bulks) {
-		this.bulks = bulks;
-	}*/
 
 }

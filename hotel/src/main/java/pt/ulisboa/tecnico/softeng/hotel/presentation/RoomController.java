@@ -1,5 +1,4 @@
 package pt.ulisboa.tecnico.softeng.hotel.presentation;
-/*package pt.ulisboa.tecnico.softeng.hotel.presentation;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -10,52 +9,52 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
-import pt.ulisboa.tecnico.softeng.hotel.exception.BrokerException;
-import pt.ulisboa.tecnico.softeng.hotel.services.local.BrokerInterface;
-import pt.ulisboa.tecnico.softeng.hotel.services.local.dataobjects.AdventureData;
-import pt.ulisboa.tecnico.softeng.hotel.services.local.dataobjects.BrokerData;
-import pt.ulisboa.tecnico.softeng.hotel.services.local.dataobjects.BrokerData.CopyDepth;
+
+import pt.ulisboa.tecnico.softeng.hotel.exception.HotelException;
+import pt.ulisboa.tecnico.softeng.hotel.services.local.HotelInterface;
+import pt.ulisboa.tecnico.softeng.hotel.services.local.dataobjects.HotelData;
+import pt.ulisboa.tecnico.softeng.hotel.services.local.dataobjects.RoomData;
+import pt.ulisboa.tecnico.softeng.hotel.services.local.dataobjects.HotelData.CopyDepth;
+
 
 @Controller
-@RequestMapping(value = "/brokers/{brokerCode}/adventures")
-public class AdventureController {
-	private static Logger logger = LoggerFactory.getLogger(AdventureController.class);
+@RequestMapping(value = "/hotels/{hotelCode}/rooms")
+public class RoomController {
+	private static Logger logger = LoggerFactory.getLogger(RoomController.class);
 
 	@RequestMapping(method = RequestMethod.GET)
-	public String showAdventures(Model model, @PathVariable String brokerCode) {
-		logger.info("showAdventures code:{}", brokerCode);
+	public String showRooms(Model model, @PathVariable String hotelCode) {
+		logger.info("showRooms code:{}", hotelCode);
 
-		BrokerData brokerData = BrokerInterface.getBrokerDataByCode(brokerCode, CopyDepth.ADVENTURES);
+		HotelData hotelData = HotelInterface.getHotelDataByCode(hotelCode, CopyDepth.ROOM);
 
-		if (brokerData == null) {
-			model.addAttribute("error", "Error: it does not exist a broker with the code " + brokerCode);
-			model.addAttribute("broker", new BrokerData());
-			model.addAttribute("brokers", BrokerInterface.getBrokers());
-			return "brokers";
+		if (hotelData == null) {
+			model.addAttribute("error", "Error: it does not exist a broker with the code " + hotelCode);
+			model.addAttribute("hotels", new HotelData());
+			model.addAttribute("hotels", HotelInterface.getHotels());
+			return "hotels";
 		} else {
-			model.addAttribute("adventure", new AdventureData());
-			model.addAttribute("broker", brokerData);
-			return "adventures";
+			model.addAttribute("room", new RoomData());
+			model.addAttribute("hotel", hotelData);
+			return "rooms";
 		}
 	}
 
 	@RequestMapping(method = RequestMethod.POST)
-	public String submitAdventure(Model model, @PathVariable String brokerCode,
-			@ModelAttribute AdventureData adventureData) {
-		logger.info("adventureSubmit brokerCode:{}, begin:{}, end:{}, age:{}, iban:{}, amount:{}", brokerCode,
-				adventureData.getBegin(), adventureData.getEnd(), adventureData.getAge(), adventureData.getIban(),
-				adventureData.getAmount());
+	public String submitRoom(Model model, @PathVariable String hotelCode,
+			@ModelAttribute RoomData roomData) {
+		logger.info("roomSubmit number:{}, type:{}", roomData.getNumber(), roomData.getType());
 
 		try {
-			BrokerInterface.createAdventure(brokerCode, adventureData);
-		} catch (BrokerException be) {
-			model.addAttribute("error", "Error: it was not possible to create the adventure");
-			model.addAttribute("adventure", adventureData);
-			model.addAttribute("broker", BrokerInterface.getBrokerDataByCode(brokerCode, CopyDepth.ADVENTURES));
-			return "adventures";
+			HotelInterface.createRoom(hotelCode, roomData);
+		} catch (HotelException he) {
+			model.addAttribute("error", "Error: it was not possible to create the room");
+			model.addAttribute("room", roomData);
+			model.addAttribute("hotel", HotelInterface.getHotelDataByCode(hotelCode, CopyDepth.ROOM));
+			return "rooms";
 		}
 
-		return "redirect:/brokers/" + brokerCode + "/adventures";
+		return "redirect:/hotels/" + hotelCode + "/rooms";
 	}
 
-}*/
+}

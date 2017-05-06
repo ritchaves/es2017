@@ -10,12 +10,14 @@ import org.joda.time.LocalDate;
 import pt.ist.fenixframework.Atomic;
 import pt.ist.fenixframework.Atomic.TxMode;
 import pt.ist.fenixframework.FenixFramework;
+import pt.ulisboa.tecnico.softeng.hotel.services.local.dataobjects.HotelData;
+import pt.ulisboa.tecnico.softeng.hotel.services.local.dataobjects.HotelData.CopyDepth;
+import pt.ulisboa.tecnico.softeng.hotel.services.local.dataobjects.RoomData;
 import pt.ulisboa.tecnico.softeng.hotel.domain.Booking;
 import pt.ulisboa.tecnico.softeng.hotel.domain.Hotel;
 import pt.ulisboa.tecnico.softeng.hotel.domain.Room;
 import pt.ulisboa.tecnico.softeng.hotel.exception.HotelException;
 import pt.ulisboa.tecnico.softeng.hotel.services.local.dataobjects.BookingData;
-import pt.ulisboa.tecnico.softeng.hotel.services.local.dataobjects.HotelData;
 
 public class HotelInterface {
 
@@ -88,15 +90,70 @@ public class HotelInterface {
 	public static List<HotelData> getHotels() {
 		List<HotelData> hotels = new ArrayList<>();
 		for(Hotel hotel : FenixFramework.getDomainRoot().getHotelSet()){
-			hotels.add(new HotelData(hotel, pt.ulisboa.tecnico.softeng.hotel.services.local.dataobjects.HotelData.CopyDepth.SHALLOW));
+			hotels.add(new HotelData(hotel, CopyDepth.SHALLOW));
 		}
 		return hotels;
 	}
 	
+	@Atomic(mode = TxMode.READ)
+	public static List<RoomData> getRooms(String hotelCode) {
+		List<RoomData> rooms = new ArrayList<>();
+		for(Room room : getHotelByCode(hotelCode).getRoomSet()) {
+			rooms.add(new RoomData(room, CopyDepth.SHALLOW));
+		}
+		return rooms;
+	}
+	
+	@Atomic(mode = TxMode.READ)
+	public static HotelData getHotelDataByCode(String code, CopyDepth depth) {
+		Hotel hotel = getHotelByCode(code);
+		
+		if (hotel != null) {
+			return new HotelData(hotel, depth);
+		}
+		else {
+			return null;
+		}
+	}
+	
+	private static Hotel getHotelByCode(String code) {
+		for (Hotel hotel : FenixFramework.getDomainRoot().getHotelSet()) {
+			if (hotel.getCode().equals(code))
+				return hotel;
+		}
+		return null;
+	}
+
 	@Atomic(mode = TxMode.WRITE)
 	public static void createHotel(HotelData hotelData){
 			new Hotel(hotelData.getCode(), hotelData.getName());
 
+	}
+	
+	@Atomic(mode = TxMode.WRITE)
+	public static void createRoom(String hotelCode, RoomData roomData) {
+		new Room(getHotelByCode(hotelCode), roomData.getNumber(), roomData.getType());		
+	}
+
+	public static RoomData getRoomData(String hotelCode, String roomNumber, CopyDepth depth) {
+		Room room = getRoom(hotelCode, roomNumber);
+		if (room != null)
+			return new RoomData(room, depth);
+		else
+			return null;
+	}
+
+	private static Room getRoom(String hotelCode, String roomNumber) {
+		for (Room r : getHotelByCode(hotelCode).getRoomSet()) {
+			if (r.getNumber().equals(roomNumber))
+				return r;
+		}
+		return null;
+	}
+
+	public static void createBooking(String hotelCode, String roomNumber, BookingData bookingData) {
+		new Booking(getRoom(hotelCode, roomNumber), bookingData.getArrival(), bookingData.getDeparture());
+		
 	}
 
 }

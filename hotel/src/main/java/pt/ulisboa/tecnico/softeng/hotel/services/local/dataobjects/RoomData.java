@@ -4,12 +4,12 @@ import java.util.ArrayList;
 import java.util.List;
 
 import pt.ulisboa.tecnico.softeng.hotel.domain.Booking;
-import pt.ulisboa.tecnico.softeng.hotel.domain.Hotel;
 import pt.ulisboa.tecnico.softeng.hotel.domain.Room;
+//import pt.ulisboa.tecnico.softeng.hotel.services.local.dataobjects.HotelData.CopyDepth;
 
 public class RoomData {
 	public static enum CopyDepth {
-		SHALLOW, ROOM, BOOKING
+		SHALLOW, BOOKING
 	};
 	
 	public static enum Type {
@@ -18,25 +18,18 @@ public class RoomData {
 
 	private String number;
 	
-	//private List<RoomData> rooms = new ArrayList<>();
+	private pt.ulisboa.tecnico.softeng.hotel.domain.Room.Type type;
+	
 	private List<BookingData> bookings = new ArrayList<>();
-
-	private pt.ulisboa.tecnico.softeng.hotel.domain.Room.Type Type;
 
 	public RoomData() {
 	}
 
-	public RoomData(Room room, CopyDepth depth) {
+	public RoomData(Room room, pt.ulisboa.tecnico.softeng.hotel.services.local.dataobjects.HotelData.CopyDepth depth) {
 		this.number = room.getNumber();
-		this.Type = room.getType();
+		this.type = room.getType();
 
 		switch (depth) {
-		/*case ROOM:
-			for (Room room : hotel.getRoomSet()) {
-				//this.adventures.add(new RoomData(adventure));
-				this.rooms.add(new RoomData(room));
-			}
-			break;*/
 		case BOOKING:
 			for(Booking booking : room.getBookingSet()){
 				this.bookings.add(new BookingData(room, booking));
@@ -47,39 +40,29 @@ public class RoomData {
 		default:
 			break;
 		}
-
-	}
-/*TODO
-	public String getName() {
-		return this.name;
 	}
 
-	public void setName(String name) {
-		this.name = name;
+	public String getNumber() {
+		return this.number;
 	}
 
-	public String getCode() {
-		return this.code;
+	public void setNumber(String number) {
+		this.number = number;
 	}
 
-	public void setCode(String code) {
-		this.code = code;
+	public pt.ulisboa.tecnico.softeng.hotel.domain.Room.Type getType() {
+		return this.type;
 	}
 
-	public List<RoomData> getAdventures() {
-		return this.rooms;
+	public void setType(pt.ulisboa.tecnico.softeng.hotel.domain.Room.Type type) {
+		this.type = type;
 	}
 
-	public void setAdventures(List<RoomData> adventures) {
-		this.rooms = adventures;
-	}*/
-
-	public List<BookingData> getBulks() {
+	public List<BookingData> getBookings() {
 		return this.bookings;
 	}
 
-	public void setBulks(List<BookingData> bulks) {
+	public void setBookings(List<BookingData> bookings) {
 		this.bookings = bookings;
 	}
-
 }

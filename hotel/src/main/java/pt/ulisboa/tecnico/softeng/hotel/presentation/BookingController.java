@@ -1,5 +1,4 @@
 package pt.ulisboa.tecnico.softeng.hotel.presentation;
-/*package pt.ulisboa.tecnico.softeng.broker.presentation;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -10,51 +9,50 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
-import pt.ulisboa.tecnico.softeng.broker.exception.BrokerException;
-import pt.ulisboa.tecnico.softeng.broker.services.local.BrokerInterface;
-import pt.ulisboa.tecnico.softeng.broker.services.local.dataobjects.BrokerData;
-import pt.ulisboa.tecnico.softeng.broker.services.local.dataobjects.BrokerData.CopyDepth;
-import pt.ulisboa.tecnico.softeng.broker.services.local.dataobjects.BulkData;
+import pt.ulisboa.tecnico.softeng.hotel.exception.HotelException;
+import pt.ulisboa.tecnico.softeng.hotel.services.local.HotelInterface;
+import pt.ulisboa.tecnico.softeng.hotel.services.local.dataobjects.BookingData;
+import pt.ulisboa.tecnico.softeng.hotel.services.local.dataobjects.HotelData.CopyDepth;
+import pt.ulisboa.tecnico.softeng.hotel.services.local.dataobjects.RoomData;
 
 @Controller
-@RequestMapping(value = "/brokers/{brokerCode}/bulks")
-public class BulkController {
-	private static Logger logger = LoggerFactory.getLogger(AdventureController.class);
+@RequestMapping(value = "/hotels/{hotelCode}/rooms/{roomNumber}/bookings")
+public class BookingController {
+	private static Logger logger = LoggerFactory.getLogger(BookingController.class);
 
 	@RequestMapping(method = RequestMethod.GET)
-	public String showBulks(Model model, @PathVariable String brokerCode) {
-		logger.info("showBulks code:{}", brokerCode);
+	public String showBookings(Model model, @PathVariable String hotelCode, String roomNumber) {
+		logger.info("showBookings code:{} number: {}", hotelCode, roomNumber);
 
-		BrokerData brokerData = BrokerInterface.getBrokerDataByCode(brokerCode, CopyDepth.BULKS);
+		RoomData roomData = HotelInterface.getRoomData(hotelCode, roomNumber, CopyDepth.BOOKING);
 
-		if (brokerData == null) {
-			model.addAttribute("error", "Error: it does not exist a broker with the code " + brokerCode);
-			model.addAttribute("broker", new BrokerData());
-			model.addAttribute("brokers", BrokerInterface.getBrokers());
-			return "brokers";
+		if (roomData == null) {
+			model.addAttribute("error", "Error: it does not exist a broker with the code " + roomNumber);
+			model.addAttribute("room", new RoomData());
+			model.addAttribute("rooms", HotelInterface.getRooms(hotelCode));
+			return "rooms";
 		} else {
-			model.addAttribute("bulk", new BulkData());
-			model.addAttribute("broker", brokerData);
-			return "bulks";
+			model.addAttribute("booking", new BookingData());
+			model.addAttribute("room", roomData);
+			return "bookings";
 		}
 	}
 
 	@RequestMapping(method = RequestMethod.POST)
-	public String submitBulk(Model model, @PathVariable String brokerCode, @ModelAttribute BulkData bulkData) {
-		logger.info("submitBulk brokerCode:{}, number:{}, arrival:{}, departure:{}", brokerCode, bulkData.getNumber(),
-				bulkData.getArrival(), bulkData.getDeparture());
+	public String submitBooking(Model model, @PathVariable String hotelCode, @PathVariable String roomNumber, @ModelAttribute BookingData bookingData) {
+		logger.info("submitBooking roomNumber:{}, reference:{}, arrival:{}, departure:{}", roomNumber, bookingData.getReference(),
+				bookingData.getArrival(), bookingData.getDeparture());
 
 		try {
-			BrokerInterface.createBulkRoomBooking(brokerCode, bulkData);
-		} catch (BrokerException be) {
-			model.addAttribute("error", "Error: it was not possible to create the bulk room booking");
-			model.addAttribute("bulk", bulkData);
-			model.addAttribute("broker", BrokerInterface.getBrokerDataByCode(brokerCode, CopyDepth.BULKS));
-			return "bulks";
+			HotelInterface.createBooking(hotelCode, roomNumber, bookingData);
+		} catch (HotelException he) {
+			model.addAttribute("error", "Error: it was not possible to create the room booking");
+			model.addAttribute("booking", bookingData);
+			model.addAttribute("room", HotelInterface.getRoomData(hotelCode, roomNumber, CopyDepth.BOOKING));
+			return "bookings";
 		}
 
-		return "redirect:/brokers/" + brokerCode + "/bulks";
+		return "redirect:/hotels/{hotelCode}/rooms/" + roomNumber + "/bookings";
 	}
 
 }
-*/
