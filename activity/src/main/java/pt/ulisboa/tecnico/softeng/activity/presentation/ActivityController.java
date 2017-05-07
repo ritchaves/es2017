@@ -40,21 +40,21 @@ public class ActivityController {
 	}
 	
 	@RequestMapping(method = RequestMethod.POST)
-	public String submitActivity(Model model, @PathVariable String activityProviderCode,
+	public String submitActivity(Model model, @PathVariable String code,
 			@ModelAttribute ActivityData activityData) {
-		logger.info("activitySubmit activityProviderCode:{}, name:{}, minAge:{}, maxAge:{}, capacity:{}", activityProviderCode,
+		logger.info("activitySubmit activityProviderCode:{}, name:{}, minAge:{}, maxAge:{}, capacity:{}", code,
 				activityData.getName(), activityData.getMinAge(), activityData.getMaxAge(), activityData.getCapacity());
 
 		try {
-			ActivityInterface.createActivity(activityProviderCode, activityData);
+			ActivityInterface.createActivity(code, activityData);
 		} catch (ActivityException ae) {
 			model.addAttribute("error", "Error: it was not possible to create the activity");
 			model.addAttribute("activity", activityData);
-			model.addAttribute("activityProvider", ActivityInterface.getActivityProviderDataByCode(activityProviderCode, CopyDepth.ACTIVITIES));
+			model.addAttribute("activityProvider", ActivityInterface.getActivityProviderDataByCode(code, CopyDepth.ACTIVITIES));
 			return "activities";
 		}
 
-		return "redirect:/activityProviders/" + activityProviderCode + "/activities";
+		return "redirect:/activityProviders/" + code + "/activities";
 	}
 }
 
