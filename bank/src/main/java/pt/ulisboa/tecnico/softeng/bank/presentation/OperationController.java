@@ -39,4 +39,34 @@ public class OperationController {
 			return "operationss";
 		}
 	}
+	
+	@RequestMapping(method = RequestMethod.POST)
+	public String processDeposit(Model model, @PathVariable String bankCode, @ModelAttribute BankOperationData operationData) {
+		logger.info("processDeposit iban:{}, value:{}", operationData.getIban(), operationData.getValue());
+		
+		try {
+			BankInterface.processDep(iban, value);
+		} catch (BankException be) {
+			model.addAttribute("error", "Error: it was not possible to process that operation");
+			model.addAttribute("operation", operationData);
+			model.addAttribute("bank", BankInterface.getBankDataByCode(bankCode, CopyDepth.OPERATION));
+			return "operations";
+		}
+		return "redirect:/banks/" + bankCode + "/operations"; 
+	}
+	
+	@RequestMapping(method = RequestMethod.POST)
+	public String processWithdraw(Model model, @PathVariable String bankCode, @ModelAttribute BankOperationData operationData) {
+		logger.info("processWithdraw iban:{}, value:{}", operationData.getIban(), clientData.getValue());
+		
+		try {
+			BankInterface.processPayment(iban, value);
+		} catch (BankException be) {
+			model.addAttribute("error", "Error: it was not possible to process that operation");
+			model.addAttribute("operation", operationData);
+			model.addAttribute("bank", BankInterface.getBankDataByCode(bankCode, CopyDepth.OPERATION));
+			return "operations";
+		}
+		return "redirect:/banks/" + bankCode + "/operations"; 
+	}
 }

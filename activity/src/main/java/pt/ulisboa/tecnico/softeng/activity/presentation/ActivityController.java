@@ -17,18 +17,18 @@ import pt.ulisboa.tecnico.softeng.activity.services.local.dataobjects.ActivityPr
 
 
 @Controller
-@RequestMapping(value = "/activityProviders/{activityProviderCode}/activities")
+@RequestMapping(value = "/activityProviders/{code}/activities")
 public class ActivityController {
 	private static Logger logger = LoggerFactory.getLogger(ActivityController.class);
 	
 	@RequestMapping(method = RequestMethod.GET)
-	public String showActivities(Model model, @PathVariable String activityProviderCode) {
-		logger.info("showActivities code:{}", activityProviderCode);
+	public String showActivities(Model model, @PathVariable String code) {
+		logger.info("showActivities code:{}", code);
 		
-		ActivityProviderData activityProviderData = ActivityInterface.getActivityProviderDataByCode(activityProviderCode, CopyDepth.ACTIVITIES);
+		ActivityProviderData activityProviderData = ActivityInterface.getActivityProviderDataByCode(code, CopyDepth.ACTIVITIES);
 		
 		if (activityProviderData == null) {
-			model.addAttribute("error", "Error: it does not exist an activity provider with the code " + activityProviderCode);
+			model.addAttribute("error", "Error: it does not exist an activity provider with the code " + code);
 			model.addAttribute("activityProvider", new ActivityProviderData());
 			model.addAttribute("activityProviders", ActivityInterface.getActivityProviders());
 			return "activityProviders";
@@ -40,21 +40,21 @@ public class ActivityController {
 	}
 	
 	@RequestMapping(method = RequestMethod.POST)
-	public String submitActivity(Model model, @PathVariable String activityProviderCode,
+	public String submitActivity(Model model, @PathVariable String code,
 			@ModelAttribute ActivityData activityData) {
-		logger.info("activitySubmit activityProviderCode:{}, name:{}, minAge:{}, maxAge:{}, capacity:{}", activityProviderCode,
+		logger.info("activitySubmit activityProviderCode:{}, name:{}, minAge:{}, maxAge:{}, capacity:{}", code,
 				activityData.getName(), activityData.getMinAge(), activityData.getMaxAge(), activityData.getCapacity());
 
 		try {
-			ActivityInterface.createActivity(activityProviderCode, activityData);
+			ActivityInterface.createActivity(code, activityData);
 		} catch (ActivityException ae) {
 			model.addAttribute("error", "Error: it was not possible to create the activity");
 			model.addAttribute("activity", activityData);
-			model.addAttribute("activityProvider", ActivityInterface.getActivityProviderDataByCode(activityProviderCode, CopyDepth.ACTIVITIES));
+			model.addAttribute("activityProvider", ActivityInterface.getActivityProviderDataByCode(code, CopyDepth.ACTIVITIES));
 			return "activities";
 		}
 
-		return "redirect:/activityProviders/" + activityProviderCode + "/activities";
+		return "redirect:/activityProviders/" + code + "/activities";
 	}
 }
 

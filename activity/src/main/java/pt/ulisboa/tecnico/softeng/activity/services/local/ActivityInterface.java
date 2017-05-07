@@ -53,6 +53,7 @@ public class ActivityInterface {
 	}
 	
 	// Get Provider by code
+	@Atomic(mode = TxMode.READ)
 	private static ActivityProvider getActivityProviderByCode(String code) {
 		for (ActivityProvider activityProvider : FenixFramework.getDomainRoot().getActivityProviderSet()) {
 			if (activityProvider.getCode().equals(code)) {
@@ -95,6 +96,7 @@ public class ActivityInterface {
 	}
 	
 	//Get Activity by the name
+	@Atomic(mode = TxMode.READ)
 	private static Activity getActivityByName(String activityProviderCode, String name) {
 		ActivityProvider provider = getActivityProviderByCode(activityProviderCode);
 		for (Activity activity : provider.getActivitySet()) {
