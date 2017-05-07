@@ -116,6 +116,7 @@ public class HotelInterface {
 		}
 	}
 	
+	@Atomic(mode = TxMode.READ)
 	private static Hotel getHotelByCode(String code) {
 		for (Hotel hotel : FenixFramework.getDomainRoot().getHotelSet()) {
 			if (hotel.getCode().equals(code))
@@ -134,7 +135,8 @@ public class HotelInterface {
 	public static void createRoom(String hotelCode, RoomData roomData) {
 		new Room(getHotelByCode(hotelCode), roomData.getNumber(), roomData.getType());		
 	}
-
+	
+	@Atomic(mode = TxMode.WRITE)
 	public static RoomData getRoomData(String hotelCode, String roomNumber, CopyDepth depth) {
 		Room room = getRoom(hotelCode, roomNumber);
 		if (room != null)
@@ -142,15 +144,16 @@ public class HotelInterface {
 		else
 			return null;
 	}
-
+	@Atomic(mode = TxMode.READ)
 	private static Room getRoom(String hotelCode, String roomNumber) {
-		for (Room r : getHotelByCode(hotelCode).getRoomSet()) {
-			if (r.getNumber().equals(roomNumber))
-				return r;
+		for (Room room : getHotelByCode(hotelCode).getRoomSet()) {
+			if (room.getNumber().equals(roomNumber))
+				return room;
 		}
 		return null;
 	}
-
+	
+	@Atomic(mode = TxMode.WRITE)
 	public static void createBooking(String hotelCode, String roomNumber, BookingData bookingData) {
 		new Booking(getRoom(hotelCode, roomNumber), bookingData.getArrival(), bookingData.getDeparture());
 		

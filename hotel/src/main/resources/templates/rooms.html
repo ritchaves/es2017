@@ -36,7 +36,7 @@
 					<td th:text="${room.number}">Number</td>
 					<td th:text="${room.type}">Type</td>
 					<td><a
-						th:href="@{/rooms/{number}/bookings(number=${room.number})}">Link</a></td>
+						th:href="@{/hotels/{code}/rooms/{number}/bookings(code=${hotel.code},number=${room.number})}">Link</a></td>
 				</tr>
 			</tbody>
 		</table>

@@ -9,7 +9,6 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
-
 import pt.ulisboa.tecnico.softeng.hotel.exception.HotelException;
 import pt.ulisboa.tecnico.softeng.hotel.services.local.HotelInterface;
 import pt.ulisboa.tecnico.softeng.hotel.services.local.dataobjects.HotelData;
@@ -30,7 +29,7 @@ public class RoomController {
 
 		if (hotelData == null) {
 			model.addAttribute("error", "Error: it does not exist a broker with the code " + hotelCode);
-			model.addAttribute("hotels", new HotelData());
+			model.addAttribute("hotel", new HotelData());
 			model.addAttribute("hotels", HotelInterface.getHotels());
 			return "hotels";
 		} else {
