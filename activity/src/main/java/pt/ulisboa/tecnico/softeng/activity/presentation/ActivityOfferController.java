@@ -15,6 +15,7 @@ import pt.ulisboa.tecnico.softeng.activity.exception.ActivityException;
 import pt.ulisboa.tecnico.softeng.activity.services.local.ActivityInterface;
 import pt.ulisboa.tecnico.softeng.activity.services.local.dataobjects.ActivityData;
 import pt.ulisboa.tecnico.softeng.activity.services.local.dataobjects.ActivityOfferData;
+import pt.ulisboa.tecnico.softeng.activity.services.local.dataobjects.ActivityProviderData;
 import pt.ulisboa.tecnico.softeng.activity.services.local.dataobjects.ActivityReservationData;
 import pt.ulisboa.tecnico.softeng.activity.services.local.dataobjects.ActivityProviderData.CopyDepth;
 
@@ -31,14 +32,22 @@ public class ActivityOfferController {
 		logger.info("showActivityOffers code:{}", activityCode);
 		
 		ActivityData activityData = ActivityInterface.getActivityDataByName(activityProviderCode, activityCode, CopyDepth.ACTIVITIES);
+		ActivityProviderData activityProviderData = ActivityInterface.getActivityProviderDataByCode(activityProviderCode, CopyDepth.ACTIVITIES);
 		
+		if (activityProviderData == null) {
+			model.addAttribute("error", "Error: it does not exist an activity provider with the code " + activityProviderCode);
+			model.addAttribute("activityProvider", new ActivityProviderData());
+			model.addAttribute("activityProviders", ActivityInterface.getActivityProviders());
+			return "activityProviders";
+		}
 		if (activityData == null) {
 			model.addAttribute("error", "Error: it does not exist an activity with the code " + activityCode);
 			model.addAttribute("activity", new ActivityData());
 			model.addAttribute("activities", ActivityInterface.getActivities(activityProviderCode));
-			return "activityOffers";
+			return "activities";
 		} else {
 			model.addAttribute("activityOffer", new ActivityOfferData());
+			model.addAttribute("activityProvider", activityProviderData);
 			model.addAttribute("activity", activityData);
 			return "activityOffers";
 		}
@@ -61,27 +70,27 @@ public class ActivityOfferController {
 
 		return "redirect:/activityProviders/" + activityProviderCode + "/activities" + activityCode + "/activityOffers";
 	}
-	
-	@RequestMapping(method = RequestMethod.GET, value = "/activityOffers/{clientID}/bookings")
-	public String showBookingsByOffer(Model model, @PathVariable String activityProviderCode,
-			@PathVariable String activityCode, @ModelAttribute ActivityReservationData activityReservationData) {
-		logger.info("showBookingsByOffer activityCode:{}, bookingID:{}", activityCode, activityReservationData.getReference());
-		
-		ActivityData activityData = ActivityInterface.getActivityDataByName(activityProviderCode, activityCode, CopyDepth.ACTIVITIES);
-		List<ActivityOfferData> activityOfferDatas = ActivityInterface.getActivityOffer(activityData);
-		if (activityOfferDatas == null) {
-			model.addAttribute("error", "Error: it does not exist a activityOffer for the adventure with code" + activityCode);
-			model.addAttribute("activityOffer", new ActivityOfferData());
-			model.addAttribute("activityOffers", ActivityInterface.getActivityOffer(activityData));
-			return "activityOffers";
-		}
-		
-		else {	
-			for (ActivityOfferData activityOfferData : activityOfferDatas) {
-			model.addAttribute("booking",activityOfferData.getBookings());
-			}
-			return "bookings";
-		}
-	
-	}
+//	
+//	@RequestMapping(method = RequestMethod.GET, value = "/activityOffers/{clientID}/bookings")
+//	public String showBookingsByOffer(Model model, @PathVariable String activityProviderCode,
+//			@PathVariable String activityCode, @ModelAttribute ActivityReservationData activityReservationData) {
+//		logger.info("showBookingsByOffer activityCode:{}, bookingID:{}", activityCode, activityReservationData.getReference());
+//		
+//		ActivityData activityData = ActivityInterface.getActivityDataByName(activityProviderCode, activityCode, CopyDepth.ACTIVITIES);
+//		List<ActivityOfferData> activityOfferDatas = ActivityInterface.getActivityOffer(activityData);
+//		if (activityOfferDatas == null) {
+//			model.addAttribute("error", "Error: it does not exist a activityOffer for the adventure with code" + activityCode);
+//			model.addAttribute("activityOffer", new ActivityOfferData());
+//			model.addAttribute("activityOffers", ActivityInterface.getActivityOffer(activityData));
+//			return "activityOffers";
+//		}
+//		
+//		else {	
+//			for (ActivityOfferData activityOfferData : activityOfferDatas) {
+//			model.addAttribute("booking",activityOfferData.getBookings());
+//			}
+//			return "bookings";
+//		}
+//	
+//	}
 }
