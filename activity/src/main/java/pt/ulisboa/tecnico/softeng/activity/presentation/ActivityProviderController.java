@@ -14,7 +14,7 @@ import pt.ulisboa.tecnico.softeng.activity.services.local.dataobjects.ActivityPr
 
 
 @Controller
-@RequestMapping(value = "/activityProvider")
+@RequestMapping(value = "/activityProviders")
 public class ActivityProviderController {
 	private static Logger logger = LoggerFactory.getLogger(ActivityProviderController.class);
 	
@@ -39,6 +39,6 @@ public class ActivityProviderController {
 			return "brokers";
 		}
 
-		return "redirect:/activityProvider";
+		return "redirect:/activityProviders";
 	}
 }

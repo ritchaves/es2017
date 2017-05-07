@@ -7,6 +7,7 @@ import org.joda.time.LocalDate;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import pt.ulisboa.tecnico.softeng.activity.domain.ActivityOffer;
+import pt.ulisboa.tecnico.softeng.activity.domain.ActivityProvider;
 import pt.ulisboa.tecnico.softeng.activity.domain.Booking;
 
 public class ActivityOfferData {
@@ -19,13 +20,13 @@ public class ActivityOfferData {
 	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	private LocalDate end;
 	private int capacity;
-	private List<BookingData> bookings = new ArrayList<>();
+	private List<ActivityReservationData> bookings = new ArrayList<>();
 	
 	public ActivityOfferData(){
 		
 	}
 	
-	public ActivityOfferData(ActivityOffer offer, pt.ulisboa.tecnico.softeng.activity.services.local.dataobjects.ActivityData.CopyDepth shallow) {
+	public ActivityOfferData(ActivityProvider provider, ActivityOffer offer, pt.ulisboa.tecnico.softeng.activity.services.local.dataobjects.ActivityData.CopyDepth shallow) {
 		this.begin = offer.getBegin();
 		this.end = offer.getEnd();
 		this.setCapacity(offer.getCapacity());
@@ -33,7 +34,7 @@ public class ActivityOfferData {
 		switch (shallow) {
 		case BOOKINGS:
 			for (Booking booking : offer.getBookingSet()) {
-				this.bookings.add(new BookingData(offer, booking));
+				this.bookings.add(new ActivityReservationData(provider, offer, booking));
 			}
 			break;
 		case SHALLOW:

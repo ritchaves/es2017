@@ -5,6 +5,7 @@ import java.util.List;
 
 import pt.ulisboa.tecnico.softeng.activity.domain.Activity;
 import pt.ulisboa.tecnico.softeng.activity.domain.ActivityOffer;
+import pt.ulisboa.tecnico.softeng.activity.domain.ActivityProvider;
 
 public class ActivityData {
 	
@@ -13,7 +14,6 @@ public class ActivityData {
 	};
 	
 	private String name;
-	private String code;
 	private int minAge;
 	private int maxAge;
 	private int capacity;
@@ -23,9 +23,8 @@ public class ActivityData {
 		
 	}
 	
-	public ActivityData(Activity activity, pt.ulisboa.tecnico.softeng.activity.services.local.dataobjects.ActivityProviderData.CopyDepth shallow) {
+	public ActivityData(ActivityProvider provider, Activity activity, pt.ulisboa.tecnico.softeng.activity.services.local.dataobjects.ActivityProviderData.CopyDepth shallow) {
 		this.name = activity.getName();
-		this.code = activity.getCode();
 		this.minAge = activity.getMinAge();
 		this.maxAge = activity.getMaxAge();
 		this.capacity = activity.getCapacity();
@@ -33,7 +32,7 @@ public class ActivityData {
 		switch (shallow) {
 		case OFFERS:
 			for (ActivityOffer offer : activity.getActivityOfferSet()) {
-				this.offers.add(new ActivityOfferData(offer, CopyDepth.SHALLOW));
+				this.offers.add(new ActivityOfferData(provider, offer, CopyDepth.SHALLOW));
 			}
 			break;
 		case SHALLOW:
@@ -50,14 +49,6 @@ public class ActivityData {
 
 	public void setName(String name) {
 		this.name = name;
-	}
-
-	public String getCode() {
-		return this.code;
-	}
-
-	public void setCode(String code) {
-		this.code = code;
 	}
 
 	public List<ActivityOfferData> getActivityOffers() {
