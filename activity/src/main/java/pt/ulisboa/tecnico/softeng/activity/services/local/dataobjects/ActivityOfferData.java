@@ -60,6 +60,10 @@ public class ActivityOfferData {
 	public void setEnd(LocalDate end) {
 		this.end = end;
 	}
+	
+	public List<ActivityReservationData> getBookings() {
+		return bookings;
+	}
 
 	public int getCapacity() {
 		return capacity;

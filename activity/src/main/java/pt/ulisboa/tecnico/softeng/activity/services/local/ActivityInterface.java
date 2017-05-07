@@ -15,6 +15,7 @@ import pt.ulisboa.tecnico.softeng.activity.domain.Booking;
 import pt.ulisboa.tecnico.softeng.activity.exception.ActivityException;
 import pt.ulisboa.tecnico.softeng.activity.services.local.dataobjects.ActivityData;
 import pt.ulisboa.tecnico.softeng.activity.services.local.dataobjects.ActivityProviderData;
+import pt.ulisboa.tecnico.softeng.activity.services.local.dataobjects.ActivityOfferData;
 import pt.ulisboa.tecnico.softeng.activity.services.local.dataobjects.ActivityProviderData.CopyDepth;
 import pt.ulisboa.tecnico.softeng.activity.services.local.dataobjects.ActivityReservationData;
 
@@ -153,5 +154,22 @@ public class ActivityInterface {
 		}
 		return null;
 	}
+	
+	/*	<---------------------- Activity Offer -------------------------->   */
+
+
+	//Create Offer
+	@Atomic(mode = TxMode.WRITE)
+	public static void createActivityOffer(String activityProviderCode, String activityCode, ActivityOfferData activityOfferData) {
+		Activity activity = getActivityByName(activityProviderCode,activityCode);
+		new ActivityOffer(activity, activityOfferData.getBegin(), activityOfferData.getEnd());
+	}
+	
+	//List Offers
+	@Atomic(mode = TxMode.READ)
+	public static List<ActivityOfferData> getActivityOffer(ActivityData activityData) {
+		return activityData.getActivityOffers();}
+
+
 
 }
