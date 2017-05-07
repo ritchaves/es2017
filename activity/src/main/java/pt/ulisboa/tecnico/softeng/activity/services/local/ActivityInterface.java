@@ -1,5 +1,6 @@
 package pt.ulisboa.tecnico.softeng.activity.services.local;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.joda.time.LocalDate;
@@ -11,10 +12,27 @@ import pt.ulisboa.tecnico.softeng.activity.domain.Activity;
 import pt.ulisboa.tecnico.softeng.activity.domain.ActivityOffer;
 import pt.ulisboa.tecnico.softeng.activity.domain.ActivityProvider;
 import pt.ulisboa.tecnico.softeng.activity.domain.Booking;
-import pt.ulisboa.tecnico.softeng.activity.exception.ActivityException;
-import pt.ulisboa.tecnico.softeng.activity.services.local.dataobjects.ActivityReservationData;
+import pt.ulisboa.tecnico.softeng.activity.services.local.dataobjects.ActivityProviderData;
+import pt.ulisboa.tecnico.softeng.activity.services.local.dataobjects.ActivityProviderData.CopyDepth;
+
 
 public class ActivityInterface {
+	
+	//Create provider
+	@Atomic(mode = TxMode.WRITE)
+	public static void createActivityProvider(ActivityProviderData activityProviderData) {
+		new ActivityProvider(activityProviderData.getCode(), activityProviderData.getName());
+	}
+	
+	//List Providers
+	@Atomic(mode = TxMode.READ)
+	public static List<ActivityProviderData> getActivityProviders() {
+		List<ActivityProviderData> providers = new ArrayList<>();
+		for (ActivityProvider provider : FenixFramework.getDomainRoot().getActivityProviderSet()) {
+			providers.add(new ActivityProviderData(provider, CopyDepth.SHALLOW));
+		}
+		return providers;
+	}
 
 	@Atomic(mode = TxMode.WRITE)
 	public static String reserveActivity(LocalDate begin, LocalDate end, int age) {
