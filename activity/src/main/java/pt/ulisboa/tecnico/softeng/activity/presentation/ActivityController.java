@@ -17,18 +17,18 @@ import pt.ulisboa.tecnico.softeng.activity.services.local.dataobjects.ActivityPr
 
 
 @Controller
-@RequestMapping(value = "/activityProviders/{Code}/activities")
+@RequestMapping(value = "/activityProviders/{code}/activities")
 public class ActivityController {
 	private static Logger logger = LoggerFactory.getLogger(ActivityController.class);
 	
 	@RequestMapping(method = RequestMethod.GET)
-	public String showActivities(Model model, @PathVariable String activityProviderCode) {
-		logger.info("showActivities code:{}", activityProviderCode);
+	public String showActivities(Model model, @PathVariable String code) {
+		logger.info("showActivities code:{}", code);
 		
-		ActivityProviderData activityProviderData = ActivityInterface.getActivityProviderDataByCode(activityProviderCode, CopyDepth.ACTIVITIES);
+		ActivityProviderData activityProviderData = ActivityInterface.getActivityProviderDataByCode(code, CopyDepth.ACTIVITIES);
 		
 		if (activityProviderData == null) {
-			model.addAttribute("error", "Error: it does not exist an activity provider with the code " + activityProviderCode);
+			model.addAttribute("error", "Error: it does not exist an activity provider with the code " + code);
 			model.addAttribute("activityProvider", new ActivityProviderData());
 			model.addAttribute("activityProviders", ActivityInterface.getActivityProviders());
 			return "activityProviders";
