@@ -27,7 +27,7 @@ public class ActivityProviderData {
 		switch (depth) {
 		case ACTIVITIES:
 			for (Activity activity : provider.getActivitySet()) {
-				this.activities.add(new ActivityData(activity, CopyDepth.SHALLOW));
+				this.activities.add(new ActivityData(provider, activity, CopyDepth.SHALLOW));
 			}
 			break;
 		case SHALLOW:
