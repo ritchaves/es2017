@@ -54,4 +54,24 @@ public class ClientController {
 		
 		return "redirect:/banks/" + bankCode + "/clients"; 
 	}
+	
+	@RequestMapping(method = RequestMethod.GET, value = "/banks/{bankCode}/operations")
+	public String showOperations(Model model, @PathVariable String bankCode) {
+		logger.info("showOperations code:{}", bankCode);
+		
+		BankData bankData = BankInterface.getBankDataByCode(bankCode, CopyDepth.OPERATION);
+		
+		if (bankData == null) {
+			model.addAttribute("error", "Error: it does not exist a bank with the code " + bankCode);
+			model.addAttribute("bank", new BankData());
+			model.addAttribute("banks", BankInterface.getBanks());
+			return "banks";
+		}
+		else {
+			model.addAttribute("operation", new BankOperationData());
+			model.addAttribute("bank", bankData);
+			return "operations";
+		}
+	}
+	
 }
