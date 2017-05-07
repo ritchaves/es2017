@@ -28,7 +28,7 @@ public class ActivityProviderController {
 	
 	@RequestMapping(method = RequestMethod.POST)
 	public String activityProviderSubmit(Model model, @ModelAttribute ActivityProviderData activityProviderData) {
-		logger.info("brokerSubmit name:{}, code:{}", activityProviderData.getName(), activityProviderData.getCode());
+		logger.info("activityProviderSubmit name:{}, code:{}", activityProviderData.getName(), activityProviderData.getCode());
 
 		try {
 			ActivityInterface.createActivityProvider(activityProviderData);
@@ -36,7 +36,7 @@ public class ActivityProviderController {
 			model.addAttribute("error", "Error: it was not possible to create the activityProvider");
 			model.addAttribute("activityProvider", activityProviderData);
 			model.addAttribute("activityProviders", ActivityInterface.getActivityProviders());
-			return "brokers";
+			return "activityProviders";
 		}
 
 		return "redirect:/activityProviders";
