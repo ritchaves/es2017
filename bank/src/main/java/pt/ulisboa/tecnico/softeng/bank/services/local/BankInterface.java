@@ -25,6 +25,16 @@ public class BankInterface {
 		}
 		throw new BankException();
 	}
+	
+	@Atomic(mode = TxMode.WRITE)
+	public static String processDep(String IBAN, int amount) {
+		for (Bank bank : FenixFramework.getDomainRoot().getBankSet()) {
+			if (bank.getAccount(IBAN) != null) {
+				return bank.getAccount(IBAN).deposit(amount);
+			}
+		}
+		throw new BankException();
+	}
 
 	@Atomic(mode = TxMode.WRITE)
 	public static String cancelPayment(String paymentConfirmation) {
