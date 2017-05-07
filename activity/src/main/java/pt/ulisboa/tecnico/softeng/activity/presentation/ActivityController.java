@@ -17,7 +17,7 @@ import pt.ulisboa.tecnico.softeng.activity.services.local.dataobjects.ActivityPr
 
 
 @Controller
-@RequestMapping(value = "/activityProviders/{activityProviderCode}/activities")
+@RequestMapping(value = "/activityProviders/{Code}/activities")
 public class ActivityController {
 	private static Logger logger = LoggerFactory.getLogger(ActivityController.class);
 	
