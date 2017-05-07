@@ -31,7 +31,7 @@ public class BankData {
 			break;
 		case ACCOUNT:
 			for (Account account : bank.getAccountSet()) {
-				AccountData accountData = new AccountData(account, pt.ulisboa.tecnico.softeng.bank.services.local.dataobjects.AccountData.CopyDepth.SHALLOW);
+				AccountData accountData = new AccountData(account, pt.ulisboa.tecnico.softeng.bank.services.local.dataobjects.ClientData.CopyDepth.SHALLOW.SHALLOW);
 				accounts.add(accountData);
 			}
 			break;

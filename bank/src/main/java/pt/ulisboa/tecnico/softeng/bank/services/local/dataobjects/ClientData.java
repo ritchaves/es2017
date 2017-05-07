@@ -7,15 +7,15 @@ import pt.ulisboa.tecnico.softeng.bank.domain.*;
 
 public class ClientData {
 	public static enum CopyDepth {
-		SHALLOW, ACCOUNT
+		SHALLOW, ACCOUNT, OPERATION
 	};
 	
 	private String name;
 	private String ID;
 	private List<AccountData> accounts = new ArrayList<AccountData>();
-	
+		
 	public ClientData() {}
-	
+
 	public ClientData(Client client, CopyDepth depth) {
 		this.name = client.getName();
 		this.ID = client.getID();
@@ -23,8 +23,8 @@ public class ClientData {
 		switch(depth) {
 		case ACCOUNT:
 			for (Account account : client.getAccountSet()) {
-				AccountData accountData = new AccountData(account, pt.ulisboa.tecnico.softeng.bank.services.local.dataobjects.AccountData.CopyDepth.SHALLOW);
-				accounts.add(accountData);
+				AccountData accountData = new AccountData(account, CopyDepth.SHALLOW);
+				this.accounts.add(accountData);
 			}
 			break;
 		case SHALLOW:
@@ -54,7 +54,7 @@ public class ClientData {
 		return this.accounts;
 	}
 	
-	public void setAcoounts(List<AccountData> accounts) {
+	public void setAcounts(List<AccountData> accounts) {
 		this.accounts = accounts;
 	}
 }

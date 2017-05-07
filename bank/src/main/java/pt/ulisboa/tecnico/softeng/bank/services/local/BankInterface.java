@@ -88,26 +88,36 @@ public class BankInterface {
 		else {
 			return null;
 		}
-	}
+	}	
 	
 	@Atomic(mode = TxMode.READ)
-	public static BankData getBankDataByCode_Client(String code, String clientID, CopyDepth depth) {
-		Bank bank = getBankByCode(code);
+	public static ClientData getBankDataByCode_Client(String code, String clientID, pt.ulisboa.tecnico.softeng.bank.services.local.dataobjects.ClientData.CopyDepth depth) {
 		
-		if (bank != null) {
-			BankData bankData =  new BankData(bank, depth);
-			for (AccountData accountData : bankData.getAccounts()) {
+		Client client = getClient(getBankByCode(code), clientID);
+		BankData bankData = getBankDataByCode(code, CopyDepth.CLIENT);
+		if (client != null) {
+			ClientData cData = new ClientData(client, depth);
+			for (AccountData accountData : cData.getAccounts()) {
 				if (!accountData.getClientID().equals(clientID)) {
 					bankData.removeAccount(accountData);
 				}
 			}
-			return bankData;
+			return cData;
 		}
 		else {
 			return null;
 		}
 	}
 	
+	public static Client getClient(Bank bank, String clientID) {
+		for (Client client : bank.getClientSet()) {
+			if (client.getID().equals(clientID))
+				return client;
+		}
+		return null;
+	}
+	
+	@Atomic(mode = TxMode.READ)
 	public static Bank getBankByCode(String code) {
 		for (Bank bank : FenixFramework.getDomainRoot().getBankSet()) {
 			if (bank.getCode().equals(code)) {

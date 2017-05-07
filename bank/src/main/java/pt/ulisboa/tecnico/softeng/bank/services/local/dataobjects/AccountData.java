@@ -17,7 +17,7 @@ public class AccountData {
 	
 	public AccountData() {}
 	
-	public AccountData(Account account, CopyDepth depth) {
+	public AccountData(Account account, pt.ulisboa.tecnico.softeng.bank.services.local.dataobjects.ClientData.CopyDepth depth) {
 		this.IBAN = account.getIBAN();
 		this.balance = account.getBalance();
 		this.clientID = account.getClient().getID();
