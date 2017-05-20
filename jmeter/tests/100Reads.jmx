@@ -15,7 +15,7 @@
         <collectionProp name="Arguments.arguments">
           <elementProp name="projectHome" elementType="Argument">
             <stringProp name="Argument.name">projectHome</stringProp>
-            <stringProp name="Argument.value">/home/rferreira/Desktop/ES/es17al_17-project</stringProp>
+            <stringProp name="Argument.value">C:\Users\soare\OneDrive\Documents\Tecnico\es17al_17-project</stringProp>
             <stringProp name="Argument.metadata">=</stringProp>
           </elementProp>
           <elementProp name="Server" elementType="Argument">
@@ -541,7 +541,7 @@
           <boolProp name="LoopController.continue_forever">false</boolProp>
           <stringProp name="LoopController.loops">1</stringProp>
         </elementProp>
-        <stringProp name="ThreadGroup.num_threads">2</stringProp>
+        <stringProp name="ThreadGroup.num_threads">2000</stringProp>
         <stringProp name="ThreadGroup.ramp_time">1</stringProp>
         <longProp name="ThreadGroup.start_time">1495317073000</longProp>
         <longProp name="ThreadGroup.end_time">1495317073000</longProp>
