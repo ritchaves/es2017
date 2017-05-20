@@ -31,6 +31,13 @@ public class HotelInterface {
 	public static void createHotel(HotelData hotelData) {
 		new Hotel(hotelData.getCode(), hotelData.getName());
 	}
+	
+	@Atomic(mode = TxMode.WRITE)
+	public static void deleteHotels() {
+		for (Hotel hotel : FenixFramework.getDomainRoot().getHotelSet()) {
+			hotel.delete();
+		}
+	}
 
 	@Atomic(mode = TxMode.READ)
 	public static HotelData getHotelDataByCode(String code) {
