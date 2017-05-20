@@ -1,0 +1,1 @@
+HOTEL1, 6, SINGLE
