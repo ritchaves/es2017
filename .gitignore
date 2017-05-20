@@ -9,3 +9,4 @@ jmeter.log
 *.hprof
 infer-out
 .DS_Store
+jmeter/tests/Adventure.jmx
