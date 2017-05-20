@@ -67,7 +67,7 @@
       </ThreadGroup>
       <hashTree>
         <CSVDataSet guiclass="TestBeanGUI" testclass="CSVDataSet" testname="Define Broker Data" enabled="true">
-          <stringProp name="filename">${projectHome}/jmeter/data/broker.txt</stringProp>
+          <stringProp name="filename">${projectHome}/jmeter/data/Test2/broker.txt</stringProp>
           <stringProp name="fileEncoding"></stringProp>
           <stringProp name="variableNames">brokerCode,brokerName</stringProp>
           <stringProp name="delimiter">,</stringProp>
@@ -129,7 +129,7 @@
       </ThreadGroup>
       <hashTree>
         <CSVDataSet guiclass="TestBeanGUI" testclass="CSVDataSet" testname="Define Hotel Data" enabled="true">
-          <stringProp name="filename">${projectHome}/jmeter/data/hotel.txt</stringProp>
+          <stringProp name="filename">${projectHome}/jmeter/data/Test2/hotel.txt</stringProp>
           <stringProp name="fileEncoding"></stringProp>
           <stringProp name="variableNames">hotelCode,hotelName</stringProp>
           <stringProp name="delimiter">,</stringProp>
@@ -191,7 +191,7 @@
       </ThreadGroup>
       <hashTree>
         <CSVDataSet guiclass="TestBeanGUI" testclass="CSVDataSet" testname="Define Bank Data" enabled="true">
-          <stringProp name="filename">${projectHome}/jmeter/data/bank.txt</stringProp>
+          <stringProp name="filename">${projectHome}/jmeter/data/Test2/bank.txt</stringProp>
           <stringProp name="fileEncoding"></stringProp>
           <stringProp name="variableNames">bankName,bankCode</stringProp>
           <stringProp name="delimiter">,</stringProp>
@@ -253,7 +253,7 @@
       </ThreadGroup>
       <hashTree>
         <CSVDataSet guiclass="TestBeanGUI" testclass="CSVDataSet" testname="Define Provider Data" enabled="true">
-          <stringProp name="filename">${projectHome}/jmeter/data/activityProvider.txt</stringProp>
+          <stringProp name="filename">${projectHome}/jmeter/data/Test2/activityProvider.txt</stringProp>
           <stringProp name="fileEncoding"></stringProp>
           <stringProp name="variableNames">providerCode,providerName</stringProp>
           <stringProp name="delimiter">,</stringProp>
@@ -305,7 +305,7 @@
           <boolProp name="LoopController.continue_forever">false</boolProp>
           <stringProp name="LoopController.loops">1</stringProp>
         </elementProp>
-        <stringProp name="ThreadGroup.num_threads">100</stringProp>
+        <stringProp name="ThreadGroup.num_threads">30</stringProp>
         <stringProp name="ThreadGroup.ramp_time">1</stringProp>
         <longProp name="ThreadGroup.start_time">1485537266000</longProp>
         <longProp name="ThreadGroup.end_time">1485537266000</longProp>
@@ -315,7 +315,7 @@
       </ThreadGroup>
       <hashTree>
         <CSVDataSet guiclass="TestBeanGUI" testclass="CSVDataSet" testname="Define Adventure ID Data" enabled="true">
-          <stringProp name="filename">${projectHome}/jmeter/data/adventureId.txt</stringProp>
+          <stringProp name="filename">${projectHome}/jmeter/data/Test2/adventureId.txt</stringProp>
           <stringProp name="fileEncoding"></stringProp>
           <stringProp name="variableNames">brokerId,adventureId</stringProp>
           <stringProp name="delimiter">,</stringProp>
