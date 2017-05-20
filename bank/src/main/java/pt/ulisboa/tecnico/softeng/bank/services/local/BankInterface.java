@@ -30,6 +30,13 @@ public class BankInterface {
 	public static void createBank(BankData bankData) {
 		new Bank(bankData.getName(), bankData.getCode());
 	}
+	
+	@Atomic(mode = TxMode.WRITE)
+	public static void deleteBanks() {
+		for (Bank bank : FenixFramework.getDomainRoot().getBankSet()) {
+			bank.delete();
+		}
+	}
 
 	@Atomic(mode = TxMode.READ)
 	public static BankData getBankDataByCode(String code) {
