@@ -32,7 +32,7 @@
       </Arguments>
       <hashTree/>
       <CSVDataSet guiclass="TestBeanGUI" testclass="CSVDataSet" testname="Define Broker Data" enabled="true">
-        <stringProp name="filename">${projectHome}/jmeter/data/broker.txt</stringProp>
+        <stringProp name="filename">${projectHome}/jmeter/data/Test3/broker.txt</stringProp>
         <stringProp name="fileEncoding"></stringProp>
         <stringProp name="variableNames">brokerCode,brokerName</stringProp>
         <stringProp name="delimiter">,</stringProp>
@@ -44,7 +44,7 @@
       </CSVDataSet>
       <hashTree/>
       <CSVDataSet guiclass="TestBeanGUI" testclass="CSVDataSet" testname="Define Adventure Data" enabled="true">
-        <stringProp name="filename">${projectHome}/jmeter/data/adventure.txt</stringProp>
+        <stringProp name="filename">${projectHome}/jmeter/data/Test3/adventure.txt</stringProp>
         <stringProp name="fileEncoding"></stringProp>
         <stringProp name="variableNames">brokerId,begin,end,age,iban,amount</stringProp>
         <stringProp name="delimiter">,</stringProp>
@@ -56,7 +56,7 @@
       </CSVDataSet>
       <hashTree/>
       <CSVDataSet guiclass="TestBeanGUI" testclass="CSVDataSet" testname="Define Adventure ID Data" enabled="true">
-        <stringProp name="filename">${projectHome}/jmeter/data/adventureId.txt</stringProp>
+        <stringProp name="filename">${projectHome}/jmeter/data/Test3/adventureId.txt</stringProp>
         <stringProp name="fileEncoding"></stringProp>
         <stringProp name="variableNames">brokerId,adventureId</stringProp>
         <stringProp name="delimiter">,</stringProp>
