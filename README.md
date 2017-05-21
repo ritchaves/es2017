@@ -12,13 +12,13 @@ To run jmeter (nogui) execute in project's top directory: mvn -Pjmeter verify. R
 
 
 
-|   Number   |          Name           |            Email            |   Name GitHUb          | Module(s)        |
-| ---------- | ----------------------- | --------------------------- | ---------------------- | ---------------- |
-|81718       |Nuno Cartier Tomás       |soarestomas@yahoo.com.br     |nunocartier             |1ºTeste/relatorio |
-|69836       |Rita Ferreira            |rita.c.ferreira@live.com     |ritchaves               |1ºTeste/relatorio |
-|79710       |David Cardoso            |davidanil@tecnico.ulisboa.pt |davidanil               |2ºTeste/relatorio |
-|81586       |Diogo Freitas            |diogo.maria.freitas@gmail.com|dfreitas06              |2ºTeste/relatorio |
-|78753	     |Alcino Albuquerque       |condealbuquerque@gmail.com	 |alcinocondealbuquerque  |3ºTeste	 		 |
+|   Number   |          Name           |            Email            |   Name GitHUb          | Module(s)          |
+| ---------- | ----------------------- | --------------------------- | ---------------------- | ------------------ |
+|81718       |Nuno Cartier Tomás       |soarestomas@yahoo.com.br     |nunocartier             |100 reads/relatorio |
+|69836       |Rita Ferreira            |rita.c.ferreira@live.com     |ritchaves               |100 reads/relatorio |
+|79710       |David Cardoso            |davidanil@tecnico.ulisboa.pt |davidanil               |30 writes/relatorio |
+|81586       |Diogo Freitas            |diogo.maria.freitas@gmail.com|dfreitas06              |30 writes/relatorio |
+|78753	     |Alcino Albuquerque       |condealbuquerque@gmail.com	 |alcinocondealbuquerque  |100 writes/relatorio|
 
  
  
