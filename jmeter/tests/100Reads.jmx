@@ -15,7 +15,7 @@
         <collectionProp name="Arguments.arguments">
           <elementProp name="projectHome" elementType="Argument">
             <stringProp name="Argument.name">projectHome</stringProp>
-            <stringProp name="Argument.value">C:\Users\soare\OneDrive\Documents\Tecnico\es17al_17-project</stringProp>
+            <stringProp name="Argument.value">/home/rferreira/Desktop/ES/es17al_17-project</stringProp>
             <stringProp name="Argument.metadata">=</stringProp>
           </elementProp>
           <elementProp name="Server" elementType="Argument">
@@ -489,7 +489,7 @@
           <stringProp name="HTTPSampler.port">${activityPort}</stringProp>
           <stringProp name="HTTPSampler.protocol"></stringProp>
           <stringProp name="HTTPSampler.contentEncoding"></stringProp>
-          <stringProp name="HTTPSampler.path">/providers/{providerCode}/activities</stringProp>
+          <stringProp name="HTTPSampler.path">/providers/${providerCode}/activities</stringProp>
           <stringProp name="HTTPSampler.method">POST</stringProp>
           <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
           <boolProp name="HTTPSampler.auto_redirects">false</boolProp>
@@ -523,7 +523,7 @@
           <stringProp name="HTTPSampler.port">${activityPort}</stringProp>
           <stringProp name="HTTPSampler.protocol"></stringProp>
           <stringProp name="HTTPSampler.contentEncoding"></stringProp>
-          <stringProp name="HTTPSampler.path">/providers/{providerCode}/activities/{codeActivity}/offers</stringProp>
+          <stringProp name="HTTPSampler.path">/providers/${providerCode}/activities/${codeActivity}/offers</stringProp>
           <stringProp name="HTTPSampler.method">POST</stringProp>
           <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
           <boolProp name="HTTPSampler.auto_redirects">false</boolProp>
