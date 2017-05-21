@@ -21,8 +21,8 @@ De acordo, com os resultados observados é possível concluir-se que quanto maio
 
 <h4> Teste 3: 100 Writes </h4>
 
-Neste teste de carga foi necessário fazer dois tipos de HTTP Request diferentes, um POST e em seguida um GET para cada correspondente módulo. O POST tem como objectivo a introdução dos dados, para ser possivel a leitura destes posteriormente com o metodo GET. 
-Após diversas simulações, com o Jmeter, os resultados que se seguem demonstram a capacidade de interacção que a FenixFramework tem nos serviços remotos, neste caso a nossa aplicação Adventures.
+Tal como nos testes anteriores, este teste vai ter dois tipos de HTTP Request diferentes, um POST e em seguida um GET para cada correspondente módulo. 
+Após diversas simulações, com o Jmeter, podemos observar os resultados na seguinte tabela:
 
 Nº Utilizadores | Avg. Throughput | Avg. Min response (ms) | Avg. Max response (ms)
 ------------ | -------------  | -------------  | ------------- 
