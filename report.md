@@ -43,3 +43,7 @@ Nº Utilizadores | Avg. Throughput | Avg. Min response (ms) | Avg. Max response 
   
 Nenhum dos presentes testes foi efectuado com loops, apenas manipulação do número de threads.<p>
 De acordo, com os resultados observados é possível concluir-se que quanto maior for o número de utilizadores, menor será o tempo de resposta máximo e menor será o throughput. Isto é justificado pela política optimista de leitura da FenixFramework. Pelo que quando são efectuadas operações de escrita a partir da Framework, vai existir um decrescimento de número de request a serem lidados. 
+
+<h4> Conclusões Gerais </h4>
+
+Tanto o primeiro teste (100 Reads) como o segundo (30 writes) comportam-se de maneira diferente do espectável. No entanto, nestes dois, o resultado da execução com um numero de utilizadores a 800 e a 2000 têm resultados semelhantes, ao que, com 1300 utilizadores os resultados pioram significativamente. Parece-nos, portanto, que a FenixFramework tem uma espécie de algoritmo inteligente onde prioritariza os reads/writes(se com 800 estaria a 98/2, com 2000 estaria 95/5, em caso do write ser os pedidos mais frequentes dos utilizadores), dependendo o teste e do número de utilizadores simultâneos.
