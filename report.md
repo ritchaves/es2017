@@ -38,3 +38,6 @@ Nº Utilizadores | Avg. Throughput | Avg. Min response (ms) | Avg. Max response 
   100 | 17.3/sec | 22 | 29408
   50 | 57.3/sec | 12 | 3259
   25 | 63.1/sec | 10 | 859 
+  
+Nenhum dos presentes testes foi efectuado com loops, apenas manipulação do número de threads.<p>
+De acordo, com os resultados observados é possível concluir-se que quanto maior for o número de utilizadores, menor será o tempo de resposta máximo e menor será o throughput. Isto é justificado pela política optimista de leitura da FenixFramework. Pelo que quando são efectuadas operações de escrita a partir da Framework, vai existir um decrescimento de número de request a ser lidados. 
