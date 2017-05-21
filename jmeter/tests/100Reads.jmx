@@ -710,7 +710,7 @@
           <stringProp name="HTTPSampler.port">${activityPort}</stringProp>
           <stringProp name="HTTPSampler.protocol"></stringProp>
           <stringProp name="HTTPSampler.contentEncoding"></stringProp>
-          <stringProp name="HTTPSampler.path">/providers/{codeProvider}/activities</stringProp>
+          <stringProp name="HTTPSampler.path">/providers/${providerCode}/activities</stringProp>
           <stringProp name="HTTPSampler.method">GET</stringProp>
           <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
           <boolProp name="HTTPSampler.auto_redirects">false</boolProp>
@@ -729,7 +729,7 @@
           <stringProp name="HTTPSampler.port">${activityPort}</stringProp>
           <stringProp name="HTTPSampler.protocol"></stringProp>
           <stringProp name="HTTPSampler.contentEncoding"></stringProp>
-          <stringProp name="HTTPSampler.path">/providers/{codeProvider}/activities/{codeActivity}/offers</stringProp>
+          <stringProp name="HTTPSampler.path">/providers/${providerCode}/activities/${codeActivity}/offers</stringProp>
           <stringProp name="HTTPSampler.method">GET</stringProp>
           <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
           <boolProp name="HTTPSampler.auto_redirects">false</boolProp>
