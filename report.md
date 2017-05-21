@@ -21,13 +21,14 @@ De acordo, com os resultados observados é possível concluir-se que quanto maio
 Este teste de carga, tal como no anterior, foram executados dois metódos de HTTP Request: o POST e o GET. Foi pedido também três "Process" ao nosso Adventures, entercalados entre os POST, de modo a verificar se os estados da aplicação eram alterados após terem sido criados os dados. <p>
 A seguinte tabela mostra os resultados deste teste de carga:
 
-Nº Utilizadores | Avg. Throughput | Avg. Min response (ms) | Avg. Max response (ms)
------------- | -------------  | -------------  | ------------- 
- |  |  |  
- | | | 
- | |  | 
+Nº Utilizadores | Avg. Throughput | Avg. Min response (ms) | Avg. Max response (ms) | Error (%)
+------------ | -------------  | -------------  | ------------- | ------------- 
+ 2000| 24.2/sec|  2|  11940| 29.68
+1300 |21.8/sec | 2| 8951| 44.64
+800 |  24.2/sec| 2 | 3899| 38.23
 
-Os resultados apresentados poderão falhas, visto que em determinadas circunstâncias o Process Adventure falhava. 
+Os resultados poderão apresentar falhas, pois em determinadas circunstâncias o Process Adventure falhava. Visto que os dados a serem manipulados no .txt, tem apenas um único input, existe a hipótese de ocorrerem cancelamentos da Aventura ou conflitos de escrita. <p>
+Contudo é possível observar nestes resultados que existe um tempo maior de resposta quando o número de utilizadores aumenta, e uma diminuição do throughput. 
 
 <h4> Teste 3: 100 Writes </h4>
 
