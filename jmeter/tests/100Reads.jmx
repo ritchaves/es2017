@@ -255,7 +255,7 @@
               </elementProp>
             </collectionProp>
           </elementProp>
-          <stringProp name="HTTPSampler.domain">${brokerServer}</stringProp>
+          <stringProp name="HTTPSampler.domain">${Server}</stringProp>
           <stringProp name="HTTPSampler.port">${brokerPort}</stringProp>
           <stringProp name="HTTPSampler.protocol"></stringProp>
           <stringProp name="HTTPSampler.contentEncoding"></stringProp>
