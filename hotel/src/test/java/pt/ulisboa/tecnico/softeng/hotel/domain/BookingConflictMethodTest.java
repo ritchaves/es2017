@@ -6,15 +6,17 @@ import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
+import pt.ist.fenixframework.FenixFramework;
 import pt.ulisboa.tecnico.softeng.hotel.exception.HotelException;
+import src.test.java.pt.ulisboa.tecnico.softeng.activity.domain.RollBackTestAbstractClass;
 
-public class BookingConflictMethodTest {
+public class BookingConflictMethodTest extends RollbackTestAbstractClass {
 	private final LocalDate arrival = new LocalDate(2016, 12, 19);
 	private final LocalDate departure = new LocalDate(2016, 12, 24);
 	private Booking booking;
 
 	@Before
-	public void setUp() {
+	public void populate4Test() {
 		Hotel hotel = new Hotel("XPTO123", "Londres");
 
 		this.booking = new Booking(hotel, this.arrival, this.departure);
@@ -88,7 +90,7 @@ public class BookingConflictMethodTest {
 
 	@After
 	public void tearDown() {
-		Hotel.hotels.clear();
+		FenixFramework.getDomainRoot().getHotelSet().clear();
 	}
 
 }

@@ -7,14 +7,15 @@ import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
+import pt.ist.fenixframework.FenixFramework;
 import pt.ulisboa.tecnico.softeng.hotel.domain.Room.Type;
 import pt.ulisboa.tecnico.softeng.hotel.exception.HotelException;
 
-public class RoomConstructorMethodTest {
+public class RoomConstructorMethodTest extends RollbackTestAbstractClass {
 	private Hotel hotel;
 
 	@Before
-	public void setUp() {
+	public void populate4Test() {
 		this.hotel = new Hotel("XPTO123", "Lisboa");
 	}
 
@@ -71,7 +72,7 @@ public class RoomConstructorMethodTest {
 
 	@After
 	public void tearDown() {
-		Hotel.hotels.clear();
+		FenixFramework.getDomainRoot().getHotelSet().clear();
 	}
 
 }

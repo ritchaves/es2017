@@ -1,9 +1,8 @@
 package pt.ulisboa.tecnico.softeng.bank.domain;
-
+/*
 import java.util.ArrayList;
 import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
+import java.util.Set;*/
 
 import pt.ist.fenixframework.FenixFramework;
 import pt.ulisboa.tecnico.softeng.bank.dataobjects.BankOperationData;
@@ -12,24 +11,32 @@ import pt.ulisboa.tecnico.softeng.bank.exception.BankException;
 public class Bank extends Bank_Base {
 	public static final int CODE_SIZE = 4;
 
-	private final String name;
-	private final String code;
-	private final Set<Account> accounts = new HashSet<>();
-	private final Set<Client> clients = new HashSet<>();
-	private final List<Operation> log = new ArrayList<>();
+	//private final String name;
+	//private final String code;
+	//private final Set<Account> accounts = new HashSet<>();
+	//private final Set<Client> clients = new HashSet<>();
+	//private final List<Operation> log = new ArrayList<>();
 
 	public Bank(String name, String code) {
 		checkArguments(name, code);
 
-		this.name = name;
-		this.code = code;
-
+		setName(name);
+		setCode(code);
+		
 		FenixFramework.getDomainRoot().addBank(this);
 	}
 
-	public void delete() {
+	public void delete() {		
+		for(Account account : getAccountSet()){
+			account.delete();
+		}
+		for(Client client : getClientSet()){
+			client.delete();
+		}
+		for(Operation operation : getOperationSet()){
+			operation.delete();
+		}
 		setRoot(null);
-
 		deleteDomainObject();
 	}
 
@@ -48,7 +55,7 @@ public class Bank extends Bank_Base {
 			}
 		}
 	}
-
+/*
 	String getName() {
 		return this.name;
 	}
@@ -56,47 +63,52 @@ public class Bank extends Bank_Base {
 	String getCode() {
 		return this.code;
 	}
-
-	int getNumberOfAccounts() {
-		return this.accounts.size();
+*/
+	public int getNumberOfAccounts() {
+		return getAccountSet().size();
 	}
 
-	int getNumberOfClients() {
-		return this.clients.size();
+	public int getNumberOfClients() {
+		return getClientSet().size();
 	}
 
-	void addAccount(Account account) {
-		this.accounts.add(account);
+	public void addAccount(Account account) {
+		getAccountSet().add(account);
 	}
 
 	boolean hasClient(Client client) {
-		return this.clients.contains(client);
+		return getClientSet().contains(client);
 	}
 
-	void addClient(Client client) {
-		this.clients.add(client);
+	public void addClient(Client client) {
+		getClientSet().add(client);
 	}
 
-	void addLog(Operation operation) {
-		this.log.add(operation);
+	public void addOperation(Operation operation) {
+		getOperationSet().add(operation);
 	}
 
 	public Account getAccount(String IBAN) {
 		if (IBAN == null || IBAN.trim().equals("")) {
 			throw new BankException();
 		}
-
-		for (Account account : this.accounts) {
-			if (account.getIBAN().equals(IBAN)) {
+		
+		for (Account account : this.getAccountSet()){
+			if (account.getIBAN().equals(IBAN)){
 				return account;
 			}
 		}
-
+		
+		/*for (Bank bank:FenixFramework.getDomainRoot().getBankSet()){
+			if(!bank.getAccount(IBAN).equals(null))
+				return bank.getAccount(IBAN);
+		}
+*/
 		return null;
 	}
 
 	public Operation getOperation(String reference) {
-		for (Operation operation : this.log) {
+		for (Operation operation : getOperationSet()) {
 			if (operation.getReference().equals(reference)) {
 				return operation;
 			}
@@ -122,7 +134,7 @@ public class Bank extends Bank_Base {
 		}
 		return null;
 	}
-
+	
 	public static String processPayment(String IBAN, int amount) {
 		for (Bank bank : FenixFramework.getDomainRoot().getBankSet()) {
 			if (bank.getAccount(IBAN) != null) {
