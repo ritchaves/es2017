@@ -12,9 +12,9 @@ import org.junit.runner.RunWith;
 import mockit.Mocked;
 import mockit.StrictExpectations;
 import mockit.integration.junit4.JMockit;
-import pt.ulisboa.tecnico.softeng.broker.exception.RemoteAccessException;
-import pt.ulisboa.tecnico.softeng.broker.interfaces.HotelInterface;
-import pt.ulisboa.tecnico.softeng.hotel.exception.HotelException;
+import pt.ulisboa.tecnico.softeng.broker.services.remote.HotelInterface;
+import pt.ulisboa.tecnico.softeng.broker.services.remote.exception.HotelException;
+import pt.ulisboa.tecnico.softeng.broker.services.remote.exception.RemoteAccessException;
 
 @RunWith(JMockit.class)
 public class BulkRoomBookingProcessBookingMethodTest extends RollbackTestAbstractClass {
@@ -25,7 +25,7 @@ public class BulkRoomBookingProcessBookingMethodTest extends RollbackTestAbstrac
 
 	@Override
 	public void populate4Test() {
-		this.bulk = new BulkRoomBooking(NUMBER, arrival, departure);
+		this.bulk = new BulkRoomBooking(new Broker("BK1111", "Traveling"), NUMBER, arrival, departure);
 	}
 
 	@Test
